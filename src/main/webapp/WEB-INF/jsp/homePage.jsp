@@ -20,18 +20,24 @@
 <body>
 
 <div class="container">
+
     <c:if test="${pageContext.request.userPrincipal.name != null}">
+
         <form id="logoutForm" method="POST" action="${contextPath}/logout">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
 
-        <h2><spring:message code="Homepage.welcome"/> ${pageContext.request.userPrincipal.name} | <a
-                onclick="document.forms['logoutForm'].submit()"><spring:message code="Homepage.signOut"/> </a>
+        <h2><spring:message code="Homepage.welcome"/> ${pageContext.request.userPrincipal.name} |
+            <a onclick="document.forms['logoutForm'].submit()"><spring:message code="Homepage.signOut"/> </a>
         </h2>
+
     </c:if>
+
     <c:if test="${pageContext.request.userPrincipal.name == null}">
-        <h2><spring:message code="Homepage.welcome"/> <a href="/login"><spring:message code="Homepage.signIn"/></a> <a
-                href="/registration"><spring:message code="Homepage.register"/> </a></h2>
+
+        <h2><spring:message code="Homepage.welcome"/> <a href="/login"><spring:message code="Homepage.signIn"/></a>
+            <a href="/registration"><spring:message code="Homepage.register"/> </a></h2>
+
     </c:if>
 
 </div>

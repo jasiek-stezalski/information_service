@@ -30,6 +30,9 @@ public class User implements UserDetails {
     public User() {
     }
 
+
+    // Getters and Setters
+
     public Long getIdUser() {
         return idUser;
     }
@@ -71,7 +74,7 @@ public class User implements UserDetails {
     }
 
 
-    //UserDetails method
+    // UserDetails methods
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

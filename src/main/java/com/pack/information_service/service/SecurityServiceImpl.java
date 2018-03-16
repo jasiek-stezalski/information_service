@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
+
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
     @Autowired
@@ -19,16 +20,6 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Autowired
     UserRepository userRepository;
-
-    @Override
-    public String findLoggedInUsername() {
-        Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
-            return ((UserDetails) userDetails).getUsername();
-        }
-
-        return null;
-    }
 
     @Override
     public void autoLogin(String username, String password) {

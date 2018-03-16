@@ -17,6 +17,8 @@ public class Role {
     private Set<User> users;
 
 
+    // Getters and Setters
+
     public Long getIdRole() {
         return idRole;
     }
@@ -40,6 +42,5 @@ public class Role {
     public String getName() {
         return name;
     }
-
 
 }
