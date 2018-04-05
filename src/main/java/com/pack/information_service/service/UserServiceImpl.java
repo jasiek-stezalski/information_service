@@ -26,17 +26,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User findById(Long idUser) {
+        return userRepository.findByIdUser(idUser);
+    }
+
+    @Override
     public void save(User user) {
         user.setPassword((passwordEncoder.encode(user.getPassword())));
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.getOne(1L));
         user.setRoles(roles);
         userRepository.save(user);
-    }
-
-    @Override
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
     }
 
 }

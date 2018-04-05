@@ -25,8 +25,7 @@ public class User implements UserDetails {
     @Transient
     private String confirmPassword;
 
-    @OneToMany
-    @JoinColumn(name = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<Article> articles;
 
     @OneToMany

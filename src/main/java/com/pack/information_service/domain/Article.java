@@ -30,6 +30,10 @@ public class Article {
     @JoinColumn(name = "id_article")
     private List<Comment> comments;
 
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
     public long getIdArticle() {
         return idArticle;
     }
@@ -108,5 +112,13 @@ public class Article {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
