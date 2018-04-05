@@ -22,7 +22,7 @@ public class Article {
     @JoinColumn(name = "id_article")
     private List<ArticleRating> articleRatings;
 
-    @OneToMany
+    @OneToMany()
     @JoinColumn(name = "id_article")
     private List<Picture> pictures;
 

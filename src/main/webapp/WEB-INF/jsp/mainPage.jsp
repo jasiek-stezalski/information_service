@@ -36,19 +36,25 @@
             <a href="/registration"><spring:message code="MainPage.register"/> </a></h2>
 
     </c:if>
-
-    <h3><spring:message code="MainPage.article.topNews"/></h3>
-    <table class="table">
-        <tbody>
+    <h2><spring:message code="MainPage.article.topNews"/></h2>
+    <div class="row">
         <c:forEach items="${articles.topNews}" var="article">
-            <tr>
-                <td>
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
-                </td>
-            </tr>
+            <div class="col-md-2">
+                <div class="thumbnail">
+                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
+                        <c:forEach items="${article.pictures}" var="picture">
+                            <c:if test="${picture.priority == 1}">
+                                <img src="<c:url value="${picture.path}"/>" style="width: 100px;height: 100px;">
+                            </c:if>
+                        </c:forEach>
+                        <div class="caption">
+                            <p>${article.title}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </c:forEach>
-        </tbody>
-    </table>
+    </div>
 
     <h3><spring:message code="MainPage.article.news"/></h3>
     <table class="table">

@@ -13,6 +13,7 @@ public class Picture {
     private long idPicture;
     private String path;
     private String description;
+    private int priority;
 
     public long getIdPicture() {
         return idPicture;
@@ -36,5 +37,13 @@ public class Picture {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

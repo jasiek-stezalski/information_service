@@ -25,6 +25,7 @@ public class MainPageFacade {
         this.articleRepository = articleRepository;
     }
 
+
     public void generateContent() {
         topNews = articleRepository
                 .findFirst10ByOrderByPriorityAscPublicationDateDesc();
