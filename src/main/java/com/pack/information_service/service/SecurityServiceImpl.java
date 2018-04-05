@@ -15,11 +15,14 @@ public class SecurityServiceImpl implements SecurityService {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
-    @Autowired
     private AuthenticationManager authenticationManager;
+    private UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
+    public SecurityServiceImpl(AuthenticationManager authenticationManager, UserRepository userRepository) {
+        this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void autoLogin(String username, String password) {
