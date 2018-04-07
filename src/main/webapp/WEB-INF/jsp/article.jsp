@@ -10,7 +10,18 @@
     <img src="<c:url value="${picture.path}"/>" style="width: 100px;height: 100px;">
 </c:forEach>
 <p>${article.content}</p>
-${article.publicationDate}
-${journalist.username}
+Ocena artykułu: ${articleRate}
+<br />Data publikacji: ${article.publicationDate}
+<br />Autor: ${journalist.username}
+<br /><br />
+Komentarze:
+<br /><br />
+<c:forEach items="${article.comments}" var="comment" varStatus="status">
+    ${comment.content}
+    <br />Autor komentarza: ${commentsAuthors[status.index]}
+    <br />Data dodania: ${comment.date}
+    <br />Ocena komentarza: ${comment.mark}
+    <br /> <br />
+</c:forEach>
 </body>
 </html>

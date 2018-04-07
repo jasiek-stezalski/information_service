@@ -1,10 +1,7 @@
 package com.pack.information_service.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -17,6 +14,10 @@ public class Comment {
     private String content;
     private Date date;
     private int mark;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 
     public long getIdComment() {
         return idComment;
@@ -49,4 +50,13 @@ public class Comment {
     public void setMark(int mark) {
         this.mark = mark;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

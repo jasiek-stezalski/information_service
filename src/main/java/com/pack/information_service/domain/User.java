@@ -32,8 +32,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "id_user")
     private List<ArticleRating> articleRatings;
 
-    @OneToMany
-    @JoinColumn(name = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
     @ManyToMany(fetch = FetchType.EAGER)
