@@ -23,8 +23,13 @@ import java.util.Set;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public SecurityConfiguration(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
