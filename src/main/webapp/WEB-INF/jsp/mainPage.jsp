@@ -7,15 +7,62 @@
 <html>
 <head>
     <title><spring:message code="MainPage.title"/></title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="icon" href="resources/images/newspaper.jpg">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body id="body">
+    <div id="top">
+        <div id="logo">
 
-<div class="container">
+        </div>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <div id="singedIn">
+
+                <spring:message code="MainPage.loggedAs"/></br>
+                    ${pageContext.request.userPrincipal.name}
+            </div>
+        </c:if>
+    </div>
+    <div id="menu" class="bg-primary">
+        <a href="/mainPage">
+            <span id="home" class="glyphicon glyphicon-home"></span>
+        </a>
+
+        <c:if test="${pageContext.request.userPrincipal.name == null}">
+            <a href="/registration" class="btn registerButton">
+                <spring:message code="MainPage.register"/>
+            </a>
+            <a href="/login" class="btn registerButton">
+                <spring:message code="MainPage.signIn"/>
+            </a>
+        </c:if>
+
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <a onclick="document.forms['logoutForm'].submit()" class="btn registerButton">
+                <spring:message code="MainPage.signOut"/>
+            </a>
+            <a href="" id="panelButton" class="btn">
+                <spring:message code="MainPage.userPanel"/>
+            </a>
+            <input id="search" type="text" placeholder=<spring:message code="MainPage.search"/>
+            <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            </form>
+        </c:if>
+
+    </div>
+    <div id="container" class="bg" >
+
+    </div>
+
+<%--<div class="container">
+
 
     <c:if test="${pageContext.request.userPrincipal.name != null}">
 
@@ -132,7 +179,7 @@
         </c:forEach>
         </tbody>
     </table>
-</div>
+</div>--%>
 
 </body>
 </html>
