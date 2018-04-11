@@ -31,14 +31,25 @@
         <spring:message code="Article.userMark"/> ${userMark}
     </c:if>
 </c:if>
-
 <br/>
 <spring:message code="Article.Rate"/> ${articleRate}
 <br/><spring:message code="Article.Date"/> ${article.publicationDate}
 <br/><spring:message code="Article.articleAuthor"/> ${journalist.username}
+
 <br/><br/>
+
 <spring:message code="Article.comments"/>
-<br/><br/>
+<br/>
+
+<c:if test="${pageContext.request.userPrincipal.name != null}">
+    <form:form method="post" action="/articlePage/addComment">
+        <input type="hidden" name="idArticle" value="${article.idArticle}"/>
+        <textarea name="commentContent" rows="4" cols="50"></textarea>
+        <input type="submit" value="<spring:message code="submit"/>">
+    </form:form>
+</c:if>
+
+<br/>
 <c:forEach items="${article.comments}" var="comment" varStatus="status">
     ${comment.content}
     <br/><spring:message code="Article.comment.author"/> ${commentsAuthors[status.index]}

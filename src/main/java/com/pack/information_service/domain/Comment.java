@@ -2,7 +2,7 @@ package com.pack.information_service.domain;
 
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "comment")
@@ -18,6 +18,21 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_article")
+    private Article article;
+
+    public Comment() {
+    }
+
+    public Comment(String content, User user, Article article) {
+        this.content = content;
+        this.date = new Date();
+        this.mark = 0;
+        this.user = user;
+        this.article = article;
+    }
 
     public long getIdComment() {
         return idComment;
@@ -57,6 +72,14 @@ public class Comment {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
 }
