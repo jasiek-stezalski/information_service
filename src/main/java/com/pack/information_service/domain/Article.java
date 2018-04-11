@@ -18,11 +18,10 @@ public class Article {
     private Date publicationDate;
     private String status;
 
-    @OneToMany
-    @JoinColumn(name = "id_article")
+    @OneToMany(mappedBy = "article")
     private List<ArticleRating> articleRatings;
 
-    @OneToMany()
+    @OneToMany
     @JoinColumn(name = "id_article")
     private List<Picture> pictures;
 

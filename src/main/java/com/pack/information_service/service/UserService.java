@@ -9,4 +9,6 @@ public interface UserService {
     User findByUsername(String username);
 
     User findById(Long idUser);
+
+    void addArticleRate(String username, int userMark, Long idArticle);
 }

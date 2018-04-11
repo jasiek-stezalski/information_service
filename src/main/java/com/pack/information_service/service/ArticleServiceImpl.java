@@ -42,7 +42,8 @@ public class ArticleServiceImpl implements ArticleService {
         for (ArticleRating rate : article.getArticleRatings()) {
             sumOfRates += rate.getValue();
         }
-        return sumOfRates / article.getArticleRatings().size();
+        double articleRate = sumOfRates / article.getArticleRatings().size();
+        return Math.round(articleRate * 100) / 100.d;
     }
 
     @Override

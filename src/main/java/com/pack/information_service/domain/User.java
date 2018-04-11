@@ -28,8 +28,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Article> articles;
 
-    @OneToMany
-    @JoinColumn(name = "id_user")
+    @OneToMany(mappedBy = "user")
     private List<ArticleRating> articleRatings;
 
     @OneToMany(mappedBy = "user")
