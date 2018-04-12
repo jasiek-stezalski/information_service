@@ -1,6 +1,5 @@
 
 #body{
-
     margin-top:10px;
     margin-bottom:20px;
 }
@@ -12,11 +11,18 @@
 }
 
 #container{
-
     width: 1100px;
     height: 1000px;
     margin: auto;
     background-color: #ddd9b8;
     box-shadow: 0px 15px 30px 10px;
+}
 
+.noSelect{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
 }

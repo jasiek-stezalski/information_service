@@ -1,8 +1,7 @@
 
-#logo{
+.logo{
     width:400px;
     height:150px;
-    background-color:black;
     display: inline;
     float:left;
 }
