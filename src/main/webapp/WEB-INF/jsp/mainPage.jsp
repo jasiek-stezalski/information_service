@@ -8,59 +8,72 @@
 <head>
     <title><spring:message code="MainPage.title"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="resources/css/main.css">
     <link rel="icon" href="resources/images/newspaper.jpg">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="resources/css/main.css">
+    <script src="resources/js/menu.js"></script>
+
 </head>
 <body id="body">
-<div id="top">
-    <div id="logo">
-
-    </div>
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <div id="singedIn">
-
-                <spring:message code="MainPage.loggedAs"/></br>
-                ${pageContext.request.userPrincipal.name}
+    <div id="top">
+        <div class="logo">
+            <img class="logo" src="resources/images/logo.jpg">
         </div>
-    </c:if>
-</div>
-<div id="menu" class="bg-primary">
-    <a href="/mainPage">
-        <span id="home" class="glyphicon glyphicon-home"></span>
-    </a>
-
-    <c:if test="${pageContext.request.userPrincipal.name == null}">
-    <a href="/registration" class="btn registerButton">
-        <spring:message code="MainPage.register"/>
-    </a>
-    <a href="/login" class="btn registerButton">
-        <spring:message code="MainPage.signIn"/>
-    </a>
-    </c:if>
-
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-    <form id="logoutForm" method="POST" action="${contextPath}/logout">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    </form>
-    <a onclick="document.forms['logoutForm'].submit()" class="btn registerButton">
-        <spring:message code="MainPage.signOut"/>
-    </a>
-    <a href="" id="panelButton" class="btn">
-        <spring:message code="MainPage.userPanel"/>
-    </a>
-    <input id="search" type="text" placeholder=
-        <spring:message code="MainPage.search"/>
-
-    </c:if>
-
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <div id="singedIn">
+                <spring:message code="MainPage.loggedAs"/></br>
+                    ${pageContext.request.userPrincipal.name}
             </div>
-    <div id="container" class="bg">
+        </c:if>
+    </div>
+    <div id="menu" class="bg-primary">
 
+        <a href="/mainPage">
+            <span id="home" class="glyphicon glyphicon-home"></span>
+        </a>
+        <div style="float: right">
+            <input id="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
+            <c:if test="${pageContext.request.userPrincipal.name == null}">
+                <a href="/login" class="btn registerButton">
+                    <spring:message code="MainPage.signIn"/>
+                </a>
+                <a href="/registration" class="btn registerButton">
+                    <spring:message code="MainPage.register"/>
+                </a>
+            </c:if>
+
+            <c:if test="${pageContext.request.userPrincipal.name != null}">
+                <a href="" id="panelButton" class="btn">
+                    <spring:message code="MainPage.userPanel"/>
+                </a>
+                <a onclick="document.forms['logoutForm'].submit()" class="btn registerButton">
+                    <spring:message code="MainPage.signOut"/>
+                </a>
+                <form id="logoutForm" method="POST" action="${contextPath}/logout">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+            </c:if>
+        </div>
+    </div>
+    <div id="container" class="" >
+        <div class="slideShowContainer">
+            <c:forEach items="${articles.topNews}" var="article">
+                <c:forEach items="${article.pictures}" var="picture">
+                <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
+                    <img class="mySlides" src="<c:url value="${picture.path}"/>">
+                    <div class="slidesTitle noSelect">${article.title}</div>
+                </a>
+                </c:forEach>
+                <div class="slideShowLeft noSelect" onclick="plusDivs(-1)">&#10094;</div>
+                <div class="slideShowRight noSelect" onclick="plusDivs(+1)">&#10095;</div>
+                <a href="/login" class="slidesAuthor">${article.user.username}</a>
+            </c:forEach>
+        </div>
     </div>
 
     <div class="container">
@@ -164,4 +177,5 @@
     </div>
 
 </body>
+<script src="resources/js/slideShow.js"></script>
 </html>

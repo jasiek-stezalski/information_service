@@ -6,6 +6,18 @@
     margin: auto;
     border-radius: 15px;
     border: 2px solid blue;
+    z-index: 1;
+}
+
+#menu.affix{
+    position:fixed;
+    top: 0;
+    right:50%;
+    margin-right: -563px;
+}
+
+#container.affix2{
+    margin-top:50px;
 }
 
 #home{
@@ -17,34 +29,31 @@
 }
 
 #panelButton{
-    width: 140px;
+    width: 145px;
     height: 35px;
     margin-right:10px;
-    margin-top:8px;
     color: white;
     background-color: #16b50e;
     text-decoration: none;
-    float:right;
+
 }
 
 .registerButton{
     width: 115px;
     height: 35px;
     margin-right:10px;
-    margin-top:8px;
     color: white;
     background-color: #16b50e;
     text-decoration: none;
-    float:right;
+
 }
 
-#menu input{
+#search{
     margin-top: 9px;
     margin-right: 16px;
     padding: 6px;
     border:none;
     color: black;
-    float:right;
     font-size: 15px;
-
 }
+
