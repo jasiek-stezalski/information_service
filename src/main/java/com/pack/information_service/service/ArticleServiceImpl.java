@@ -34,19 +34,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Double findArticleRate(Long id) {
-        Article article = articleRepository.findByIdArticle(id);
-        if (article.getArticleRatings().size() == 0)
-            return 0.0;
-        double sumOfRates = 0;
-        for (ArticleRating rate : article.getArticleRatings()) {
-            sumOfRates += rate.getValue();
-        }
-        double articleRate = sumOfRates / article.getArticleRatings().size();
-        return Math.round(articleRate * 100) / 100.d;
-    }
-
-    @Override
     public List<String> findCommentsAuthors(Long id) {
         Article article = articleRepository.findByIdArticle(id);
         List<String> commentsAuthors = new ArrayList<>();

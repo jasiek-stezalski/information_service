@@ -35,7 +35,7 @@ public class ArticleController {
         User user = article.getUser();
         model.addAttribute("article", article);
         model.addAttribute("journalist", userService.findById(user.getIdUser()));
-        model.addAttribute("articleRate", articleService.findArticleRate(id));
+//        model.addAttribute("articleRate", articleService.findArticleRate(id));
         model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(id));
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (username != null) {
@@ -48,7 +48,7 @@ public class ArticleController {
     @PostMapping("/mark")
     public String articleMark(@RequestParam int mark, @RequestParam Long idArticle) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        userService.addArticleRate(username, mark, idArticle);
+        articleRatingService.addArticleRate(username, mark, idArticle);
         return "redirect:/articlePage/" + idArticle;
     }
 

@@ -17,6 +17,7 @@ public class Article {
     private int priority;
     private Date publicationDate;
     private String status;
+    private double mark;
 
     @OneToMany(mappedBy = "article")
     private List<ArticleRating> articleRatings;
@@ -87,6 +88,14 @@ public class Article {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public double getMark() {
+        return mark;
+    }
+
+    public void setMark(double mark) {
+        this.mark = mark;
     }
 
     public List<ArticleRating> getArticleRatings() {

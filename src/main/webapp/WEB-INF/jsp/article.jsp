@@ -33,7 +33,7 @@
     </c:if>
 </c:if>
 <br/>
-<spring:message code="Article.Rate"/> ${articleRate}
+<spring:message code="Article.Rate"/> ${article.mark}
 <br/><spring:message code="Article.Date"/> ${article.publicationDate}
 <br/><spring:message code="Article.articleAuthor"/> ${journalist.username}
 

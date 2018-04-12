@@ -8,7 +8,5 @@ public interface ArticleService {
 
     Article findById(Long idArticle);
 
-    Double findArticleRate(Long id);
-
     List<String> findCommentsAuthors(Long id);
 }

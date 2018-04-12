@@ -10,5 +10,4 @@ public interface UserService {
 
     User findById(Long idUser);
 
-    void addArticleRate(String username, int userMark, Long idArticle);
 }
