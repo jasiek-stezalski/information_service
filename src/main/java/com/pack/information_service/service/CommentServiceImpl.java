@@ -24,11 +24,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void saveComment(String commentContent, Long idArticle, String username) {
+    public void save(String commentContent, Long idArticle, String username) {
         User user = userRepository.findByUsername(username);
         Article article = articleRepository.findByIdArticle(idArticle);
         Comment comment = new Comment(commentContent, user, article);
         commentRepository.save(comment);
+    }
+
+    @Override
+    public void delete(Long idComment) {
+        Comment comment = commentRepository.findByIdComment(idComment);
+        commentRepository.delete(comment);
     }
 
 }

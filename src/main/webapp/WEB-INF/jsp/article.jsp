@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%--<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -40,7 +41,6 @@
 
 <spring:message code="Article.comments"/>
 <br/>
-
 <c:if test="${pageContext.request.userPrincipal.name != null}">
     <form:form method="post" action="/articlePage/addComment">
         <input type="hidden" name="idArticle" value="${article.idArticle}"/>
@@ -55,6 +55,18 @@
     <br/><spring:message code="Article.comment.author"/> ${commentsAuthors[status.index]}
     <br/><spring:message code="Article.comment.date"/> ${comment.date}
     <br/><spring:message code="Article.comment.mark"/> ${comment.mark}
+
+    <%--<sec:authorize access="hasRole('ROLE_MODERATOR')" var="isModerator"/>--%>
+    <%--<c:if test="${commentsAuthors[status.index] == pageContext.request.userPrincipal.name or 'ROLE_MODERATOR'.equals(isModerator)}">--%>
+
+    <c:if test="${commentsAuthors[status.index] == pageContext.request.userPrincipal.name}">
+        <form:form method="post" action="/articlePage/deleteComment">
+            <input type="hidden" name="idComment" value="${comment.idComment}"/>
+            <input type="hidden" name="idArticle" value="${article.idArticle}"/>
+            <input type="submit" value="<spring:message code="Article.comment.delete"/>">
+        </form:form>
+    </c:if>
+
     <br/> <br/>
 </c:forEach>
 </body>

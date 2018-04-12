@@ -10,12 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping(value = "/articlePage")
 public class ArticleController {
 
     private ArticleService articleService;
@@ -31,7 +29,7 @@ public class ArticleController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/articlePage/{idArticle}")
+    @GetMapping("/{idArticle}")
     public String openArticle(@PathVariable("idArticle") Long id, Model model) {
         Article article = articleService.findById(id);
         User user = article.getUser();
@@ -47,17 +45,23 @@ public class ArticleController {
         return "article";
     }
 
-    @PostMapping("/articlePage/mark")
+    @PostMapping("/mark")
     public String articleMark(@RequestParam int mark, @RequestParam Long idArticle) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         userService.addArticleRate(username, mark, idArticle);
         return "redirect:/articlePage/" + idArticle;
     }
 
-    @PostMapping("/articlePage/addComment")
+    @PostMapping("/addComment")
     public String addComment(@RequestParam String commentContent, @RequestParam Long idArticle) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        commentService.saveComment(commentContent, idArticle, username);
+        commentService.save(commentContent, idArticle, username);
+        return "redirect:/articlePage/" + idArticle;
+    }
+
+    @PostMapping("/deleteComment")
+    public String deleteComment(@RequestParam Long idComment, @RequestParam Long idArticle) {
+        commentService.delete(idComment);
         return "redirect:/articlePage/" + idArticle;
     }
 }
