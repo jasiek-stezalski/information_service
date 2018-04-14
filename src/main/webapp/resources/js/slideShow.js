@@ -7,9 +7,9 @@ function plusDivs(n) {
 
 function showDivs(n) {
     var i;
-    var x = document.getElementsByClassName("mySlides");
-    var y = document.getElementsByClassName("slidesTitle");
-    var z = document.getElementsByClassName("slidesAuthor");
+    var x = $('.mySlides');
+    var y = $('.slidesTitle');
+    var z = $('.slidesAuthor');
     if (n > x.length) {slideIndex = 1}
     if (n < 1) {slideIndex = x.length} ;
     for (i = 0; i < x.length; i++) {
@@ -28,9 +28,9 @@ carousel();
 
 function carousel() {
     var i;
-    var x = document.getElementsByClassName("mySlides");
-    var y = document.getElementsByClassName("slidesTitle");
-    var z = document.getElementsByClassName("slidesAuthor");
+    var x = $('.mySlides');
+    var y = $('.slidesTitle');
+    var z = $('.slidesAuthor');
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
         y[i].style.display = "none";
