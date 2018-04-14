@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 11 Kwi 2018, 12:51
+-- Czas generowania: 14 Kwi 2018, 12:38
 -- Wersja serwera: 10.1.30-MariaDB
 -- Wersja PHP: 7.2.1
 
@@ -36,18 +36,19 @@ CREATE TABLE `article` (
   `publication_date` date DEFAULT NULL,
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `id_user` bigint(20) DEFAULT NULL
+  `id_user` bigint(20) DEFAULT NULL,
+  `mark` double NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `article`
 --
 
-INSERT INTO `article` (`id_article`, `category`, `content`, `priority`, `publication_date`, `status`, `title`, `id_user`) VALUES
-(5, 'Business', 'Szef MON Mariusz Błaszczak podpisał 28 marca 2018 roku umowę o dostawie amerykańskich zestawów obrony powietrznej Patriot dla Polski. Za system wraz z systemem zarządzania polem walki zapłacimy 4,75 miliarda dolarów. Jak wygląda i działa MIM-104 Patriot?', 2, '2018-04-02', 'to display', 'Spojrzenie z bliska na system rakiet Patriot', 5),
-(6, 'Business', 'Na GPW ogłoszono wezwanie do zapisywania się na sprzedaż akcji spółki Colian. Wzywającymi byli: AllumaInvest, Ziołopex, Barbara Kolańska, Jan Kolański, Colian Holding oraz Ipopema 21 FIZAN, którzy przekroczyli łącznie 66 proc. ogólnej liczby głosów w Colian Holding, w wyniku zawarcia przez wzywających porozumienia.', 1, '2018-04-01', 'to display', 'Kolejna spółka wycofa się z warszawskiej giełdy?', 3),
-(7, 'News', 'W ramach środków odwetowych wydalimy z Rosji analogiczną liczbę amerykańskich dyplomatów - zapowiedział Siegiej Ławrow. Minister Spraw Zagranicznych Rosji zapowiedział też, że \"Moskwa odpowie symetrycznie wszystkim krajom, które wydaliły rosyjskich dyplomatów\".', 1, '2018-03-13', 'to display', 'Rosja reaguje na wydalenie dyplomatów', 3),
-(8, 'Sport', 'Szefowie klubu z ulicy Cichej przy pomocy podmiotu zewnętrznego spłacili zobowiązania, dzięki czemu odzyskają zabrane wcześniej punkty.', 3, '2018-03-29', 'to display', 'Zasłużony klub odzyska utracone punkty', 4);
+INSERT INTO `article` (`id_article`, `category`, `content`, `priority`, `publication_date`, `status`, `title`, `id_user`, `mark`) VALUES
+(5, 'Business', 'Szef MON Mariusz Błaszczak podpisał 28 marca 2018 roku umowę o dostawie amerykańskich zestawów obrony powietrznej Patriot dla Polski. Za system wraz z systemem zarządzania polem walki zapłacimy 4,75 miliarda dolarów. Jak wygląda i działa MIM-104 Patriot?', 2, '2018-04-02', 'to display', 'Spojrzenie z bliska na system rakiet ', 5, 0),
+(6, 'Business', 'Na GPW ogłoszono wezwanie do zapisywania się na sprzedaż akcji spółki Colian. Wzywającymi byli: AllumaInvest, Ziołopex, Barbara Kolańska, Jan Kolański, Colian Holding oraz Ipopema 21 FIZAN, którzy przekroczyli łącznie 66 proc. ogólnej liczby głosów w Colian Holding, w wyniku zawarcia przez wzywających porozumienia.', 1, '2018-04-01', 'to display', 'Kolejna spółka wycofa się z warszawskiej giełdy?', 3, 3),
+(7, 'News', 'W ramach środków odwetowych wydalimy z Rosji analogiczną liczbę amerykańskich dyplomatów - zapowiedział Siegiej Ławrow. Minister Spraw Zagranicznych Rosji zapowiedział też, że \"Moskwa odpowie symetrycznie wszystkim krajom, które wydaliły rosyjskich dyplomatów\".', 1, '2018-03-13', 'to display', 'Rosja reaguje na wydalenie dyplomatów', 3, 5),
+(8, 'Sport', 'Szefowie klubu z ulicy Cichej przy pomocy podmiotu zewnętrznego spłacili zobowiązania, dzięki czemu odzyskają zabrane wcześniej punkty.', 3, '2018-03-29', 'to display', 'Zasłużony klub odzyska utracone punkty', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -67,8 +68,8 @@ CREATE TABLE `article_rating` (
 --
 
 INSERT INTO `article_rating` (`id_rating`, `value`, `id_article`, `id_user`) VALUES
-(1, 5, 6, 1),
-(2, 6, 6, 2);
+(3, 3, 6, 1),
+(4, 5, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -79,21 +80,11 @@ INSERT INTO `article_rating` (`id_rating`, `value`, `id_article`, `id_user`) VAL
 CREATE TABLE `comment` (
   `id_comment` bigint(20) NOT NULL,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
-  `date` date DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `mark` int(11) NOT NULL,
   `id_article` bigint(20) DEFAULT NULL,
   `id_user` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `comment`
---
-
-INSERT INTO `comment` (`id_comment`, `content`, `date`, `mark`, `id_article`, `id_user`) VALUES
-(1, 'jakiś tam komentarz sprawdzam polskie znaki żźóśęą\r\ndsffd\r\nsdfsfd\r\nddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', '2018-04-06', 0, 6, 1),
-(2, 'dffffffffdsffdddfsffffffffffffff', '2018-04-07', 0, 7, 2),
-(3, 'sfdddddddddddddddd sdf sd  \r\nsdf\r\n sd\r\n \r\ns df\r\n f', '2018-04-01', 0, 6, 4),
-(4, 'dffffffffffff dgd d f df', '2018-04-07', 0, 6, 3);
 
 -- --------------------------------------------------------
 
@@ -274,13 +265,13 @@ ALTER TABLE `article`
 -- AUTO_INCREMENT dla tabeli `article_rating`
 --
 ALTER TABLE `article_rating`
-  MODIFY `id_rating` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_rating` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT dla tabeli `picture`
