@@ -2,10 +2,7 @@ package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.User;
-import com.pack.information_service.service.ArticleRatingService;
-import com.pack.information_service.service.ArticleService;
-import com.pack.information_service.service.CommentService;
-import com.pack.information_service.service.UserService;
+import com.pack.information_service.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,30 +17,32 @@ public class ArticleController {
     private UserService userService;
     private ArticleRatingService articleRatingService;
     private CommentService commentService;
+    private CommentRatingService commentRatingService;
 
     @Autowired
-    public ArticleController(ArticleService articleService, UserService userService, ArticleRatingService articleRatingService, CommentService commentService) {
+    public ArticleController(ArticleService articleService, UserService userService, ArticleRatingService articleRatingService, CommentService commentService, CommentRatingService commentRatingService) {
         this.articleService = articleService;
         this.userService = userService;
         this.articleRatingService = articleRatingService;
         this.commentService = commentService;
+        this.commentRatingService = commentRatingService;
     }
 
     @GetMapping("/{idArticle}")
     public String openArticle(@PathVariable("idArticle") Long id, Model model) {
         Article article = articleService.findById(id);
-        User user = article.getUser();
         model.addAttribute("article", article);
         model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(id));
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (username != null) {
+        if (!username.equals("anonymousUser")) {
             User loggedUser = userService.findByUsername(username);
-            model.addAttribute("userMark", articleRatingService.userMark(article, loggedUser));
+            model.addAttribute("userArticleMark", articleRatingService.userMark(article, loggedUser));
+            model.addAttribute("userCommentMarks", commentRatingService.userMark(article, loggedUser.getIdUser()));
         }
         return "article";
     }
 
-    @PostMapping("/mark")
+    @PostMapping("/articleMark")
     public String articleMark(@RequestParam int mark, @RequestParam Long idArticle) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         articleRatingService.addArticleRate(username, mark, idArticle);
@@ -54,6 +53,13 @@ public class ArticleController {
     public String addComment(@RequestParam String commentContent, @RequestParam Long idArticle) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         commentService.save(commentContent, idArticle, username);
+        return "redirect:/articlePage/" + idArticle;
+    }
+
+    @PostMapping("/commentMark")
+    public String commentMark(@RequestParam int mark, @RequestParam Long idArticle, @RequestParam Long idComment) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        commentRatingService.addCommentRate(username, mark, idComment, idArticle);
         return "redirect:/articlePage/" + idArticle;
     }
 

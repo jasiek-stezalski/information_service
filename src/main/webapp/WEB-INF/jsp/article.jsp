@@ -15,8 +15,8 @@
 <p>${article.content}</p>
 <br/>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
-    <c:if test="${userMark == 0}">
-        <form:form method="post" action="/articlePage/mark">
+    <c:if test="${userArticleMark == 0}">
+        <form:form method="post" action="/articlePage/articleMark">
             <spring:message code="Article.userMark"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
             <select name="mark" size="1">
@@ -28,7 +28,7 @@
             </br>
         </form:form>
     </c:if>
-    <c:if test="${userMark != 0}">
+    <c:if test="${userArticleMark != 0}">
         <spring:message code="Article.userMark"/> ${userMark}
     </c:if>
 </c:if>
@@ -62,6 +62,20 @@
             <input type="hidden" name="idComment" value="${comment.idComment}"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}"/>
             <input type="submit" value="<spring:message code="Article.comment.delete"/>">
+        </form:form>
+    </c:if>
+    <br/><br/>
+    <c:if test="${pageContext.request.userPrincipal.name != null and userCommentMarks[status.index] == 0}">
+        <form:form method="post" action="/articlePage/commentMark">
+            <spring:message code="Article.comment.mark"/>
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <input type="hidden" name="idComment" value="${comment.idComment}">
+            <select name="mark" size="1">
+                <option value="-1">-</option>
+                <option value="1">+</option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+            </br>
         </form:form>
     </c:if>
 

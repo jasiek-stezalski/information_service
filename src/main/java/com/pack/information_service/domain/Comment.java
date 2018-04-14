@@ -1,8 +1,8 @@
 package com.pack.information_service.domain;
 
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "comment")
@@ -14,6 +14,9 @@ public class Comment {
     private String content;
     private Date date;
     private int mark;
+
+    @OneToMany(mappedBy = "comment")
+    private List<CommentRating> commentRatings;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -64,6 +67,14 @@ public class Comment {
 
     public void setMark(int mark) {
         this.mark = mark;
+    }
+
+    public List<CommentRating> getCommentRatings() {
+        return commentRatings;
+    }
+
+    public void setCommentRatings(List<CommentRating> commentRatings) {
+        this.commentRatings = commentRatings;
     }
 
     public User getUser() {

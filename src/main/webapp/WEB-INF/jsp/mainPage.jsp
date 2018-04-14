@@ -75,7 +75,7 @@
     <c:forEach items="${articles.topNews}" var="article">
         <div class="lesserPictureContainer">
             <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
-                <img class="lesserPicture" src="resources/images/test1.jpg">
+                <img class="lesserPicture" src="<c:url value="${(article.pictures[0]).path}"/>">
                 <div class="lesserPictureTitle">${article.title}</div>
             </a>
         </div>
