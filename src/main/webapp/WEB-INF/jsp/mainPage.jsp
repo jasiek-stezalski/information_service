@@ -64,16 +64,26 @@
         <div class="slideShowContainer">
             <c:forEach items="${articles.topNews}" var="article">
                 <c:forEach items="${article.pictures}" var="picture">
-                <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
-                    <img class="mySlides" src="<c:url value="${picture.path}"/>">
-                    <div class="slidesTitle noSelect">${article.title}</div>
-                </a>
+                    <c:if test="${picture.priority ==1}">
+                        <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
+                            <img class="mySlides" src="<c:url value="${picture.path}"/>">
+                            <div class="slidesTitle noSelect">${article.title}</div>
+                        </a>
+                    </c:if>
                 </c:forEach>
                 <div class="slideShowLeft noSelect" onclick="plusDivs(-1)">&#10094;</div>
                 <div class="slideShowRight noSelect" onclick="plusDivs(+1)">&#10095;</div>
                 <a href="/login" class="slidesAuthor">${article.user.username}</a>
             </c:forEach>
         </div>
+        <c:forEach items="${articles.topNews}" var="article">
+        <div class="lesserPictureContainer">
+            <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
+                <img class="lesserPicture" src="resources/images/test1.jpg">
+                <div class="lesserPictureTitle">${article.title}</div>
+            </a>
+        </div>
+        </c:forEach>
     </div>
 
 <%--<div class="container">

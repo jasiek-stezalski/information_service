@@ -4,6 +4,7 @@
     height: 350px;
     width: calc(350px * 1.78);
     margin-left:20px;
+    margin-bottom:50px;
     padding-top:20px;
     opacity: 1;
 }
