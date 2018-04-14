@@ -1,7 +1,6 @@
 package com.pack.information_service.service;
 
 import com.pack.information_service.domain.Article;
-import com.pack.information_service.domain.ArticleRating;
 import com.pack.information_service.domain.Comment;
 import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.ArticleRepository;

@@ -34,8 +34,6 @@ public class ArticleController {
         Article article = articleService.findById(id);
         User user = article.getUser();
         model.addAttribute("article", article);
-        model.addAttribute("journalist", userService.findById(user.getIdUser()));
-//        model.addAttribute("articleRate", articleService.findArticleRate(id));
         model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(id));
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (username != null) {

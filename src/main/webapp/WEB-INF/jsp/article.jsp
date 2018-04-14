@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%--<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>--%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -35,7 +35,7 @@
 <br/>
 <spring:message code="Article.Rate"/> ${article.mark}
 <br/><spring:message code="Article.Date"/> ${article.publicationDate}
-<br/><spring:message code="Article.articleAuthor"/> ${journalist.username}
+<br/><spring:message code="Article.articleAuthor"/> ${article.user.username}
 
 <br/><br/>
 
@@ -56,10 +56,8 @@
     <br/><spring:message code="Article.comment.date"/> ${comment.date}
     <br/><spring:message code="Article.comment.mark"/> ${comment.mark}
 
-    <%--<sec:authorize access="hasRole('ROLE_MODERATOR')" var="isModerator"/>--%>
-    <%--<c:if test="${commentsAuthors[status.index] == pageContext.request.userPrincipal.name or 'ROLE_MODERATOR'.equals(isModerator)}">--%>
-
-    <c:if test="${commentsAuthors[status.index] == pageContext.request.userPrincipal.name}">
+    <sec:authentication property="authorities" var="roles" scope="page"/>
+    <c:if test="${commentsAuthors[status.index] == pageContext.request.userPrincipal.name or 'MODERATOR' == roles[0]}">
         <form:form method="post" action="/articlePage/deleteComment">
             <input type="hidden" name="idComment" value="${comment.idComment}"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}"/>

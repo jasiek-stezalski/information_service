@@ -1,6 +1,5 @@
 package com.pack.information_service.domain;
 
-
 import javax.persistence.*;
 
 @Entity

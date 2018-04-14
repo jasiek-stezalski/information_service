@@ -2,8 +2,6 @@ package com.pack.information_service.service;
 
 import com.pack.information_service.domain.Role;
 import com.pack.information_service.domain.User;
-import com.pack.information_service.repository.ArticleRatingRepository;
-import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.RoleRepository;
 import com.pack.information_service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
