@@ -56,6 +56,12 @@ public class ArticleController {
         return "redirect:/articlePage/" + idArticle;
     }
 
+    @PostMapping("/editComment")
+    public String editComment(@RequestParam String commentContent, @RequestParam Long idArticle, @RequestParam Long idComment) {
+        commentService.edit(commentContent, idComment);
+        return "redirect:/articlePage/" + idArticle;
+    }
+
     @PostMapping("/commentMark")
     public String commentMark(@RequestParam int mark, @RequestParam Long idArticle, @RequestParam Long idComment) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -65,4 +65,9 @@ public class CommentRatingServiceImpl implements CommentRatingService {
         return markList;
     }
 
+    @Override
+    public void deleteAllCommentRating(Comment comment) {
+        commentRatingRepository.deleteByComment(comment);
+    }
+
 }

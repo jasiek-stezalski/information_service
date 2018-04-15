@@ -15,12 +15,14 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     private ArticleRepository articleRepository;
     private UserRepository userRepository;
+    private CommentRatingService commentRatingService;
 
     @Autowired
-    public CommentServiceImpl(CommentRepository commentRepository, ArticleRepository articleRepository, UserRepository userRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, ArticleRepository articleRepository, UserRepository userRepository, CommentRatingService commentRatingService) {
         this.commentRepository = commentRepository;
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
+        this.commentRatingService = commentRatingService;
     }
 
     @Override
@@ -34,7 +36,15 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void delete(Long idComment) {
         Comment comment = commentRepository.findByIdComment(idComment);
+        commentRatingService.deleteAllCommentRating(comment);
         commentRepository.delete(comment);
+    }
+
+    @Override
+    public void edit(String commentContent, Long idComment) {
+        Comment comment = commentRepository.findByIdComment(idComment);
+        comment.setContent(commentContent);
+        commentRepository.save(comment);
     }
 
 }

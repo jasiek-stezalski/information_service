@@ -5,4 +5,6 @@ public interface CommentService {
     void save(String commentContent, Long idArticle, String username);
 
     void delete(Long idComment);
+
+    void edit(String commentContent, Long idComment);
 }

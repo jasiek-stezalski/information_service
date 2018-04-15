@@ -1,6 +1,7 @@
 package com.pack.information_service.service;
 
 import com.pack.information_service.domain.Article;
+import com.pack.information_service.domain.Comment;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ public interface CommentRatingService {
 
     List<Integer> userMark(Article article, Long idUser);
 
+    void deleteAllCommentRating(Comment comment);
 }
