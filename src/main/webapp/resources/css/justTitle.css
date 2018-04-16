@@ -1,0 +1,26 @@
+
+.allJustTitleContainer{
+    margin-bottom: 20px;
+    width:300px;
+    display:inline-block;
+    vertical-align: top;
+    overflow: auto;
+}
+
+.justTitleContainer{
+    padding-top:10px;
+    text-align: justify;
+}
+
+.justTitle{
+    color:black;
+    font: bold 18px "Times New Roman", Times, serif;
+}
+
+.justTitle:hover{
+    color:darkslategrey;
+}
+
+.bar{
+    font-size: 10px;
+}

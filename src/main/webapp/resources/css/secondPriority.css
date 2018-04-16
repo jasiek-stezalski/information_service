@@ -1,0 +1,21 @@
+
+.secondPriorityContainer{
+    margin-left: 20px;
+    margin-bottom: 15px;
+    width: calc(240px * 1.78);
+    float: left;
+    overflow: auto;
+}
+
+.secondPriorityPicture{
+    height: 240px;
+    width: calc(240px * 1.78);
+}
+
+.secondPriorityTitle{
+    padding-top:5px;
+    padding-left:5px;
+    padding-right:5px;
+    color:black;
+    font: bold 18px "Times New Roman", Times, serif;
+}
