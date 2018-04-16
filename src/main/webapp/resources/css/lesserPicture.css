@@ -1,12 +1,23 @@
 
-.lesserPictureContainer{
-    margin-left: 25px;
-    height: 130px;
-    width: calc(130px * 1.78);
+.allLesserPictureContainer{
+    overflow: auto;
+    width:775px;
+    padding-left:10px;
+    padding-bottom:20px;
     display:inline-block;
 }
 
-.lesserPictureContainer:hover{
+
+.lesserPictureContainer{
+    margin-left: 15px;
+    margin-bottom: 15px;
+    overflow: auto;
+    width: calc(130px * 1.78);
+    vertical-align: top;
+    display:inline-block;
+}
+
+.lesserPicture.hover{
     opacity: 0.75;
 }
 
@@ -19,5 +30,6 @@
     padding-top:5px;
     padding-left:5px;
     padding-right:5px;
-    font: bold 20px "Times New Roman", Times, serif;
+    color:black;
+    font: bold 18px "Times New Roman", Times, serif;
 }

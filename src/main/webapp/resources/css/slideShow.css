@@ -7,6 +7,7 @@
     margin-bottom:50px;
     padding-top:20px;
     opacity: 1;
+    float:left;
 }
 
 .mySlides{
@@ -70,4 +71,8 @@
     color: white;
     background: rgba(0,0,0,0.7);
     font: italic 15px "Times New Roman", Times, serif;
+}
+
+.slidesAuthor:hover{
+    color:grey;
 }

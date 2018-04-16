@@ -17,7 +17,6 @@
 
     <link rel="stylesheet" href="resources/css/main.css">
     <script src="resources/js/menu.js"></script>
-
 </head>
 <body id="body">
     <div id="top">
@@ -33,9 +32,18 @@
     </div>
     <div id="menu" class="bg-primary">
 
-        <a href="/mainPage">
-            <span id="home" class="glyphicon glyphicon-home"></span>
+        <a style="float:left;" href="/mainPage">
+            <span class="glyphicon glyphicon-home home"></span>
         </a>
+        <div class="divider">|</div>
+        <div class="dropdown menuItem">
+            <spring:message code="MainPage.categories"/>
+            <div class="dropdownContent bottomCurve noSelect bg-primary">
+                <a href="">News</a>
+                <a href="">Buissness</a>
+                <a class="bottomCurve" href="">Sport</a>
+            </div>
+        </div>
         <div style="float: right">
             <input id="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
             <c:if test="${pageContext.request.userPrincipal.name == null}">
@@ -63,27 +71,49 @@
     <div id="container" class="" >
         <div class="slideShowContainer">
             <c:forEach items="${articles.topNews}" var="article">
-                <c:forEach items="${article.pictures}" var="picture">
-                    <c:if test="${picture.priority ==1}">
-                        <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
-                            <img class="mySlides" src="<c:url value="${picture.path}"/>">
-                            <div class="slidesTitle noSelect">${article.title}</div>
-                        </a>
-                    </c:if>
-                </c:forEach>
-                <div class="slideShowLeft noSelect" onclick="plusDivs(-1)">&#10094;</div>
-                <div class="slideShowRight noSelect" onclick="plusDivs(+1)">&#10095;</div>
-                <a href="/login" class="slidesAuthor">${article.user.username}</a>
+                <c:if test="${article.priority==1}">
+                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
+                        <img class="mySlides" src="<c:url value="${(article.pictures[0]).path}"/>">
+                        <div class="slidesTitle noSelect">${article.title}</div>
+                    </a>
+                    <div class="slideShowLeft noSelect" onclick="plusDivs(-1)">&#10094;</div>
+                    <div class="slideShowRight noSelect" onclick="plusDivs(+1)">&#10095;</div>
+                    <a style="text-decoration: none;" href="/login" class="slidesAuthor">${article.user.username}</a>
+                </c:if>
             </c:forEach>
         </div>
+        <div style="padding-top:20px;">
         <c:forEach items="${articles.topNews}" var="article">
-        <div class="lesserPictureContainer">
-            <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
-                <img class="lesserPicture" src="resources/images/test1.jpg">
-                <div class="lesserPictureTitle">${article.title}</div>
-            </a>
-        </div>
+            <c:if test="${article.priority==2}">
+                <div class="secondPriorityContainer noSelect">
+                    <img  class="secondPriorityPicture noSelect" src="<c:url value="${(article.pictures[0]).path}"/>">
+                    <div  class="secondPriorityTitle noSelect">${article.title}</div>
+                </div>
+            </c:if>
         </c:forEach>
+        </div>
+        <div class="allLesserPictureContainer">
+            <c:forEach items="${articles.topNews}" var="article">
+                <c:if test="${article.priority==2}">
+                    <div class="lesserPictureContainer noSelect">
+                        <a style="text-decoration: none;" href="<spring:url value="/articlePage/${article.idArticle}"/>">
+                            <img  class="lesserPicture" src="<c:url value="${(article.pictures[0]).path}"/>">
+                            <div  class="lesserPictureTitle">${article.title}</div>
+                        </a>
+                    </div>
+                </c:if>
+            </c:forEach>
+        </div>
+        <div class="allJustTitleContainer">
+            <c:forEach items="${articles.topNews}" var="article">
+                <c:if test="${article.priority==3}">
+                    <div class="bar noSelect"><spring:message code="MainPage.bar"/></div>
+                    <div class="justTitleContainer noSelect">
+                        <a style="text-decoration: none;" class="justTitle" href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
+                    </div>
+                </c:if>
+            </c:forEach>
+        </div>
     </div>
 
 <%--<div class="container">
@@ -208,4 +238,5 @@
 
 </body>
 <script src="resources/js/slideShow.js"></script>
+<script src="resources/js/lesserPicture.js"></script>
 </html>

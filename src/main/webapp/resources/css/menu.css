@@ -1,6 +1,5 @@
 
 #menu{
-
     width:1126px;
     height: 55px;
     margin: auto;
@@ -20,12 +19,12 @@
     margin-top:50px;
 }
 
-#home{
-    padding-top:8px;
-    padding-left: 10px;
+.home{
+    padding: 8px 0px 0px 10px;
     font-size:30px;
     color: white;
     text-decoration: none;
+    float: left;
 }
 
 #panelButton{
@@ -57,3 +56,22 @@
     font-size: 15px;
 }
 
+.divider{
+    padding: 0px 0px 0px 10px;
+    font-size: 30px;
+    float: left;
+}
+
+.menuItem{
+    width:134px;
+    height:51px;
+    padding-top:13px;
+    float:left;
+    text-align: center;
+    font: bold 18px "Times New Roman", Times, serif;
+    cursor:pointer;
+}
+
+.menuItem:hover{
+    background-color: #1b6d85;
+}
