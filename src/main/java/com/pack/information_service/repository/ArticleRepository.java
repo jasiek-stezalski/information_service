@@ -11,7 +11,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc(String status, String category);
 
-    List<Article> findFirst10ByOrderByPriorityAscPublicationDateDesc();
+    List<Article> findFirst20ByOrderByPriorityAscPublicationDateDesc();
 
     Article findByIdArticle(Long idArticle);
 }

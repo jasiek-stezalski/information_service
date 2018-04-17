@@ -82,16 +82,14 @@
                 </c:if>
             </c:forEach>
         </div>
-        <div style="padding-top:20px;">
-        <c:forEach items="${articles.topNews}" var="article">
-            <c:if test="${article.priority==2}">
+        <%--<div style="padding-top:20px;">
+            <c:if test="${articles[0].priority==2}">
                 <div class="secondPriorityContainer noSelect">
                     <img  class="secondPriorityPicture noSelect" src="<c:url value="${(article.pictures[0]).path}"/>">
                     <div  class="secondPriorityTitle noSelect">${article.title}</div>
                 </div>
             </c:if>
-        </c:forEach>
-        </div>
+        </div>--%>
         <div class="allLesserPictureContainer">
             <c:forEach items="${articles.topNews}" var="article">
                 <c:if test="${article.priority==2}">
@@ -116,7 +114,7 @@
         </div>
     </div>
 
-<div class="container">
+<%--<div class="container">
     <h2><spring:message code="MainPage.article.topNews"/></h2>
     <div class="row">
         <c:forEach items="${articles.topNews}" var="article">
@@ -210,7 +208,7 @@
         </c:forEach>
         </tbody>
     </table>
-</div>
+</div>--%>
 
 </body>
 <script src="resources/js/slideShow.js"></script>

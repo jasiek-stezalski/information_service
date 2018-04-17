@@ -28,7 +28,7 @@ public class MainPageFacade {
 
     public void generateContent() {
         topNews = articleRepository
-                .findFirst10ByOrderByPriorityAscPublicationDateDesc();
+                .findFirst20ByOrderByPriorityAscPublicationDateDesc();
         news = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "News");
         sport = articleRepository
