@@ -44,4 +44,15 @@ public class ArticleServiceImpl implements ArticleService {
         return commentsAuthors;
     }
 
+    @Override
+    public List<Article> findByIdJournalist(Long idUser) {
+        User user = userRepository.findByIdUser(idUser);
+        return articleRepository.findByUser(user);
+    }
+
+    @Override
+    public List<Article> findByCategory(String category) {
+        return articleRepository.findByCategory(category);
+    }
+
 }

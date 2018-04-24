@@ -29,10 +29,10 @@ public class ArticleController {
     }
 
     @GetMapping("/{idArticle}")
-    public String openArticle(@PathVariable("idArticle") Long id, Model model) {
-        Article article = articleService.findById(id);
+    public String openArticle(@PathVariable Long idArticle, Model model) {
+        Article article = articleService.findById(idArticle);
         model.addAttribute("article", article);
-        model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(id));
+        model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(idArticle));
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!username.equals("anonymousUser")) {
             User loggedUser = userService.findByUsername(username);
@@ -73,5 +73,17 @@ public class ArticleController {
     public String deleteComment(@RequestParam Long idComment, @RequestParam Long idArticle) {
         commentService.delete(idComment);
         return "redirect:/articlePage/" + idArticle;
+    }
+
+    @GetMapping("/journalist/{idUser}")
+    public String getJournalistArticles(@PathVariable Long idUser, Model model) {
+        model.addAttribute("articles", articleService.findByIdJournalist(idUser));
+        return "searchPage";
+    }
+
+    @GetMapping("/category/{category}")
+    public String getCategoryArticles(@PathVariable String category, Model model) {
+        model.addAttribute("articles", articleService.findByCategory(category));
+        return "searchPage";
     }
 }

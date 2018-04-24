@@ -5,8 +5,9 @@ import com.pack.information_service.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class MainPageFacade {
@@ -18,7 +19,7 @@ public class MainPageFacade {
     private List<Article> entertainment;
     private List<Article> technologies;
     private List<Article> motorization;
-    private List<String> categories;
+    private Map<String, String> categories;
     private ArticleRepository articleRepository;
 
     @Autowired
@@ -41,10 +42,14 @@ public class MainPageFacade {
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Technologies");
         motorization = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Motorization");
-        categories = Arrays.asList(
-                "MainPage.article.news", "MainPage.article.sport",
-                "MainPage.article.business", "MainPage.article.entertainment",
-                "MainPage.article.technologies", "MainPage.article.motorization");
+        categories = new LinkedHashMap<>() {{
+            put("News", "MainPage.article.news");
+            put("Sport", "MainPage.article.sport");
+            put("Business", "MainPage.article.business");
+            put("Entertainment", "MainPage.article.entertainment");
+            put("Technologies", "MainPage.article.technologies");
+            put("Motorization", "MainPage.article.motorization");
+        }};
     }
 
     public List<Article> getTopNews() {
@@ -103,11 +108,11 @@ public class MainPageFacade {
         this.motorization = motorization;
     }
 
-    public List<String> getCategories() {
+    public Map<String, String> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<String> categories) {
+    public void setCategories(Map<String, String> categories) {
         this.categories = categories;
     }
 }

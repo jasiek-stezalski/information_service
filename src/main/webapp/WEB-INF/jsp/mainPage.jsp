@@ -41,7 +41,7 @@
         <spring:message code="MainPage.categories"/>
         <div class="dropdownContent bottomCurve noSelect bg-primary">
             <c:forEach items="${articles.categories}" var="category">
-                <a href=""><spring:message code="${category}"/></a>
+                <a href="/articlePage/category/${category.key}"><spring:message code="${category.value}"/></a>
             </c:forEach>
         </div>
     </div>
@@ -79,7 +79,10 @@
                 </a>
                 <div class="slideShowLeft noSelect" onclick="plusDivs(-1)">&#10094;</div>
                 <div class="slideShowRight noSelect" onclick="plusDivs(+1)">&#10095;</div>
-                <a style="text-decoration: none;" href="/login" class="slidesAuthor">${article.user.username}</a>
+                <a style="text-decoration: none;" class="slidesAuthor"
+                   href="<spring:url value="/articlePage/journalist/${article.user.idUser}"/>">
+                        ${article.user.username}
+                </a>
             </c:if>
         </c:forEach>
     </div>

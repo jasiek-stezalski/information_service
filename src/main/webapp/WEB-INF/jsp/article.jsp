@@ -51,7 +51,11 @@
 <br/>
 <spring:message code="Article.Rate"/> ${article.mark}
 <br/><spring:message code="Article.Date"/> ${article.publicationDate}
-<br/><spring:message code="Article.articleAuthor"/> ${article.user.username}
+
+<br/><spring:message code="Article.articleAuthor"/>
+<a href="<spring:url value="/articlePage/journalist/${article.user.idUser}"/>">
+    ${article.user.username}
+</a>
 
 <br/><br/>
 
