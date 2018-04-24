@@ -55,4 +55,10 @@ public class ArticleServiceImpl implements ArticleService {
         return articleRepository.findByCategory(category);
     }
 
+    @Override
+    public List<Article> findByTitle(String search) {
+        String pattern = ".*" + search.toLowerCase() + ".*";
+        return articleRepository.findByTitle(pattern);
+    }
+
 }

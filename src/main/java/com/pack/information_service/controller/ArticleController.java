@@ -86,4 +86,10 @@ public class ArticleController {
         model.addAttribute("articles", articleService.findByCategory(category));
         return "searchPage";
     }
+
+    @PostMapping("/searchArticle")
+    public String searchArticle(@RequestParam String search, Model model) {
+        model.addAttribute("articles", articleService.findByTitle(search));
+        return "searchPage";
+    }
 }

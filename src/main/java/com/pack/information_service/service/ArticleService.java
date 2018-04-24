@@ -13,4 +13,6 @@ public interface ArticleService {
     List<Article> findByIdJournalist(Long idUser);
 
     List<Article> findByCategory(String category);
+
+    List<Article> findByTitle(String search);
 }

@@ -2,6 +2,7 @@
          pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <!DOCTYPE html>
 <html>
@@ -46,13 +47,16 @@
         </div>
     </div>
     <div style="float: right">
-        <input id="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
+        <form:form method="post" action="articlePage/searchArticle">
+            <input id="search" name="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
+            <input type="submit" class="btn registerButton" value="<spring:message code="MainPage.buttonSearch"/>">
+        </form:form>
         <c:if test="${pageContext.request.userPrincipal.name == null}">
             <a href="/login" class="btn registerButton">
                 <spring:message code="MainPage.signIn"/>
             </a>
-            <a href="/registration" class="btn registerButton">
-                <spring:message code="MainPage.register"/>
+            <a href="" id="panelButton" class="btn">
+                <spring:message code="MainPage.userPanel"/>
             </a>
         </c:if>
 
