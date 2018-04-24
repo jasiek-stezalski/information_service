@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CommentRatingService {
 
-    void addCommentRate(String username, int mark, Long idComment, Long idArticle);
+    void save(String username, int mark, Long idComment, Long idArticle);
 
     List<Integer> userMark(Article article, Long idUser);
 

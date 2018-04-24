@@ -28,7 +28,7 @@
 
 <c:if test="${pageContext.request.userPrincipal.name != null}">
     <c:if test="${userArticleMark == 0}">
-        <form:form method="post" action="/articlePage/articleMark">
+        <form:form method="post" action="/articlePage/addArticleMark">
             <spring:message code="Article.userMark"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
             <select name="mark" size="1">
@@ -44,6 +44,7 @@
         <spring:message code="Article.userMark"/> ${userMark}
     </c:if>
 </c:if>
+
 
 <%--Information about the article--%>
 

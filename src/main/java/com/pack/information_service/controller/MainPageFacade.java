@@ -5,6 +5,7 @@ import com.pack.information_service.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -17,14 +18,13 @@ public class MainPageFacade {
     private List<Article> entertainment;
     private List<Article> technologies;
     private List<Article> motorization;
-
+    private List<String> categories;
     private ArticleRepository articleRepository;
 
     @Autowired
     public MainPageFacade(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
-
 
     public void generateContent() {
         topNews = articleRepository
@@ -40,7 +40,11 @@ public class MainPageFacade {
         technologies = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Technologies");
         motorization = articleRepository
-                .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "motorization");
+                .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Motorization");
+        categories = Arrays.asList(
+                "MainPage.article.news", "MainPage.article.sport",
+                "MainPage.article.business", "MainPage.article.entertainment",
+                "MainPage.article.technologies", "MainPage.article.motorization");
     }
 
     public List<Article> getTopNews() {
@@ -97,5 +101,13 @@ public class MainPageFacade {
 
     public void setMotorization(List<Article> motorization) {
         this.motorization = motorization;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 }

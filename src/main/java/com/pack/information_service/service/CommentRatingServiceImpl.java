@@ -28,16 +28,17 @@ public class CommentRatingServiceImpl implements CommentRatingService {
     }
 
     @Override
-    public void addCommentRate(String username, int mark, Long idComment, Long idArticle) {
+    public void save(String username, int mark, Long idComment, Long idArticle) {
         User user = userRepository.findByUsername(username);
         Comment comment = commentRepository.findByIdComment(idComment);
         CommentRating commentRating = new CommentRating(mark, comment, user);
         commentRatingRepository.save(commentRating);
 
-        int commentMark = 0;
-        for (CommentRating rate : comment.getCommentRatings()) {
-            commentMark += rate.getValue();
-        }
+        int commentMark = comment.getCommentRatings()
+                .stream()
+                .mapToInt(a -> a.getValue())
+                .sum();
+
         comment.setMark(commentMark);
         commentRepository.save(comment);
     }
@@ -48,7 +49,7 @@ public class CommentRatingServiceImpl implements CommentRatingService {
         List<Comment> commentList = article.getComments();
         List<Integer> markList = new ArrayList<>();
         if (commentRatingList.isEmpty()) {
-            for (Comment comment : commentList) {
+            for (Comment ignored : commentList) {
                 markList.add(0);
             }
         } else {
