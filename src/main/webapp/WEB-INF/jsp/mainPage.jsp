@@ -26,12 +26,11 @@
     <c:if test="${pageContext.request.userPrincipal.name != null}">
         <div id="singedIn">
                 <spring:message code="MainPage.loggedAs"/></br>
-                ${pageContext.request.userPrincipal.name}
-        </div>
-    </c:if>
-</div>
-<div id="menu" class="bg-primary">
-
+                    ${pageContext.request.userPrincipal.name}
+            </div>
+        </c:if>
+    </div>
+    <div id="menu" class="bg-primary">
         <a style="float:left;" href="/mainPage">
             <span class="glyphicon glyphicon-home home"></span>
         </a>
@@ -43,6 +42,10 @@
                 <a href="">Buissness</a>
                 <a class="bottomCurve" href="">Sport</a>
             </div>
+        </div>
+        <div class="divider">|</div>
+        <div class="menuItem">
+            <spring:message code="MainPage.signIn"/>
         </div>
         <div style="float: right">
             <input id="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
@@ -116,14 +119,38 @@
         </div>
     </div>
 
-<div class="container">
+<%--<div class="container">
+
+
+    <c:if test="${pageContext.request.userPrincipal.name != null}">
+
+        <form id="logoutForm" method="POST" action="${contextPath}/logout">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+
+        <h2><spring:message code="MainPage.welcome"/> ${pageContext.request.userPrincipal.name} |
+            <a onclick="document.forms['logoutForm'].submit()"><spring:message code="MainPage.signOut"/> </a>
+        </h2>
+
+    </c:if>
+
+    <c:if test="${pageContext.request.userPrincipal.name == null}">
+
+        <h2><spring:message code="MainPage.welcome"/> <a href="/login"><spring:message code="MainPage.signIn"/></a>
+            <a href="/registration"><spring:message code="MainPage.register"/> </a></h2>
+
+    </c:if>
     <h2><spring:message code="MainPage.article.topNews"/></h2>
     <div class="row">
         <c:forEach items="${articles.topNews}" var="article">
             <div class="col-md-2">
                 <div class="thumbnail">
                     <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
-                        <img src="<c:url value="${(article.pictures[0]).path}"/>" style="width: 100px;height: 100px;">
+                        <c:forEach items="${article.pictures}" var="picture">
+                            <c:if test="${picture.priority == 1}">
+                                <img src="<c:url value="${picture.path}"/>" style="width: 100px;height: 100px;">
+                            </c:if>
+                        </c:forEach>
                         <div class="caption">
                             <p>${article.title}</p>
                         </div>
@@ -210,7 +237,7 @@
         </c:forEach>
         </tbody>
     </table>
-</div>
+</div>--%>
 
 </body>
 <script src="resources/js/slideShow.js"></script>
