@@ -34,6 +34,13 @@ public class Article {
     @JoinColumn(name = "id_user")
     private User user;
 
+    public Article() {
+    }
+
+    public Article(String status) {
+        this.status = status;
+    }
+
     public long getIdArticle() {
         return idArticle;
     }

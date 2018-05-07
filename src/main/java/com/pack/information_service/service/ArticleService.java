@@ -20,4 +20,6 @@ public interface ArticleService {
     void save(Article articleFrom);
 
     Map<String,String> getCategories();
+
+    List<Article> findByJournalistInProgress(String username);
 }

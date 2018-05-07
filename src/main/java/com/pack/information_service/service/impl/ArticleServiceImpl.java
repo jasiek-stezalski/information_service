@@ -62,7 +62,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public void save(Article articleFrom) {
-        articleFrom.setStatus("in progress");
         articleRepository.save(articleFrom);
     }
 
@@ -77,6 +76,12 @@ public class ArticleServiceImpl implements ArticleService {
         }};
 
         return categories;
+    }
+
+    @Override
+    public List<Article> findByJournalistInProgress(String username) {
+        User user = userRepository.findByUsername(username);
+        return articleRepository.findByJournalistInProgress(user.getIdUser());
     }
 
 }

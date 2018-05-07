@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -21,9 +20,9 @@
 </head>
 <body>
 
-<form:form method="post" action="articleEdition" modelAttribute="articleForm">
+<form:form method="post" action="/addArticle" modelAttribute="articleForm">
     <h1><spring:message code="ArticleEdition.mainTitle"/></h1>
-    <form:hidden path="priority"/>
+    <form:hidden path="idArticle"/>
     <form:hidden path="status"/>
     <form:hidden path="user"/>
     <br/><spring:message code="ArticleEdition.category"/>
