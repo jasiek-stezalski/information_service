@@ -1,16 +1,15 @@
-package com.pack.information_service.service;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.Comment;
 import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
+import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -59,6 +58,25 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> findByTitle(String search) {
         String pattern = ".*" + search.toLowerCase() + ".*";
         return articleRepository.findByTitle(pattern);
+    }
+
+    @Override
+    public void save(Article articleFrom) {
+        articleFrom.setStatus("in progress");
+        articleRepository.save(articleFrom);
+    }
+
+    public Map<String, String> getCategories() {
+        Map<String, String> categories = new LinkedHashMap<>() {{
+            put("News", "MainPage.article.news");
+            put("Sport", "MainPage.article.sport");
+            put("Business", "MainPage.article.business");
+            put("Entertainment", "MainPage.article.entertainment");
+            put("Technologies", "MainPage.article.technologies");
+            put("Motorization", "MainPage.article.motorization");
+        }};
+
+        return categories;
     }
 
 }

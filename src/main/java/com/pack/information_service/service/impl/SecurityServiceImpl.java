@@ -1,6 +1,7 @@
-package com.pack.information_service.service;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.repository.UserRepository;
+import com.pack.information_service.service.SecurityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

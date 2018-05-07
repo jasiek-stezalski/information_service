@@ -2,6 +2,7 @@ package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.repository.ArticleRepository;
+import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,11 +21,14 @@ public class MainPageFacade {
     private List<Article> technologies;
     private List<Article> motorization;
     private Map<String, String> categories;
+
     private ArticleRepository articleRepository;
+    private ArticleService articleService;
 
     @Autowired
-    public MainPageFacade(ArticleRepository articleRepository) {
+    public MainPageFacade(ArticleRepository articleRepository, ArticleService articleService) {
         this.articleRepository = articleRepository;
+        this.articleService = articleService;
     }
 
     public void generateContent() {
@@ -42,14 +46,7 @@ public class MainPageFacade {
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Technologies");
         motorization = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Motorization");
-        categories = new LinkedHashMap<>() {{
-            put("News", "MainPage.article.news");
-            put("Sport", "MainPage.article.sport");
-            put("Business", "MainPage.article.business");
-            put("Entertainment", "MainPage.article.entertainment");
-            put("Technologies", "MainPage.article.technologies");
-            put("Motorization", "MainPage.article.motorization");
-        }};
+        categories = articleService.getCategories();
     }
 
     public List<Article> getTopNews() {

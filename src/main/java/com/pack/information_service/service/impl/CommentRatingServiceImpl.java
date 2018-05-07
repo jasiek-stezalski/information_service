@@ -1,4 +1,4 @@
-package com.pack.information_service.service;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.Comment;
@@ -7,6 +7,7 @@ import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.CommentRatingRepository;
 import com.pack.information_service.repository.CommentRepository;
 import com.pack.information_service.repository.UserRepository;
+import com.pack.information_service.service.CommentRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
