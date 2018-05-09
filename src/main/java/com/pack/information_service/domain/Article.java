@@ -9,6 +9,7 @@ import java.util.List;
 public class Article {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idArticle;
     private String title;
     @Lob
@@ -22,8 +23,7 @@ public class Article {
     @OneToMany(mappedBy = "article")
     private List<ArticleRating> articleRatings;
 
-    @OneToMany
-    @JoinColumn(name = "id_article")
+    @OneToMany(mappedBy = "article")
     private List<Picture> pictures;
 
     @OneToMany

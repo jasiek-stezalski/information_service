@@ -25,6 +25,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM article WHERE LOWER(article.Title) regexp ?1")
     List<Article> findByTitle(String pattern);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM article WHERE article.id_user =:idUser AND (article.status ='in progress' OR article.status ='to check')")
+    @Query(nativeQuery = true, value = "SELECT * FROM article WHERE article.id_user =:idUser AND article.status ='in progress'")
     List<Article> findByJournalistInProgress(@Param("idUser") Long idUser);
 }

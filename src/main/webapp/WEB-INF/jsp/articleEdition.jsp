@@ -20,11 +20,12 @@
 </head>
 <body>
 
-<form:form method="post" action="/addArticle" modelAttribute="articleForm">
+<form:form method="post" action="/addArticle" modelAttribute="articleForm" enctype="multipart/form-data">
     <h1><spring:message code="ArticleEdition.mainTitle"/></h1>
     <form:hidden path="idArticle"/>
     <form:hidden path="status"/>
     <form:hidden path="user"/>
+
     <br/><spring:message code="ArticleEdition.category"/>
     <form:select path="category" size="1">
         <c:forEach items="${categories}" var="category">
@@ -36,7 +37,12 @@
     <form:textarea path="content" id="text" rows="4" cols="50"/>
     <br/><spring:message code="ArticleEdition.title"/>
     <form:input path="title"/>
-    <input type="submit" value="<spring:message code="submit"/>"/>
+
+    <spring:message code="ArticleEdition.description"/>
+    <input type="text" name="description" value="${description}"/>
+    <input type="file" name="file"/>
+
+    <input type="submit" value="<spring:message code="save"/>"/>
 
 </form:form>
 

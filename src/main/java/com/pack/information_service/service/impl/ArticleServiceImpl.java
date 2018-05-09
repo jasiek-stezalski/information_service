@@ -9,7 +9,10 @@ import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -26,8 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article findById(Long idArticle) {
         Article article = articleRepository.findByIdArticle(idArticle);
-        Collections.sort(article.getComments(),
-                (comment1, comment2) -> -comment1.getDate().compareTo(comment2.getDate()));
+        article.getComments().sort((comment1, comment2) -> -comment1.getDate().compareTo(comment2.getDate()));
         return article;
     }
 
@@ -61,8 +63,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void save(Article articleFrom) {
-        articleRepository.save(articleFrom);
+    public Article save(Article articleFrom) {
+        return articleRepository.saveAndFlush(articleFrom);
     }
 
     public Map<String, String> getCategories() {

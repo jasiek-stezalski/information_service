@@ -1,19 +1,30 @@
 package com.pack.information_service.domain;
 
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "picture")
 public class Picture {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idPicture;
     private String path;
     private String description;
     private int priority;
+
+    @ManyToOne
+    @JoinColumn(name = "id_article")
+    private Article article;
+
+    public Picture() {
+    }
+
+    public Picture(String description, Article article) {
+        this.description = description;
+        this.priority = 1;
+        this.article = article;
+    }
 
     public long getIdPicture() {
         return idPicture;
@@ -45,5 +56,13 @@ public class Picture {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }

@@ -1,16 +1,17 @@
 package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.Article;
+import com.pack.information_service.domain.Picture;
 import com.pack.information_service.service.ArticleService;
+import com.pack.information_service.service.PictureService;
 import com.pack.information_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
@@ -19,17 +20,23 @@ public class EditorPanelController {
 
     private ArticleService articleService;
     private UserService userService;
+    private PictureService pictureService;
 
     @Autowired
-    public EditorPanelController(ArticleService articleService, UserService userService) {
+    public EditorPanelController(ArticleService articleService, UserService userService, PictureService pictureService) {
         this.articleService = articleService;
         this.userService = userService;
+        this.pictureService = pictureService;
     }
 
     @GetMapping("/userPanel")
     public String userPanel(Model model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("articlesInProgress", articleService.findByJournalistInProgress(username));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String role = String.valueOf(authentication.getAuthorities());
+        if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
+            String username = authentication.getName();
+            model.addAttribute("articlesInProgress", articleService.findByJournalistInProgress(username));
+        }
         return "userPanel";
     }
 
@@ -41,19 +48,35 @@ public class EditorPanelController {
     }
 
     @PostMapping("addArticle")
-    public String addArticle(@ModelAttribute Article articleFrom) {
+    public String addArticle(@ModelAttribute Article articleFrom, @RequestParam MultipartFile file, @RequestParam String description) {
         articleFrom.setUser(Optional.ofNullable(articleFrom.getUser())
                 .orElse(userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())));
-        articleService.save(articleFrom);
+        articleFrom = articleService.save(articleFrom);
+        if (!file.isEmpty()) {
+            pictureService.save(file, description, articleFrom);
+        }
         return "redirect:/userPanel";
     }
 
     @GetMapping("updateArticle/{idArticle}")
     public String updateArticle(@PathVariable Long idArticle, Model model) {
-        model.addAttribute("articleForm", articleService.findById(idArticle));
+        Article article = articleService.findById(idArticle);
+        model.addAttribute("articleForm", article);
         model.addAttribute("categories", articleService.getCategories());
+        Picture picture = pictureService.findByArticle(article);
+        if (picture != null)
+            model.addAttribute("description", picture.getDescription());
+        else
+            model.addAttribute("description", "");
         return "articleEdition";
     }
 
+    @PostMapping("article/changeStatus")
+    public String changeStatus(@RequestParam Long idArticle, @RequestParam String status) {
+        Article article = articleService.findById(idArticle);
+        article.setStatus(status);
+        articleService.save(article);
+        return "redirect:/userPanel";
+    }
 
 }

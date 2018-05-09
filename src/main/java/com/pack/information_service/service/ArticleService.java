@@ -17,7 +17,7 @@ public interface ArticleService {
 
     List<Article> findByTitle(String search);
 
-    void save(Article articleFrom);
+    Article save(Article articleFrom);
 
     Map<String,String> getCategories();
 

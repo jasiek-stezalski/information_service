@@ -54,9 +54,6 @@
             <a href="/login" class="btn registerButton">
                 <spring:message code="MainPage.signIn"/>
             </a>
-            <a href="/userPanel" id="panelButton" class="btn">
-                <spring:message code="MainPage.userPanel"/>
-            </a>
         </c:if>
 
         <c:if test="${pageContext.request.userPrincipal.name != null}">

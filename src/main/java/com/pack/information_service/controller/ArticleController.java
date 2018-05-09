@@ -43,7 +43,7 @@ public class ArticleController {
     }
 
     @PostMapping("/addArticleMark")
-    public String addArticleMark(@RequestParam int mark, @RequestParam Long idArticle) {
+    public String addArticleMark(@RequestParam Integer mark, @RequestParam Long idArticle) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         articleRatingService.save(mark, username, idArticle);
         return "redirect:/articlePage/" + idArticle;
@@ -63,7 +63,7 @@ public class ArticleController {
     }
 
     @PostMapping("/commentMark")
-    public String commentMark(@RequestParam int mark, @RequestParam Long idArticle, @RequestParam Long idComment) {
+    public String commentMark(@RequestParam Integer mark, @RequestParam Long idArticle, @RequestParam Long idComment) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         commentRatingService.save(username, mark, idComment, idArticle);
         return "redirect:/articlePage/" + idArticle;
