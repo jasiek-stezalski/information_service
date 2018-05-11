@@ -15,7 +15,7 @@ public class Comment {
     private Date date;
     private int mark;
 
-    @OneToMany(mappedBy = "comment")
+    @OneToMany(mappedBy = "comment", cascade=CascadeType.ALL)
     private List<CommentRating> commentRatings;
 
     @ManyToOne

@@ -36,6 +36,7 @@ public class EditorPanelController {
         if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
             String username = authentication.getName();
             model.addAttribute("articlesInProgress", articleService.findByJournalistInProgress(username));
+            model.addAttribute("oldArticles", articleService.findByJournalistNotInProgress(username));
         }
         return "userPanel";
     }
@@ -64,10 +65,13 @@ public class EditorPanelController {
         model.addAttribute("articleForm", article);
         model.addAttribute("categories", articleService.getCategories());
         Picture picture = pictureService.findByArticle(article);
-        if (picture != null)
+        if (picture != null) {
             model.addAttribute("description", picture.getDescription());
-        else
+            model.addAttribute("path", picture.getPath());
+        } else {
             model.addAttribute("description", "");
+            model.addAttribute("path", "");
+        }
         return "articleEdition";
     }
 
@@ -76,6 +80,12 @@ public class EditorPanelController {
         Article article = articleService.findById(idArticle);
         article.setStatus(status);
         articleService.save(article);
+        return "redirect:/userPanel";
+    }
+
+    @GetMapping("/deleteArticle/{idArticle}")
+    public String deleteArticle(@PathVariable Long idArticle) {
+        articleService.delete(idArticle);
         return "redirect:/userPanel";
     }
 

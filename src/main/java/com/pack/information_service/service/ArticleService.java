@@ -22,4 +22,8 @@ public interface ArticleService {
     Map<String,String> getCategories();
 
     List<Article> findByJournalistInProgress(String username);
+
+    void delete(Long idArticle);
+
+    List<Article> findByJournalistNotInProgress(String username);
 }

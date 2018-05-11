@@ -35,7 +35,15 @@
             <input type="hidden" name="status" value="checked">
             <input type="submit" value="<spring:message code="userPanel.articleChecked"/> ">
         </form:form>
+        <br/><a href="/deleteArticle/${article.idArticle}"><spring:message
+            code="userPanel.deleteArticle"/> </a>
         <br/><br/>
+    </c:forEach>
+
+    <h1><spring:message code="userPanel.oldArticles"/></h1>
+
+    <c:forEach items="${oldArticles}" var="article">
+        <br/>${article.title}
     </c:forEach>
 
 </c:if>

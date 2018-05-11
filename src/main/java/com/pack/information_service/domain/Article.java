@@ -20,13 +20,13 @@ public class Article {
     private String status;
     private double mark;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article" , cascade=CascadeType.ALL)
     private List<ArticleRating> articleRatings;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article", cascade=CascadeType.ALL)
     private List<Picture> pictures;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name = "id_article")
     private List<Comment> comments;
 

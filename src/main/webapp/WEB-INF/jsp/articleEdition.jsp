@@ -41,7 +41,7 @@
     <spring:message code="ArticleEdition.description"/>
     <input type="text" name="description" value="${description}"/>
     <input type="file" name="file"/>
-
+    <img src="<c:url value=" ${path}"/>" style="width: 100px;height: 100px;">
     <input type="submit" value="<spring:message code="save"/>"/>
 
 </form:form>

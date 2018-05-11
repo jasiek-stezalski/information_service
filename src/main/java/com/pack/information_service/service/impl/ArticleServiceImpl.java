@@ -2,13 +2,17 @@ package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.Comment;
+import com.pack.information_service.domain.Picture;
 import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
 import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -83,7 +87,29 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> findByJournalistInProgress(String username) {
         User user = userRepository.findByUsername(username);
-        return articleRepository.findByJournalistInProgress(user.getIdUser());
+        return articleRepository.findByUserAndStatusLike(user, "in progress");
+    }
+
+    @Override
+    public List<Article> findByJournalistNotInProgress(String username) {
+        User user = userRepository.findByUsername(username);
+        return articleRepository.findByUserAndStatusNotLike(user, "in progress");
+    }
+
+    @Override
+    public void delete(Long idArticle) {
+        Article article = articleRepository.findByIdArticle(idArticle);
+        try {
+            String path = ResourceUtils.getFile("classpath:application.properties").getPath();
+            for (Picture p : article.getPictures()) {
+                File file = new File(path.substring(0,
+                        path.indexOf("target")) + "src\\main\\webapp\\resources\\images\\image" + p.getIdPicture() + ".jpg");
+                file.delete();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        articleRepository.delete(article);
     }
 
 }
