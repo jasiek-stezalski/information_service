@@ -11,7 +11,7 @@ public interface ArticleService {
 
     List<String> findCommentsAuthors(Long id);
 
-    List<Article> findByIdJournalist(Long idUser);
+    List<Article> findByIdUser(Long idUser);
 
     List<Article> findByCategory(String category);
 
@@ -21,9 +21,13 @@ public interface ArticleService {
 
     Map<String,String> getCategories();
 
-    List<Article> findByJournalistInProgress(String username);
+    List<Article> findByUserAndStatus(String username, String status);
 
     void delete(Long idArticle);
 
-    List<Article> findByJournalistNotInProgress(String username);
+    List<Article> findByUserAndNotStatus(String username, String status);
+
+    List<Article> findByStatus(String status);
+
+    List<Article> findByStatusAndCategory(String status, String username);
 }

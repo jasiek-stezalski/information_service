@@ -50,7 +50,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByIdJournalist(Long idUser) {
+    public List<Article> findByIdUser(Long idUser) {
         User user = userRepository.findByIdUser(idUser);
         return articleRepository.findByUser(user);
     }
@@ -85,16 +85,28 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByJournalistInProgress(String username) {
+    public List<Article> findByUserAndStatus(String username, String status) {
         User user = userRepository.findByUsername(username);
-        return articleRepository.findByUserAndStatusLike(user, "in progress");
+        return articleRepository.findByUserAndStatusLike(user, status);
     }
 
     @Override
-    public List<Article> findByJournalistNotInProgress(String username) {
+    public List<Article> findByUserAndNotStatus(String username, String status) {
         User user = userRepository.findByUsername(username);
-        return articleRepository.findByUserAndStatusNotLike(user, "in progress");
+        return articleRepository.findByUserAndStatusNotLike(user, status);
     }
+
+    @Override
+    public List<Article> findByStatus(String status) {
+        return articleRepository.findByStatus(status);
+    }
+
+    @Override
+    public List<Article> findByStatusAndCategory(String status, String username) {
+        User user = userRepository.findByUsername(username);
+        return articleRepository.findByStatusAndCategory(status, user.getCategory());
+    }
+
 
     @Override
     public void delete(Long idArticle) {

@@ -21,6 +21,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private boolean blocked;
+    private String category;
 
     @Transient
     private String confirmPassword;
@@ -123,6 +124,13 @@ public class User implements UserDetails {
         this.role = roles;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     // UserDetails methods
 

@@ -6,7 +6,6 @@ import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +32,7 @@ public class MainPageFacade {
 
     public void generateContent() {
         topNews = articleRepository
-                .findFirst20ByOrderByPriorityAscPublicationDateDesc();
+                .findFirst20ByStatusOrderByPriorityAscPublicationDateDesc("to display");
         news = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "News");
         sport = articleRepository

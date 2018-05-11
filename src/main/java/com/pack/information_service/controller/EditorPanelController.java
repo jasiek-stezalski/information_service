@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -33,10 +34,24 @@ public class EditorPanelController {
     public String userPanel(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String role = String.valueOf(authentication.getAuthorities());
-        if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
+        if (role.equals("[JOURNALIST]")) {
             String username = authentication.getName();
-            model.addAttribute("articlesInProgress", articleService.findByJournalistInProgress(username));
-            model.addAttribute("oldArticles", articleService.findByJournalistNotInProgress(username));
+            model.addAttribute("articlesInProgress", articleService.findByUserAndStatus(username, "in progress"));
+            model.addAttribute("oldArticles", articleService.findByUserAndNotStatus(username, "in progress"));
+        }
+        if (role.equals("[MODERATOR]")) {
+            String username = authentication.getName();
+            model.addAttribute("articlesInProgress", articleService.findByUserAndStatus(username, "in progress"));
+            model.addAttribute("articlesToCheck", articleService.findByStatusAndCategory("to check", username));
+            model.addAttribute("articlesChecked", articleService.findByStatusAndCategory("checked", username));
+            model.addAttribute("oldArticles", articleService.findByUserAndStatus(username, "archive"));
+        }
+        if (role.equals("[EDITOR_IN_CHIEF]")) {
+            String username = authentication.getName();
+            model.addAttribute("articlesInProgress", articleService.findByUserAndStatus(username, "in progress"));
+            model.addAttribute("articlesToCheck", articleService.findByStatus("to check"));
+            model.addAttribute("articlesChecked", articleService.findByStatus("checked"));
+            model.addAttribute("oldArticles", articleService.findByStatus("archive"));
         }
         return "userPanel";
     }
@@ -79,6 +94,23 @@ public class EditorPanelController {
     public String changeStatus(@RequestParam Long idArticle, @RequestParam String status) {
         Article article = articleService.findById(idArticle);
         article.setStatus(status);
+        articleService.save(article);
+        return "redirect:/userPanel";
+    }
+
+    @PostMapping("article/display")
+    public String display(@RequestParam Long idArticle, @RequestParam String status) {
+        Article article = articleService.findById(idArticle);
+        article.setStatus(status);
+        article.setPublicationDate(new Date());
+        articleService.save(article);
+        return "redirect:/userPanel";
+    }
+
+    @PostMapping("article/setPriority")
+    public String setPriority(@RequestParam Long idArticle, @RequestParam Integer priority) {
+        Article article = articleService.findById(idArticle);
+        article.setPriority(priority);
         articleService.save(article);
         return "redirect:/userPanel";
     }

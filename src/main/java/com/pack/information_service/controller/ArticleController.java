@@ -77,7 +77,7 @@ public class ArticleController {
 
     @GetMapping("/journalist/{idUser}")
     public String getJournalistArticles(@PathVariable Long idUser, Model model) {
-        model.addAttribute("articles", articleService.findByIdJournalist(idUser));
+        model.addAttribute("articles", articleService.findByIdUser(idUser));
         return "searchPage";
     }
 
