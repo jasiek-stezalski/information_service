@@ -93,16 +93,8 @@ public class EditorPanelController {
     @PostMapping("article/changeStatus")
     public String changeStatus(@RequestParam Long idArticle, @RequestParam String status) {
         Article article = articleService.findById(idArticle);
+        if (status.equals("to display")) article.setPublicationDate(new Date());
         article.setStatus(status);
-        articleService.save(article);
-        return "redirect:/userPanel";
-    }
-
-    @PostMapping("article/display")
-    public String display(@RequestParam Long idArticle, @RequestParam String status) {
-        Article article = articleService.findById(idArticle);
-        article.setStatus(status);
-        article.setPublicationDate(new Date());
         articleService.save(article);
         return "redirect:/userPanel";
     }

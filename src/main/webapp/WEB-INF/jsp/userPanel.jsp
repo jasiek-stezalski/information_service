@@ -16,34 +16,33 @@
 
 <c:if test="${roles[0] == 'JOURNALIST'}">
 
-
-    <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/>
-
     <h1><spring:message code="userPanel.actualArticles"/></h1>
 
+    <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/><br/>
+
     <c:forEach items="${articlesInProgress}" var="article">
-        ${article.title}
+        <a href="/articlePage/${article.idArticle}">${article.title}</a>
+
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
             code="userPanel.updateArticle"/> </a>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="to check">
-            <input type="submit" value="<spring:message code="userPanel.articleToCheck"/> ">
-        </form:form>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="checked">
-            <input type="submit" value="<spring:message code="userPanel.articleChecked"/> ">
-        </form:form>
         <br/><a href="/deleteArticle/${article.idArticle}"><spring:message
             code="userPanel.deleteArticle"/> </a>
-        <br/><br/>
+
+        <form:form method="post" action="article/changeStatus">
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="status" size="1">
+                <option value="to check"><spring:message code="userPanel.articleToCheck"/></option>
+                <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
     </c:forEach>
 
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
     <c:forEach items="${oldArticles}" var="article">
-        <br/>${article.title}
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
     </c:forEach>
 
 </c:if>
@@ -52,48 +51,54 @@
 
 <c:if test="${roles[0] == 'MODERATOR'}">
 
-    <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/>
-
     <h1><spring:message code="userPanel.actualArticles"/></h1>
 
+    <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/><br/>
+
     <c:forEach items="${articlesInProgress}" var="article">
-        ${article.title}
+        <a href="/articlePage/${article.idArticle}">${article.title}</a>
+
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
             code="userPanel.updateArticle"/> </a>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="checked">
-            <input type="submit" value="<spring:message code="userPanel.articleChecked"/> ">
-        </form:form>
         <br/><a href="/deleteArticle/${article.idArticle}"><spring:message
             code="userPanel.deleteArticle"/> </a>
-        <br/><br/>
+
+        <form:form method="post" action="article/changeStatus">
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="status" size="1">
+                <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
     </c:forEach>
 
     <h1><spring:message code="userPanel.articlesToCheck"/></h1>
 
     <c:forEach items="${articlesToCheck}" var="article">
-        <br/>${article.title}
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
             code="userPanel.updateArticle"/> </a>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="checked">
-            <input type="submit" value="<spring:message code="userPanel.articleChecked"/> ">
-        </form:form>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="in progress">
-            <input type="submit" value="<spring:message code="userPanel.articleToImprove"/> ">
-        </form:form>
         <br/><a href="/deleteArticle/${article.idArticle}"><spring:message
             code="userPanel.deleteArticle"/> </a>
+
+        <form:form method="post" action="article/changeStatus">
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="status" size="1">
+                <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
+                <option value="in progress"><spring:message code="userPanel.articleToImprove"/></option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
     </c:forEach>
 
     <h1><spring:message code="userPanel.articlesChecked"/></h1>
 
     <c:forEach items="${articlesChecked}" var="article">
-        <br/>${article.title}
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
         <form:form method="post" action="article/setPriority">
             <spring:message code="userPanel.setPriority"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
@@ -104,19 +109,23 @@
             </select>
             <input type="submit" value="<spring:message code="save"/> ">
         </form:form>
+
         <c:if test="${article.priority != 0}">
             <form:form method="post" action="article/display">
                 <input type="hidden" name="idArticle" value="${article.idArticle}">
-                <input type="hidden" name="status" value="to display">
-                <input type="submit" value="<spring:message code="userPanel.articleToDisplay"/> ">
+                <select name="status" size="1">
+                    <option value="to display"><spring:message code="userPanel.articleToDisplay"/></option>
+                </select>
+                <input type="submit" value="<spring:message code="submit"/> ">
             </form:form>
         </c:if>
+
     </c:forEach>
 
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
     <c:forEach items="${oldArticles}" var="article">
-        <br/>${article.title}
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
     </c:forEach>
 
 </c:if>
@@ -125,53 +134,65 @@
 
 <c:if test="${roles[0] == 'EDITOR_IN_CHIEF'}">
 
-    <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/>
-
     <h1><spring:message code="userPanel.actualArticles"/></h1>
 
+    <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/><br/>
+
     <c:forEach items="${articlesInProgress}" var="article">
-        ${article.title}
+        <a href="/articlePage/${article.idArticle}">${article.title}</a>
+
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
             code="userPanel.updateArticle"/> </a>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="checked">
-            <input type="submit" value="<spring:message code="userPanel.articleChecked"/> ">
-        </form:form>
         <br/><a href="/deleteArticle/${article.idArticle}"><spring:message
             code="userPanel.deleteArticle"/> </a>
-        <br/><br/>
+
+        <form:form method="post" action="article/changeStatus">
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="status" size="1">
+                <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
     </c:forEach>
 
     <h1><spring:message code="userPanel.articlesToCheck"/></h1>
 
     <c:forEach items="${articlesToCheck}" var="article">
-        <br/>${article.title}
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
             code="userPanel.updateArticle"/> </a>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="checked">
-            <input type="submit" value="<spring:message code="userPanel.articleChecked"/> ">
-        </form:form>
-        <form:form method="post" action="article/changeStatus">
-            <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="in progress">
-            <input type="submit" value="<spring:message code="userPanel.articleToImprove"/> ">
-        </form:form>
         <br/><a href="/deleteArticle/${article.idArticle}"><spring:message
             code="userPanel.deleteArticle"/> </a>
+
+        <form:form method="post" action="article/changeStatus">
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="status" size="1">
+                <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
+                <option value="in progress"><spring:message code="userPanel.articleToImprove"/></option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
     </c:forEach>
 
     <h1><spring:message code="userPanel.articlesChecked"/></h1>
 
     <c:forEach items="${articlesChecked}" var="article">
-        <br/>${article.title}
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
         <form:form method="post" action="article/changeStatus">
             <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <input type="hidden" name="status" value="to check">
-            <input type="submit" value="<spring:message code="userPanel.articleToCorrect"/> ">
+            <select name="status" size="1">
+                <option value="to check"><spring:message code="userPanel.articleToCorrect"/></option>
+                <c:if test="${article.priority != 0}">
+                    <option value="to display"><spring:message code="userPanel.articleToDisplay"/></option>
+                </c:if>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
         </form:form>
+
         <form:form method="post" action="article/setPriority">
             <spring:message code="userPanel.setPriority"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
@@ -183,19 +204,12 @@
             <input type="submit" value="<spring:message code="save"/> ">
         </form:form>
 
-        <c:if test="${article.priority != 0}">
-            <form:form method="post" action="article/display">
-                <input type="hidden" name="idArticle" value="${article.idArticle}">
-                <input type="hidden" name="status" value="to display">
-                <input type="submit" value="<spring:message code="userPanel.articleToDisplay"/> ">
-            </form:form>
-        </c:if>
     </c:forEach>
 
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
     <c:forEach items="${oldArticles}" var="article">
-        <br/>${article.title}
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
     </c:forEach>
 
 </c:if>
