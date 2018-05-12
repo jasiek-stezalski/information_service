@@ -9,25 +9,34 @@ public interface ArticleService {
 
     Article findById(Long idArticle);
 
-    List<String> findCommentsAuthors(Long id);
-
     List<Article> findByIdUser(Long idUser);
 
     List<Article> findByCategory(String category);
 
-    List<Article> findByTitle(String search);
+    List<Article> findByStatus(String status);
 
-    Article save(Article articleFrom);
+    List<Article> findByStatusInOrder(String status);
 
-    Map<String,String> getCategories();
+    List<Article> findByTitle(String title);
 
-    List<Article> findByUserAndStatus(String username, String status);
+    List<Article> findByUserAndStatus(String status, String username);
+
+    List<Article> findByUserAndNotStatus(String status, String username);
+
+    List<Article> findByStatusAndCategory(String status, String username);
+
+    List<Article> findByStatusAndCategoryInOrder(String status, String username);
+
+    List<String> findCommentsAuthors(Long idArticle);
+
+    Article save(Article article);
+
+    void save(Long idArticle, String status);
+
+    void save(Long idArticle, Integer priority);
 
     void delete(Long idArticle);
 
-    List<Article> findByUserAndNotStatus(String username, String status);
+    Map<String,String> getCategories();
 
-    List<Article> findByStatus(String status);
-
-    List<Article> findByStatusAndCategory(String status, String username);
 }

@@ -1,4 +1,4 @@
-package com.pack.information_service.controller;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.repository.ArticleRepository;

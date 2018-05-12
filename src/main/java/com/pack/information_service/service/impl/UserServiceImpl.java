@@ -32,12 +32,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Long idUser) {
-        return userRepository.findByIdUser(idUser);
-    }
-
-
-    @Override
     public void save(User user) {
         user.setPassword((passwordEncoder.encode(user.getPassword())));
         Set<Role> roles = new HashSet<>();

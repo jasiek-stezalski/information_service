@@ -2,6 +2,7 @@ package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.Picture;
+import com.pack.information_service.service.impl.ArticlePanelFacade;
 import com.pack.information_service.service.ArticleService;
 import com.pack.information_service.service.PictureService;
 import com.pack.information_service.service.UserService;
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -22,36 +22,23 @@ public class EditorPanelController {
     private ArticleService articleService;
     private UserService userService;
     private PictureService pictureService;
+    private ArticlePanelFacade articlePanelFacade;
 
     @Autowired
-    public EditorPanelController(ArticleService articleService, UserService userService, PictureService pictureService) {
+    public EditorPanelController(ArticleService articleService, UserService userService, PictureService pictureService, ArticlePanelFacade articlePanelFacade) {
         this.articleService = articleService;
         this.userService = userService;
         this.pictureService = pictureService;
+        this.articlePanelFacade = articlePanelFacade;
     }
 
     @GetMapping("/userPanel")
     public String userPanel(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String role = String.valueOf(authentication.getAuthorities());
-        if (role.equals("[JOURNALIST]")) {
-            String username = authentication.getName();
-            model.addAttribute("articlesInProgress", articleService.findByUserAndStatus(username, "in progress"));
-            model.addAttribute("oldArticles", articleService.findByUserAndNotStatus(username, "in progress"));
-        }
-        if (role.equals("[MODERATOR]")) {
-            String username = authentication.getName();
-            model.addAttribute("articlesInProgress", articleService.findByUserAndStatus(username, "in progress"));
-            model.addAttribute("articlesToCheck", articleService.findByStatusAndCategory("to check", username));
-            model.addAttribute("articlesChecked", articleService.findByStatusAndCategory("checked", username));
-            model.addAttribute("oldArticles", articleService.findByUserAndStatus(username, "archive"));
-        }
-        if (role.equals("[EDITOR_IN_CHIEF]")) {
-            String username = authentication.getName();
-            model.addAttribute("articlesInProgress", articleService.findByUserAndStatus(username, "in progress"));
-            model.addAttribute("articlesToCheck", articleService.findByStatus("to check"));
-            model.addAttribute("articlesChecked", articleService.findByStatus("checked"));
-            model.addAttribute("oldArticles", articleService.findByStatus("archive"));
+        if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
+            articlePanelFacade.generateContent();
+            model.addAttribute("articles", articlePanelFacade);
         }
         return "userPanel";
     }
@@ -92,18 +79,13 @@ public class EditorPanelController {
 
     @PostMapping("article/changeStatus")
     public String changeStatus(@RequestParam Long idArticle, @RequestParam String status) {
-        Article article = articleService.findById(idArticle);
-        if (status.equals("to display")) article.setPublicationDate(new Date());
-        article.setStatus(status);
-        articleService.save(article);
+        articleService.save(idArticle, status);
         return "redirect:/userPanel";
     }
 
     @PostMapping("article/setPriority")
     public String setPriority(@RequestParam Long idArticle, @RequestParam Integer priority) {
-        Article article = articleService.findById(idArticle);
-        article.setPriority(priority);
-        articleService.save(article);
+        articleService.save(idArticle, priority);
         return "redirect:/userPanel";
     }
 

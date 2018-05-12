@@ -7,5 +7,6 @@ public interface ArticleRatingService {
 
     int userMark(Article article, User user);
 
-    void save(int mark, String username, Long idArticle);
+    void save(Integer mark, Long idArticle);
+
 }

@@ -13,10 +13,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -38,18 +35,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<String> findCommentsAuthors(Long id) {
-        Article article = articleRepository.findByIdArticle(id);
-        List<String> commentsAuthors = new ArrayList<>();
-        User user;
-        for (Comment comment : article.getComments()) {
-            user = userRepository.findByIdUser(comment.getUser().getIdUser());
-            commentsAuthors.add(user.getUsername());
-        }
-        return commentsAuthors;
-    }
-
-    @Override
     public List<Article> findByIdUser(Long idUser) {
         User user = userRepository.findByIdUser(idUser);
         return articleRepository.findByUser(user);
@@ -61,44 +46,31 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByTitle(String search) {
-        String pattern = ".*" + search.toLowerCase() + ".*";
+    public List<Article> findByStatus(String status) {
+        return articleRepository.findByStatus(status);
+    }
+
+    @Override
+    public List<Article> findByStatusInOrder(String status) {
+        return articleRepository.findByStatusOrderByPriorityAscPublicationDateDesc(status);
+    }
+
+    @Override
+    public List<Article> findByTitle(String title) {
+        String pattern = ".*" + title.toLowerCase() + ".*";
         return articleRepository.findByTitle(pattern);
     }
 
     @Override
-    public Article save(Article articleFrom) {
-        return articleRepository.saveAndFlush(articleFrom);
-    }
-
-    public Map<String, String> getCategories() {
-        Map<String, String> categories = new LinkedHashMap<>() {{
-            put("News", "MainPage.article.news");
-            put("Sport", "MainPage.article.sport");
-            put("Business", "MainPage.article.business");
-            put("Entertainment", "MainPage.article.entertainment");
-            put("Technologies", "MainPage.article.technologies");
-            put("Motorization", "MainPage.article.motorization");
-        }};
-
-        return categories;
-    }
-
-    @Override
-    public List<Article> findByUserAndStatus(String username, String status) {
+    public List<Article> findByUserAndStatus(String status, String username) {
         User user = userRepository.findByUsername(username);
         return articleRepository.findByUserAndStatusLike(user, status);
     }
 
     @Override
-    public List<Article> findByUserAndNotStatus(String username, String status) {
+    public List<Article> findByUserAndNotStatus(String status, String username) {
         User user = userRepository.findByUsername(username);
         return articleRepository.findByUserAndStatusNotLike(user, status);
-    }
-
-    @Override
-    public List<Article> findByStatus(String status) {
-        return articleRepository.findByStatus(status);
     }
 
     @Override
@@ -107,6 +79,43 @@ public class ArticleServiceImpl implements ArticleService {
         return articleRepository.findByStatusAndCategory(status, user.getCategory());
     }
 
+    @Override
+    public List<Article> findByStatusAndCategoryInOrder(String status, String username) {
+        User user = userRepository.findByUsername(username);
+        return articleRepository.findByStatusAndCategoryOrderByPriorityAscPublicationDateDesc(status, user.getCategory());
+    }
+
+    @Override
+    public List<String> findCommentsAuthors(Long idArticle) {
+        Article article = articleRepository.findByIdArticle(idArticle);
+        List<String> commentsAuthors = new ArrayList<>();
+        User user;
+        for (Comment comment : article.getComments()) {
+            user = userRepository.findByIdUser(comment.getUser().getIdUser());
+            commentsAuthors.add(user.getUsername());
+        }
+        return commentsAuthors;
+    }
+
+    @Override
+    public Article save(Article article) {
+        return articleRepository.saveAndFlush(article);
+    }
+
+    @Override
+    public void save(Long idArticle, String status) {
+        Article article = articleRepository.findByIdArticle(idArticle);
+        if (status.equals("to display")) article.setPublicationDate(new Date());
+        article.setStatus(status);
+        articleRepository.save(article);
+    }
+
+    @Override
+    public void save(Long idArticle, Integer priority) {
+        Article article = articleRepository.findByIdArticle(idArticle);
+        article.setPriority(priority);
+        articleRepository.save(article);
+    }
 
     @Override
     public void delete(Long idArticle) {
@@ -122,6 +131,20 @@ public class ArticleServiceImpl implements ArticleService {
             e.printStackTrace();
         }
         articleRepository.delete(article);
+    }
+
+    @Override
+    public Map<String, String> getCategories() {
+        Map<String, String> categories = new LinkedHashMap<>() {{
+            put("News", "MainPage.article.news");
+            put("Sport", "MainPage.article.sport");
+            put("Business", "MainPage.article.business");
+            put("Entertainment", "MainPage.article.entertainment");
+            put("Technologies", "MainPage.article.technologies");
+            put("Motorization", "MainPage.article.motorization");
+        }};
+
+        return categories;
     }
 
 }

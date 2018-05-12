@@ -23,6 +23,11 @@ public class PictureServiceImpl implements PictureService {
         this.pictureRepository = pictureRepository;
     }
 
+    @Override
+    public Picture findByArticle(Article article) {
+        return pictureRepository.findByArticle(article);
+    }
+
     @Transactional
     @Override
     public void save(MultipartFile file, String description, Article article) {
@@ -50,11 +55,6 @@ public class PictureServiceImpl implements PictureService {
             e.printStackTrace();
         }
 
-    }
-
-    @Override
-    public Picture findByArticle(Article article) {
-        return pictureRepository.findByArticle(article);
     }
 
 }

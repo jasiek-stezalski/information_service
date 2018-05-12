@@ -8,6 +8,7 @@ import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
 import com.pack.information_service.service.ArticleRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -37,10 +38,11 @@ public class ArticleRatingServiceImpl implements ArticleRatingService {
     }
 
     @Override
-    public void save(int userMark, String username, Long idArticle) {
+    public void save(Integer mark, Long idArticle) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username);
         Article article = articleRepository.findByIdArticle(idArticle);
-        ArticleRating articleRating = new ArticleRating(userMark, article, user);
+        ArticleRating articleRating = new ArticleRating(mark, article, user);
         articleRatingRepository.save(articleRating);
 
         OptionalDouble articleMark = article.getArticleRatings()
@@ -51,6 +53,5 @@ public class ArticleRatingServiceImpl implements ArticleRatingService {
         article.setMark(Math.round(articleMark.getAsDouble() * 100) / 100.d);
         articleRepository.save(article);
     }
-
 
 }

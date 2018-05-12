@@ -20,7 +20,7 @@
 
     <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/><br/>
 
-    <c:forEach items="${articlesInProgress}" var="article">
+    <c:forEach items="${articles.inProgress}" var="article">
         <a href="/articlePage/${article.idArticle}">${article.title}</a>
 
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
@@ -41,7 +41,7 @@
 
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
-    <c:forEach items="${oldArticles}" var="article">
+    <c:forEach items="${articles.archive}" var="article">
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
     </c:forEach>
 
@@ -55,7 +55,7 @@
 
     <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/><br/>
 
-    <c:forEach items="${articlesInProgress}" var="article">
+    <c:forEach items="${articles.inProgress}" var="article">
         <a href="/articlePage/${article.idArticle}">${article.title}</a>
 
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
@@ -75,7 +75,7 @@
 
     <h1><spring:message code="userPanel.articlesToCheck"/></h1>
 
-    <c:forEach items="${articlesToCheck}" var="article">
+    <c:forEach items="${articles.toCheck}" var="article">
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
 
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
@@ -96,7 +96,7 @@
 
     <h1><spring:message code="userPanel.articlesChecked"/></h1>
 
-    <c:forEach items="${articlesChecked}" var="article">
+    <c:forEach items="${articles.checked}" var="article">
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
 
         <form:form method="post" action="article/setPriority">
@@ -122,9 +122,35 @@
 
     </c:forEach>
 
+    <h1><spring:message code="userPanel.articlesToDisplay"/></h1>
+
+    <c:forEach items="${articles.toDisplay}" var="article">
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+        <form:form method="post" action="article/changeStatus">
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="status" size="1">
+                <option value="archive"><spring:message code="userPanel.articleArchive"/></option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
+        <form:form method="post" action="article/setPriority">
+            <spring:message code="userPanel.setPriority"/> ${article.priority}
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="priority" size="1">
+                <c:forEach var="i" begin="1" end="3">
+                    <option value="${i}">${i}</option>
+                </c:forEach>
+            </select>
+            <input type="submit" value="<spring:message code="save"/> ">
+        </form:form>
+
+    </c:forEach>
+
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
-    <c:forEach items="${oldArticles}" var="article">
+    <c:forEach items="${articles.archive}" var="article">
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
     </c:forEach>
 
@@ -138,7 +164,7 @@
 
     <a href="/addArticle"><spring:message code="userPanel.addArticle"/> </a><br/><br/>
 
-    <c:forEach items="${articlesInProgress}" var="article">
+    <c:forEach items="${articles.inProgress}" var="article">
         <a href="/articlePage/${article.idArticle}">${article.title}</a>
 
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
@@ -158,7 +184,7 @@
 
     <h1><spring:message code="userPanel.articlesToCheck"/></h1>
 
-    <c:forEach items="${articlesToCheck}" var="article">
+    <c:forEach items="${articles.toCheck}" var="article">
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
 
         <br/><a href="/updateArticle/${article.idArticle}"><spring:message
@@ -179,7 +205,7 @@
 
     <h1><spring:message code="userPanel.articlesChecked"/></h1>
 
-    <c:forEach items="${articlesChecked}" var="article">
+    <c:forEach items="${articles.checked}" var="article">
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
 
         <form:form method="post" action="article/changeStatus">
@@ -206,9 +232,35 @@
 
     </c:forEach>
 
+    <h1><spring:message code="userPanel.articlesToDisplay"/></h1>
+
+    <c:forEach items="${articles.toDisplay}" var="article">
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+        <form:form method="post" action="article/changeStatus">
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="status" size="1">
+                <option value="archive"><spring:message code="userPanel.articleArchive"/></option>
+            </select>
+            <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
+        <form:form method="post" action="article/setPriority">
+            <spring:message code="userPanel.setPriority"/> ${article.priority}
+            <input type="hidden" name="idArticle" value="${article.idArticle}">
+            <select name="priority" size="1">
+                <c:forEach var="i" begin="1" end="3">
+                    <option value="${i}">${i}</option>
+                </c:forEach>
+            </select>
+            <input type="submit" value="<spring:message code="save"/> ">
+        </form:form>
+
+    </c:forEach>
+
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
-    <c:forEach items="${oldArticles}" var="article">
+    <c:forEach items="${articles.archive}" var="article">
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
     </c:forEach>
 
