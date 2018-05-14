@@ -32,16 +32,19 @@
             <form:option value="${category.key}"><spring:message code="${category.value}"/></form:option>
         </c:forEach>
     </form:select>
-    <br/><spring:message code="ArticleEdition.content"/>
-    <input type="file" onchange="loadfile(this)">
-    <form:textarea path="content" id="text" rows="4" cols="50"/>
-    <br/><spring:message code="ArticleEdition.title"/>
-    <form:input path="title"/>
 
-    <spring:message code="ArticleEdition.description"/>
+    <br/><br/><spring:message code="ArticleEdition.title"/>
+    <form:input path="title" size="50"/>
+
+    <br/><br/><spring:message code="ArticleEdition.content"/>
+    <input type="file" onchange="loadfile(this)">
+    <br/><br/><form:textarea path="content" id="text" rows="20" cols="100"/>
+
+    <br/><br/><spring:message code="ArticleEdition.description"/>
     <input type="text" name="description" value="${description}"/>
+
     <input type="file" name="file"/>
-    <img src="<c:url value=" ${path}"/>" style="width: 100px;height: 100px;">
+    <img src="<c:url value=" ${path}"/>" style="height: 130px; width: calc(130px * 1.78);">
     <input type="submit" value="<spring:message code="save"/>"/>
 
 </form:form>

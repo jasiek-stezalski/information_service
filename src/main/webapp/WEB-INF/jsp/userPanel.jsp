@@ -111,7 +111,7 @@
         </form:form>
 
         <c:if test="${article.priority != 0}">
-            <form:form method="post" action="article/display">
+            <form:form method="post" action="article/changeStatus">
                 <input type="hidden" name="idArticle" value="${article.idArticle}">
                 <select name="status" size="1">
                     <option value="to display"><spring:message code="userPanel.articleToDisplay"/></option>

@@ -8,7 +8,7 @@
 <body>
 <br />
 <c:forEach items="${articles}" var="article">
-    ${article.title} <br/>
+    <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
 </c:forEach>
 </body>
 </html>

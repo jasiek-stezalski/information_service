@@ -19,7 +19,7 @@
 
 <h1>${article.title}</h1>
 <c:forEach items="${article.pictures}" var="picture">
-    <img src="<c:url value="${picture.path}"/>" style="width: 100px;height: 100px;">
+    <img src="<c:url value="${picture.path}"/>" style="height: 130px; width: calc(130px * 1.78);">
 </c:forEach>
 <p>${article.content}</p>
 <br/>
