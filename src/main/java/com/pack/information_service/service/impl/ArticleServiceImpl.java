@@ -135,7 +135,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Map<String, String> getCategories() {
-        Map<String, String> categories = new LinkedHashMap<>() {{
+        Map<String, String> categories = new LinkedHashMap<String, String>() {{
             put("News", "MainPage.article.news");
             put("Sport", "MainPage.article.sport");
             put("Business", "MainPage.article.business");
