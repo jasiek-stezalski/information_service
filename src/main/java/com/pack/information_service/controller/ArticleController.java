@@ -31,6 +31,7 @@ public class ArticleController {
     @GetMapping("/{idArticle}")
     public String openArticle(@PathVariable Long idArticle, Model model) {
         Article article = articleService.findById(idArticle);
+        article.setContent("<p>" + article.getContent().replaceAll("\\r?\\n", "<p></p>") + "</p>");
         model.addAttribute("article", article);
         model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(idArticle));
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
