@@ -1,11 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <title><spring:message code="title"/></title>
     <script>
         function showEditArea(id1, id2) {
             document.getElementById(id1).style.display = 'none';
@@ -19,7 +19,7 @@
 
 <h1>${article.title}</h1>
 <c:forEach items="${article.pictures}" var="picture">
-    <img src="<c:url value="${picture.path}"/>" style="width: 100px;height: 100px;">
+    <img src="<c:url value="${picture.path}"/>" style="height: 130px; width: calc(130px * 1.78);">
 </c:forEach>
 <p>${article.content}</p>
 <br/>
@@ -28,7 +28,7 @@
 
 <c:if test="${pageContext.request.userPrincipal.name != null}">
     <c:if test="${userArticleMark == 0}">
-        <form:form method="post" action="/articlePage/articleMark">
+        <form:form method="post" action="/articlePage/addArticleMark">
             <spring:message code="Article.userMark"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
             <select name="mark" size="1">
@@ -45,12 +45,17 @@
     </c:if>
 </c:if>
 
+
 <%--Information about the article--%>
 
 <br/>
 <spring:message code="Article.Rate"/> ${article.mark}
 <br/><spring:message code="Article.Date"/> ${article.publicationDate}
-<br/><spring:message code="Article.articleAuthor"/> ${article.user.username}
+
+<br/><spring:message code="Article.articleAuthor"/>
+<a href="<spring:url value="/articlePage/journalist/${article.user.idUser}"/>">
+    ${article.user.username}
+</a>
 
 <br/><br/>
 

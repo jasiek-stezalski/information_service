@@ -29,10 +29,10 @@ public class ArticleController {
     }
 
     @GetMapping("/{idArticle}")
-    public String openArticle(@PathVariable("idArticle") Long id, Model model) {
-        Article article = articleService.findById(id);
+    public String openArticle(@PathVariable Long idArticle, Model model) {
+        Article article = articleService.findById(idArticle);
         model.addAttribute("article", article);
-        model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(id));
+        model.addAttribute("commentsAuthors", articleService.findCommentsAuthors(idArticle));
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!username.equals("anonymousUser")) {
             User loggedUser = userService.findByUsername(username);
@@ -42,17 +42,15 @@ public class ArticleController {
         return "article";
     }
 
-    @PostMapping("/articleMark")
-    public String articleMark(@RequestParam int mark, @RequestParam Long idArticle) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        articleRatingService.addArticleRate(username, mark, idArticle);
+    @PostMapping("/addArticleMark")
+    public String addArticleMark(@RequestParam Integer mark, @RequestParam Long idArticle) {
+        articleRatingService.save(mark, idArticle);
         return "redirect:/articlePage/" + idArticle;
     }
 
     @PostMapping("/addComment")
     public String addComment(@RequestParam String commentContent, @RequestParam Long idArticle) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        commentService.save(commentContent, idArticle, username);
+        commentService.save(commentContent, idArticle);
         return "redirect:/articlePage/" + idArticle;
     }
 
@@ -63,9 +61,8 @@ public class ArticleController {
     }
 
     @PostMapping("/commentMark")
-    public String commentMark(@RequestParam int mark, @RequestParam Long idArticle, @RequestParam Long idComment) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        commentRatingService.addCommentRate(username, mark, idComment, idArticle);
+    public String commentMark(@RequestParam Integer mark, @RequestParam Long idArticle, @RequestParam Long idComment) {
+        commentRatingService.save(mark, idComment, idArticle);
         return "redirect:/articlePage/" + idArticle;
     }
 
@@ -73,5 +70,23 @@ public class ArticleController {
     public String deleteComment(@RequestParam Long idComment, @RequestParam Long idArticle) {
         commentService.delete(idComment);
         return "redirect:/articlePage/" + idArticle;
+    }
+
+    @GetMapping("/journalist/{idUser}")
+    public String getJournalistArticles(@PathVariable Long idUser, Model model) {
+        model.addAttribute("articles", articleService.findByIdUser(idUser));
+        return "searchPage";
+    }
+
+    @GetMapping("/category/{category}")
+    public String getCategoryArticles(@PathVariable String category, Model model) {
+        model.addAttribute("articles", articleService.findByCategory(category));
+        return "searchPage";
+    }
+
+    @PostMapping("/searchArticle")
+    public String searchArticle(@RequestParam String search, Model model) {
+        model.addAttribute("articles", articleService.findByTitle(search));
+        return "searchPage";
     }
 }

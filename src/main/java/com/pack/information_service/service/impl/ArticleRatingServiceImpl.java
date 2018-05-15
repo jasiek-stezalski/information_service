@@ -1,4 +1,4 @@
-package com.pack.information_service.service;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.ArticleRating;
@@ -6,8 +6,13 @@ import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.ArticleRatingRepository;
 import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
+import com.pack.information_service.service.ArticleRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.OptionalDouble;
 
 @Service
 public class ArticleRatingServiceImpl implements ArticleRatingService {
@@ -26,25 +31,26 @@ public class ArticleRatingServiceImpl implements ArticleRatingService {
     @Override
     public int userMark(Article article, User user) {
         ArticleRating articleRatings = articleRatingRepository.findByArticleAndUser(article, user);
-        if (articleRatings != null)
-            return articleRatings.getValue();
-        return 0;
+
+        return Optional.ofNullable(articleRatings)
+                .map(ArticleRating::getValue)
+                .orElse(0);
     }
 
     @Override
-    public void addArticleRate(String username, int userMark, Long idArticle) {
+    public void save(Integer mark, Long idArticle) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userRepository.findByUsername(username);
         Article article = articleRepository.findByIdArticle(idArticle);
-        ArticleRating articleRating = new ArticleRating(userMark, article, user);
+        ArticleRating articleRating = new ArticleRating(mark, article, user);
         articleRatingRepository.save(articleRating);
 
-        double sumOfRates = 0;
-        for (ArticleRating rate : article.getArticleRatings()) {
-            sumOfRates += rate.getValue();
-        }
-        double articleMark = sumOfRates / article.getArticleRatings().size();
-        articleMark = Math.round(articleMark * 100) / 100.d;
-        article.setMark(articleMark);
+        OptionalDouble articleMark = article.getArticleRatings()
+                .stream()
+                .mapToDouble(a -> a.getValue())
+                .average();
+
+        article.setMark(Math.round(articleMark.getAsDouble() * 100) / 100.d);
         articleRepository.save(article);
     }
 

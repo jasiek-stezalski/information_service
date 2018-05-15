@@ -1,11 +1,13 @@
-package com.pack.information_service.controller;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.repository.ArticleRepository;
+import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class MainPageFacade {
@@ -17,18 +19,20 @@ public class MainPageFacade {
     private List<Article> entertainment;
     private List<Article> technologies;
     private List<Article> motorization;
+    private Map<String, String> categories;
 
     private ArticleRepository articleRepository;
+    private ArticleService articleService;
 
     @Autowired
-    public MainPageFacade(ArticleRepository articleRepository) {
+    public MainPageFacade(ArticleRepository articleRepository, ArticleService articleService) {
         this.articleRepository = articleRepository;
+        this.articleService = articleService;
     }
-
 
     public void generateContent() {
         topNews = articleRepository
-                .findFirst10ByOrderByPriorityAscPublicationDateDesc();
+                .findFirst20ByStatusOrderByPriorityAscPublicationDateDesc("to display");
         news = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "News");
         sport = articleRepository
@@ -40,7 +44,8 @@ public class MainPageFacade {
         technologies = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Technologies");
         motorization = articleRepository
-                .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "motorization");
+                .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Motorization");
+        categories = articleService.getCategories();
     }
 
     public List<Article> getTopNews() {
@@ -97,5 +102,13 @@ public class MainPageFacade {
 
     public void setMotorization(List<Article> motorization) {
         this.motorization = motorization;
+    }
+
+    public Map<String, String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Map<String, String> categories) {
+        this.categories = categories;
     }
 }

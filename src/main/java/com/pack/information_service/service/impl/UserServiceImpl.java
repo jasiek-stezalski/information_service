@@ -1,9 +1,10 @@
-package com.pack.information_service.service;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Role;
 import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.RoleRepository;
 import com.pack.information_service.repository.UserRepository;
+import com.pack.information_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,12 +30,6 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
-    @Override
-    public User findById(Long idUser) {
-        return userRepository.findByIdUser(idUser);
-    }
-
 
     @Override
     public void save(User user) {

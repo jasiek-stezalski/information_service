@@ -1,4 +1,4 @@
-package com.pack.information_service.service;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.Comment;
@@ -7,7 +7,9 @@ import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.CommentRatingRepository;
 import com.pack.information_service.repository.CommentRepository;
 import com.pack.information_service.repository.UserRepository;
+import com.pack.information_service.service.CommentRatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,27 +30,12 @@ public class CommentRatingServiceImpl implements CommentRatingService {
     }
 
     @Override
-    public void addCommentRate(String username, int mark, Long idComment, Long idArticle) {
-        User user = userRepository.findByUsername(username);
-        Comment comment = commentRepository.findByIdComment(idComment);
-        CommentRating commentRating = new CommentRating(mark, comment, user);
-        commentRatingRepository.save(commentRating);
-
-        int commentMark = 0;
-        for (CommentRating rate : comment.getCommentRatings()) {
-            commentMark += rate.getValue();
-        }
-        comment.setMark(commentMark);
-        commentRepository.save(comment);
-    }
-
-    @Override
     public List<Integer> userMark(Article article, Long idUser) {
         List<CommentRating> commentRatingList = commentRatingRepository.findAllByIdArticleAndIdUser(article.getIdArticle(), idUser);
         List<Comment> commentList = article.getComments();
         List<Integer> markList = new ArrayList<>();
         if (commentRatingList.isEmpty()) {
-            for (Comment comment : commentList) {
+            for (Comment ignored : commentList) {
                 markList.add(0);
             }
         } else {
@@ -66,8 +53,19 @@ public class CommentRatingServiceImpl implements CommentRatingService {
     }
 
     @Override
-    public void deleteAllCommentRating(Comment comment) {
-        commentRatingRepository.deleteByComment(comment);
-    }
+    public void save(Integer mark, Long idComment, Long idArticle) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        Comment comment = commentRepository.findByIdComment(idComment);
+        CommentRating commentRating = new CommentRating(mark, comment, user);
+        commentRatingRepository.save(commentRating);
 
+        int commentMark = comment.getCommentRatings()
+                .stream()
+                .mapToInt(a -> a.getValue())
+                .sum();
+
+        comment.setMark(commentMark);
+        commentRepository.save(comment);
+    }
 }

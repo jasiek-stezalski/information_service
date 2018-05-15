@@ -1,7 +1,7 @@
 package com.pack.information_service.domain;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -9,6 +9,7 @@ import java.util.List;
 public class Article {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idArticle;
     private String title;
     @Lob
@@ -19,20 +20,26 @@ public class Article {
     private String status;
     private double mark;
 
-    @OneToMany(mappedBy = "article")
+    @OneToMany(mappedBy = "article" , cascade=CascadeType.ALL)
     private List<ArticleRating> articleRatings;
 
-    @OneToMany
-    @JoinColumn(name = "id_article")
+    @OneToMany(mappedBy = "article", cascade=CascadeType.ALL)
     private List<Picture> pictures;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name = "id_article")
     private List<Comment> comments;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
+
+    public Article() {
+    }
+
+    public Article(String status) {
+        this.status = status;
+    }
 
     public long getIdArticle() {
         return idArticle;
