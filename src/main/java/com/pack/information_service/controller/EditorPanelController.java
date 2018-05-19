@@ -2,10 +2,12 @@ package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.Picture;
+import com.pack.information_service.domain.User;
 import com.pack.information_service.service.ArticleService;
 import com.pack.information_service.service.PictureService;
 import com.pack.information_service.service.UserService;
 import com.pack.information_service.service.impl.ArticlePanelFacade;
+import com.pack.information_service.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,14 +27,16 @@ public class EditorPanelController {
     private UserService userService;
     private PictureService pictureService;
     private ArticlePanelFacade articlePanelFacade;
+    private UserValidator userValidator;
 
     @Autowired
     public EditorPanelController(ArticleService articleService, UserService userService, PictureService pictureService,
-                                 ArticlePanelFacade articlePanelFacade) {
+                                 ArticlePanelFacade articlePanelFacade, UserValidator userValidator) {
         this.articleService = articleService;
         this.userService = userService;
         this.pictureService = pictureService;
         this.articlePanelFacade = articlePanelFacade;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/userPanel")
@@ -102,6 +106,41 @@ public class EditorPanelController {
     public String deleteArticle(@PathVariable Long idArticle) {
         articleService.delete(idArticle);
         return "redirect:/userPanel";
+    }
+
+    @GetMapping("/updateUser")
+    public String updateUser(Model model) {
+        User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("userForm", user);
+        return "userEdition";
+    }
+
+    @PostMapping("/updateUsername")
+    public String updateUsername(@ModelAttribute("userForm") @Valid User userForm, BindingResult result) {
+        User user = userValidator.usernameValidate(userForm, result);
+
+        if (result.hasErrors()) return "userEdition";
+
+        userService.update(user);
+
+        return "redirect:/userPanel";
+    }
+
+    @PostMapping("/updatePassword")
+    public String updatePassword(@ModelAttribute("userForm") @Valid User userForm, BindingResult result) {
+        User user = userValidator.passwordValidate(userForm, result);
+
+        if (result.hasErrors()) return "userEdition";
+
+        userService.update(user);
+
+        return "redirect:/userPanel";
+    }
+
+    @GetMapping("/deleteUser")
+    public String deleteUser() {
+        userService.delete(SecurityContextHolder.getContext().getAuthentication().getName());
+        return "redirect:/logout";
     }
 
 }

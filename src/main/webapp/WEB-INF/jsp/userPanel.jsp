@@ -12,6 +12,13 @@
 
 <sec:authentication property="authorities" var="roles" scope="page"/>
 
+<%--User panel--%>
+
+<h1><spring:message code="userPanel.Title"/></h1>
+
+<br/><a href="/updateUser"><spring:message code="userPanel.updateUser"/> </a>
+<br/><a href="/deleteUser"><spring:message code="userPanel.deleteUser"/> </a>
+
 <%--Journalist panel--%>
 
 <c:if test="${roles[0] == 'JOURNALIST'}">

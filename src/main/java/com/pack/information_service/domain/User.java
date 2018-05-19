@@ -26,13 +26,16 @@ public class User implements UserDetails {
     @Transient
     private String confirmPassword;
 
+    @Transient
+    private String oldPassword;
+
     @OneToMany(mappedBy = "user")
     private List<Article> articles;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ArticleRating> articleRatings;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -82,6 +85,14 @@ public class User implements UserDetails {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 
     public List<Article> getArticles() {

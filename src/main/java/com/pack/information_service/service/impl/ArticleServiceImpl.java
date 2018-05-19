@@ -46,43 +46,9 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByStatus(String status) {
-        return articleRepository.findByStatus(status);
-    }
-
-    @Override
-    public List<Article> findByStatusInOrder(String status) {
-        return articleRepository.findByStatusOrderByPriorityAscPublicationDateDesc(status);
-    }
-
-    @Override
     public List<Article> findByTitle(String title) {
         String pattern = ".*" + title.toLowerCase() + ".*";
         return articleRepository.findByTitle(pattern);
-    }
-
-    @Override
-    public List<Article> findByUserAndStatus(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByUserAndStatusLike(user, status);
-    }
-
-    @Override
-    public List<Article> findByUserAndNotStatus(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByUserAndStatusNotLike(user, status);
-    }
-
-    @Override
-    public List<Article> findByStatusAndCategory(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByStatusAndCategory(status, user.getCategory());
-    }
-
-    @Override
-    public List<Article> findByStatusAndCategoryInOrder(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByStatusAndCategoryOrderByPriorityAscPublicationDateDesc(status, user.getCategory());
     }
 
     @Override

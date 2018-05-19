@@ -6,9 +6,13 @@ import com.pack.information_service.repository.RoleRepository;
 import com.pack.information_service.repository.UserRepository;
 import com.pack.information_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,11 +37,28 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
-        user.setPassword((passwordEncoder.encode(user.getPassword())));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>();
         roles.add(roleRepository.getOne(1L));
         user.setRoles(roles);
         userRepository.save(user);
+    }
+
+    @Override
+    public void update(User user) {
+        userRepository.save(user);
+
+        Collection<? extends GrantedAuthority> nowAuthorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+        UsernamePasswordAuthenticationToken newAuthentication = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), nowAuthorities);
+        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+
+    }
+
+    @Override
+    public void delete(String username) {
+        User user = userRepository.findByUsername(username);
+        userRepository.delete(user);
     }
 
 }
