@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 14 Maj 2018, 16:56
+-- Czas generowania: 19 Maj 2018, 23:00
 -- Wersja serwera: 10.1.30-MariaDB
 -- Wersja PHP: 7.2.1
 
@@ -49,7 +49,7 @@ INSERT INTO `article` (`id_article`, `category`, `content`, `priority`, `publica
 (10, 'News', 'Polska konstytucja powinna zmienić się tak, aby stworzyć jeden silny ośrodek władzy wykonawczej. Dla kraju lepszy byłby system kanclerski - wynika z ankiet przeprowadzonych na zlecenie Prawa i Sprawiedliwości w grupie kilkunastu konstytucjonalistów.\r\n\r\nWyniki zaprezentowano wczoraj na spotkaniu, w którym udział wzięli m.in. premier Mateusz Morawiecki, marszałek Senatu Stanisław Karczewski, wicepremier Beata Szydło, szef Komitetu Stałego Rady Ministrów Jacek Sasin, szef gabinetu politycznego premiera Marek Suski, wicepremier, minister kultury i dziedzictwa narodowego Piotr Gliński, minister sprawiedliwości, Prokurator Generalny Zbigniew Ziobro oraz prezes Trybunału Konstytucyjnego Julia Przyłębska.\r\n\r\n\"Nie ma wątpliwości, że prezentacja PiS zbiega się z prezydenckimi planami referendalnymi nad pytaniami konstytucyjnymi, które mają być ogłoszone na zapowiedzianym na 26 kwietnia 2018 r. Kongresie »Wspólnie o konstytucji na Narodowym« z udziałem prezydenta Dudy\" - czytamy w dzienniku \"Rzeczpospolita\".\r\n\r\n- Uproszczone musi być sprawowanie władzy wykonawczej i skupione w jednym ręku, by nie było takich gorszących scen, jak kiedyś z krzesłem dla prezydenta w Brukseli - podkreśla w rozmowie z gazetą prof. Genowefa Grabowska z Wyższej Szkoły Menedżerskiej w Warszawie. Więcej w najnowszej \"Rzeczpospolitej\".', 2, '2018-04-02', 'to display', 'Eksperci radzą PiS: lepszy byłby system kanclerski', 4, 0),
 (11, 'Business', 'Francuski koncern Lagardère sprzedał spółkę Eurozet, właściciela m.in. Radia ZET oraz rozgłośnie radiowe w Czechach, w Rumunii i na Słowacji. Kwota transakcji opiewa na 73 mln euro.\r\n\r\nFirma podała w komunikacie, że sprzedaż tych rozgłośni to pierwsza z transakcji w ramach nowej strategii ogłoszonej przez Arnauda Lagardère, partnera zarządzającego w Lagardère. Koncern zamierza sprzedać również swoje inne aktywa medialne, skupione w spółce Lagardère Active. Należą do niej m.in. magazyny \"Elle\" i \"Paris Match\" czy stacja radiowa Europe 1.\r\n\r\nEurozet posiada cztery rozgłośnie\r\nSpółka Eurozet to nadawca powstałego w latach 90. XX wieku Radia ZET, drugiej najchętniej słuchanej stacji radiowej w Polsce - w okresie od grudnia ub.r. do lutego br. udział stacji w rynku wyniósł 11,7 proc. (dane Radio Track). W portfolio firmy są też takie stacje radiowe jak Antyradio, Meloradio (dawniej Radio ZET Gold) i ChilliZET.\r\n\r\nW komunikacie podano, że w ub.r. stacje radiowe z grupy Lagardère w Polsce, Czechach, Rumunii i na Słowacji osiągnęły łączne przychody w wysokości ok. 56 mln euro.\r\n\r\nFinalizacja przejęcia biznesu radiowego francuskiej firmy przez Czech Media Invest nastąpi po uzyskaniu zgód regulatorów w krajach, w których transakcja ma miejsce. W Polsce zgoda UOKiK nie jest potrzebna, ponieważ Czech Media Invest dotąd nie prowadził nad Wisłą działalności.\r\n\r\nKim jest nowy właściciel Radia ZET?\r\nCzech Media Invest to największa spółka medialna w Czechach. Wydaje tam w cztery dzienniki, a także magazyny i serwisy internetowe. Ponadto kontroluje dwie drukarnie oraz zajmuje się wydawaniem książek i dystrybucją prasy.', 1, '2018-04-16', 'to display', 'Radio ZET zmienia właściciela.', 3, 1),
 (12, 'News', 'Przyznano nagrody Pulitzera. Za wybitne osiągnięcia w literaturze pięknej nagrodzono Andrewa Seana Greera za powieść \"Less\". Nagrodę otrzymała także urodzona w Bytomiu, ale wychowana w Ameryce Martyna Majok. W kategorii Muzyka triumfował Kendrick Lamar.\r\n\r\nNagroda Pulitzera to jedno z najbardziej prestiżowych wyróżnień, przyznawane w Stanach Zjednoczonych od 1917 roku za osiągnięcia w dziennikarstwie, literaturze i kompozycji muzycznej. Zwycięzcy otrzymują świadectwo i czek na 10 tysięcy dolarów. W niemal stuletniej historii Pulitzera nagrody w dziedzinie beletrystyki dostali m.in. John Updike, William Faulkner, Harper Lee, Cormac McCarthy, Philip Roth i wielu innych.\r\n\r\nOto laureaci nagrody Pulitzera 2018 w literaturze:\r\nFikcja\r\n\r\nAndrew Sean Greer, \"Less\"\r\n\r\nDramat\r\n\r\nMartyna Majok, \"Cost of Living\"\r\n\r\nHistoria\r\n\r\nJack E. Davis, \"The Gulf: The Making of an American Sea\"\r\n\r\nBiografia\r\n\r\nCaroline Fraser, \"Prairie Fires: The American Dreams of Laura Ingalls Wilder\"\r\n\r\nPoezja\r\n\r\nFrank Bidart, \"Half-light: Collected Poems\"\r\n\r\nReportaż\r\n\r\nJames Forman Jr., \"Locking Up Our Own: Crime and Punishment in Black America\"\r\n\r\nLaureat w kategorii Muzyka:\r\nKendrick Lamar, \"DAMN.\"', 1, '2018-04-08', 'to display', 'Nagrody Pulitzera przyznane', 3, 0),
-(13, 'Businesss', 'Uber z Polski nie zniknie. Mimo że rząd zaostrzy przepisy dotyczące kierowców jeżdżących dla firm pośredniczących w przewozach, Uber zadeklarował, że dostosuje się do planowanych zmian. O sprawie pisze \"Rzeczpospolita\".\r\n\r\nW ciągu najbliższych tygodni pod obrady rządu trafi projekt ustawy o transporcie, która zobliguje kierowców jeżdżących dla aplikacji przewozowych do posiadania takich licencji, jakie mają taksówkarze.\r\n\r\nNowe przepisy podważą model biznesowy stosowany dotąd m.in. przez Ubera. Dla tej platformy, która pośredniczy między zwykłymi kierowcami a pasażerami, nasz rynek jest jednak zbyt ważny, by z tego powodu z niego zrezygnować. Warszawa dla amerykańskiego giganta to miasto równie ważne, jak Londyn czy Paryż pod względem liczby kierowców i pasażerów.\r\n\r\n- Nie wycofamy się z Polski - zapewniła w rozmowie z \"Rz\" Magdalena Szulc, rzecznik Ubera w Polsce. Przekonuje też, że obowiązek posiadania licencji nie doprowadzi do odpływu kierowców z aplikacji. Jak tłumaczyła, podobne wątpliwości pojawiały się w 2016 r., gdy Uber wprowadził wymóg prowadzenia przez jego kierowców działalności gospodarczej. Finalnie zmiana reguł nie odbiła się na biznesie w Polsce.', 1, '2018-04-09', 'to display', 'Uber ugnie się, by zostać w Polsce', 5, 4),
+(13, 'Businesss', 'Uber z Polski nie zniknie. Mimo że rząd zaostrzy przepisy dotyczące kierowców jeżdżących dla firm pośredniczących w przewozach, Uber zadeklarował, że dostosuje się do planowanych zmian. O sprawie pisze \"Rzeczpospolita\".\r\n\r\nW ciągu najbliższych tygodni pod obrady rządu trafi projekt ustawy o transporcie, która zobliguje kierowców jeżdżących dla aplikacji przewozowych do posiadania takich licencji, jakie mają taksówkarze.\r\n\r\nNowe przepisy podważą model biznesowy stosowany dotąd m.in. przez Ubera. Dla tej platformy, która pośredniczy między zwykłymi kierowcami a pasażerami, nasz rynek jest jednak zbyt ważny, by z tego powodu z niego zrezygnować. Warszawa dla amerykańskiego giganta to miasto równie ważne, jak Londyn czy Paryż pod względem liczby kierowców i pasażerów.\r\n\r\n- Nie wycofamy się z Polski - zapewniła w rozmowie z \"Rz\" Magdalena Szulc, rzecznik Ubera w Polsce. Przekonuje też, że obowiązek posiadania licencji nie doprowadzi do odpływu kierowców z aplikacji. Jak tłumaczyła, podobne wątpliwości pojawiały się w 2016 r., gdy Uber wprowadził wymóg prowadzenia przez jego kierowców działalności gospodarczej. Finalnie zmiana reguł nie odbiła się na biznesie w Polsce.', 1, '2018-04-09', 'to display', 'Uber ugnie się, by zostać w Polsce', 5, 10),
 (14, 'News', 'W Służbie Ochrony Państwa w niecałe 2,5 miesiąca przyznano ponad milion złotych nagród - do takich informacji dotarł \"Super Express\". Funkcjonariusze mają ochraniać najważniejsze osoby w państwie, jednak zaliczają wpadki. Nie przeszkadza to jednak w przyznaniu sobie wysokich premii.\r\n\r\nSOP funkcjonuje od 1 lutego. Zastąpił Biuro Ochrony Rządu. Do połowy kwietnia w nowej służbie przyznano premie w łącznej wysokości 1 193 335 złotych. - Średnia nagroda uznaniowa w tym okresie (od 1 lutego - red.) równała się kwocie 782 zł - powiedział dla \"SE\" mł. chor. Anna Gdula-Bomba, rzeczniczka SOP.\r\n\r\nRównież za czasów BOR przyznawano wysokie nagrody. W 2017 roku łącznie wyniosły one 4,8 mln złotych.\r\n\r\n\"SE\" przypomina, że jednocześnie SOP zalicza wpadki. Pod koniec lutego limuzyna, którą podróżował Andrzej Duda, najechała na separator oddzielający pasy jezdni w Krakowie. Z kolei w marcu auto należące do kolumny marszałka Marka Kuchcińskiego wpadło w poślizg i uderzyło w bariery energochłonne. Natomiast w ubiegłą niedzielę samochód SOP dachował w pobliżu Borów Tucholskich, a czterech funkcjonariuszy trafiło do szpitala.\r\n\r\nWięcej w dzisiejszym wydaniu \"Super Expressu\".', 2, '2018-04-03', 'to display', 'W SOP przyznano ponad milion złotych premii', 3, 0),
 (15, 'Sport', 'Przyszłość Piotra Zielińskiego w SSC Napoli staje pod znakiem zapytania. Piłkarza chętnie widziałoby u siebie Atletico Madryt, z także FC Barcelona. Tymczasem włoski klub zamierza podpisać z 23-latkiem nowy kontrakt, by zatrzymać go w Neapolu.\r\n\r\nPiotr Zieliński wyrasta na coraz większą gwiazdę nie tylko reprezentacji Polski, ale także SSC Napoli. Nic więc dziwnego, że piłkarzem zaczynają się interesować najlepsze kluby w Europie. Przez długi okres mówiono o tym, że 23-latka chętnie widziałby u siebie Liverpoolu. Teraz dołączyły do niego kolejne dwie drużyny.\r\n\r\nZielińskiego chciałoby ściągnąć do siebie Atletico Madryt i FC Barcelona. Wydaje się, że w tym pierwszym Polak mógłby prędzej liczyć na grę w pierwszym składzie. Katalończycy mają silną ofensywę i ciężko byłoby się przebić reprezentantowi Polski, choć istniałaby minimalna szansa, po odejściu Andresa Iniesty. Hiszpan od przyszłego roku będzie występować w Chinach.\r\n\r\nSSC Napoli natomiast zdaje sobie sprawę z klejnotu, jaki ma w swoim zespole. Włosi ponoć nie są chętni do oddania Zielińskiego. Co więcej, jak informują tamtejsze media, klub ma podpisać z Polakiem nowy kontrakt, który miałby przekonać do pozostania w Neapolu.', 2, '2018-04-02', 'to display', 'Rośnie zainteresowanie Piotrem Zielińskim', 3, 0),
 (16, 'Business', 'Z gminy Złoczew zostanie wysiedlonych ok. 3. tys. osób zamieszkujących 33 wsie. Na jej terenie powstanie bowiem odkrywkowa kopalnia węgla brunatnego. To wywołuje protesty mieszkańców - pisze OKO.press.\r\n\r\nW ubiegłym tygodniu PGE Górnictwo i Energetyka Konwencjonalna otrzymała decyzję o środowiskowych uwarunkowaniach dla kopalni węgla brunatnego Złoczew.\r\n\r\nDecyzja środowiskowa otwiera drogę do rozpoczęcia starań o uzyskanie koncesji na wydobycie węgla w Złoczewie. Odpowiedni wniosek do Ministerstwa Środowiska ma trafić w połowie tego roku, po zakończeniu prac związanych z dostosowaniem dokumentów planistycznych gmin. Uzyskanie koncesji planowane jest w trzecim kwartale 2018 r.\r\n\r\nMieszkańcy do wyprowadzki\r\nJak pisze OKO.press, pierwszy wjazd maszyn i pierwsze wydobycie planowane jest na 2030 rok. Problem w tym, że węgiel nie leży pod nieużytkami będącymi własnością skarbu państwa, tylko na terenie 33 wsi w granicach czterech gmin.\r\n\r\nWyprowadzka nie wszystkim się podoba. Jeden z rolników z gminy Ostrówek, na którego terenach ma powstać ogromne zwałowisko, założył stowarzyszenie \"NIE dla odkrywki Złoczew\" - czytamy w serwisie.\r\n\r\n– Mamy piękne tereny, nieskażone, mamy przepiękne lasy, rzeki i wioski. A PGE chce zlikwidować 33 wsie, to 3000 mieszkańców do wysiedlenia. Samo PGE nie nazywa likwidacji wsi \"wysiedlaniem\", tylko \"wykupem nieruchomości\" - mówi Stanisław Skibiński, prezes stowarzyszenia w rozmowie z OKO.press.\r\n\r\n- Jeżeli ktoś będzie się upierał i nie będzie chciał sprzedać swoich gruntów, to jest możliwość wystąpienia na drogę sądową – wyjaśnia w rozmowie z OKO.press Wiktor Płóciennik, kierownik ds. inwestycyjnych w Urzędzie Miejskim w Złoczewie.\r\n\r\nDo tej pory nie wiadomo, za ile będą wykupywane grunty od rolników.\r\n\r\nZłoże Złoczew - rozciągające się na przestrzeni ok. 10 km na terenie trzech gmin w Łódzkiem: Złoczew, Burzenin (powiat sieradzki) oraz Ostrówek (powiat wieluński) – jest jednym z perspektywicznych złóż węgla brunatnego. Jego zasoby szacowane są na ok. 611 mln ton węgla.', 3, '2018-04-06', 'to display', '\"Wielka dziura\" pochłonie ponad 30 wsi. W Złoczewie powstaje kopalnia odkrywkowa\r\n', 3, 3),
@@ -70,6 +70,20 @@ INSERT INTO `article` (`id_article`, `category`, `content`, `priority`, `publica
 (90, 'Entertainment', 'Podczas eurowizyjnego występu reprezentantki Wielkiej Brytanii, SuRie, na scenę wtargnął mężczyzna. Wyrwał artystce mikrofon i wykrzyczał słowa \"naziści\" oraz \"pokój\". Brytyjskie media ustaliły, że był nim niejaki Dr. ACactivism, znany również jako Dr. A.C.\r\n\r\nMężczyzna wykrzykiwał hasła, które miały obrazić brytyjskie media. \"Nazistowskie media Wielkiej Brytanii, domagamy się wolności, wojna to nie pokój\"- zdążył powiedzieć, zanim został zdjęty ze sceny przez ochronę. Według świadków obecnych na miejscu, mikrofon piosenkarce oddał sam menedżer Eurowizji Henric von Zweigbergk.\r\n\r\nMężczyzna został zatrzymany i przesłuchany przez policję.\r\n\r\nDr. ACactivism, znany również jako Dr. A.C., to samozwańczy aktywista. Zanim wtargnął na scenę na Eurowizji, zakłócił galę National Television Awards. Miał wówczas na sobie koszulkę z napisem \"Ten Original Qualities That One Needs to Change The World: Art, Ideas and Creativity\", reklamującą jego e-book.\r\n\r\nW 2017 roku próbował zakłócić finał brytyjskiego talent-show \"The Voice\".\r\n\r\nPo incydencie na Eurowizji organizatorzy wyrazili żal z powodu tego, co się stało. Brytyjskiej wokalistce zaproponowano ponowny występ, ale nie zdecydowała się na to, bo ze swojego występu była bardzo dumna. Trzeba przyznać, że zachowała zimną krew i była bardzo profesjonalna.', 0, NULL, 'in progress', 'Eurowizja 2018: wiadomo, kim jest mężczyzna, który wtargnął na scenę', 5, 0),
 (91, 'Technologies', 'Popularny system reCAPTCHA chroniący strony przed botami właśnie stał się mądrzejszy. Jak poinformowali nas jego twórcy w swojej nowej wersji reCAPTCHA będzie o wiele mniej uciążliwym zabezpieczeniem i sam rozpozna w nas człowieka!\r\n\r\nZapewne każdy użytkownik internetu spotkał się na z systemem reCAPTCHA, który zmusza nas do przepisywaania znaków czy słów z jakiegoś obrazka czy też ułożenia prostej łamigłówki. Wszystko to, aby pokazać danej stronie, że jesteśmy człowiekiem i zabezpieczyć ją przed botami. Nie da się też ukryć, że jest to mocno irytujące zabezpieczenie i najwyraźniej zdają sobie z tego sprawę także jego twórcy, czyli firma Google, która szykuje znaczące usprawnienia w jego funkcjonowaniu.\r\n\r\nOtóż w reCAPTCHA v3 zostały usunięte interaktywne elementy tego zabezpieczenia, zatem przeglądanie stron korzystającym z tej wersji oprogramowania będzie zdecydowanie bardziej przyjemne. A to dzięki algorytmom, na podstawie których program będzie sam analizował nasze zachowanie na danej witrynie samodzielnie określając czy jesteśmy człowiekiem czy komputerowym botem. Google twierdzi, że program będzie opierał swoją decyzję na różnych czynnikach, np. śledząc ruch kursora na danej stronie czy kolejność odwiedzenia odnośników. Co ważne, już trwają publiczne testy nowego systemu, a to oznacza, iż reCAPTCHA v3 powinniśmy coraz częściej spotykać w sieci. A raczej jej nie spotykać - bo o to przecież tutaj chodzi!\r\n\r\nGoogle chroni strony za pomocą reCAPTCHA, a Wy powinniście chronić swoją obecnosć w sieci porządnym programem antywirusowym, np. popularnym Eset NOD32 (sprawdź cenę) czy Nortonem Security (sprawdź cenę).', 0, NULL, 'in progress', 'Nowa wersja reCAPTCHA sama rozpozna w nas człowieka', 5, 0),
 (92, 'Motorization', 'Ciężarówki, modele osobowe i prototyp modelu do jazdy w terenie. Rosjanie przetestowali autonomiczne samochody na drodze prowadzącej do nowo wybudowanego mostu na Krym. Wykorzystali przy tym nie tylko własne konstrukcje.\r\n\r\nSamochody autonomiczne z Rosji – to wcale nie jest żart. Nieopodal nowo wybudowanego mostu krymskiego przeprowadzono wspólne testy aż 5 różnych samochodów. Na wszelki wypadek drogę zamknięto dla ruchu, aby można było spokojnie przeprowadzić próby. Każdy z samochodów miał do pokonania odcinek 10 kilometrów. Każdy rozpędził się do maksymalnej prędkości 40 km/h. I w każdym nie było człowieka za kierownicą. Wszystkie nadzorowano z foteli dla pasażerów oraz ze specjalnych punktów zlokalizowanych nieopodal drogi.\r\n\r\nOrganizatorzy wydarzenia twierdzą, że do tej pory w Rosji nie było podobnego przedsięwzięcia. W jednym miejscu i czasie sprawdzono dwie ciężarówki, dwa samochody osobowe oraz prototyp pojazdu przeznaczonego do jazdy w terenie. Znamienne, że w przypadku samochodów osobowych sięgnięto po zagraniczne konstrukcje. Na potrzeby prób wykorzystano zmodyfikowaną wersję Skody Superb oraz leciwego już Forda Focusa drugiej generacji. W przypadku ciężarówek wykorzystano lokalne konstrukcje (m.in. seryjną ciężarówkę Kamaz-5350. Pojazdy wraz z wyposażeniem (głowice lidar, kamery video, radar oraz moduły do łączności 4G, WiFi i VHF) dostarczył Kamaz. I to on zasługuje na szczególną uwagę.\r\n\r\nAutonomiczne ciężarówki Kamaz mają być testowane w kilku miejscach – nie tylko nieopodal mostu. Próby odbędą się na publicznej autostradzie M7 oraz na specjalnym testowym odcinku na terenie kompleksu fabrycznego Kamaz. Firma zamierza bowiem wykorzystać samochody do transportu gotowych kabin, które będą przewożone pomiędzy halami produkcyjnymi. Zmodyfikowane pojazdy rozpoznają znaki drogowe, użytkowników dróg, pieszych czy linie wymalowane na nawierzchni.\r\n\r\nRosjanie deklarują, że nie skończy się na pojedynczych pokazach. W ramach federalnego projektu Caravan Rosja planuje stworzyć inteligentną infrastrukturę drogową na wszystkich rosyjskich autostradach, aby można było rozpocząć regularne korzystanie z bezzałogowego transportu. Zanim to jednak nastąpi, upłynie jeszcze sporo czasu. Plany sięgają aż 2035 roku.', 0, NULL, 'in progress', 'Rosja testuje własne autonomiczne samochody', 5, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `article_error`
+--
+
+CREATE TABLE `article_error` (
+  `id_error` bigint(20) NOT NULL,
+  `content` longtext CHARACTER SET utf8 COLLATE utf8_bin,
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `id_article` bigint(20) DEFAULT NULL,
+  `id_user` bigint(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -127,7 +141,7 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(13);
+(29);
 
 -- --------------------------------------------------------
 
@@ -259,6 +273,14 @@ ALTER TABLE `article`
   ADD KEY `FKe3j1tbmi0sgg7xqans6yjuxo4` (`id_user`);
 
 --
+-- Indexes for table `article_error`
+--
+ALTER TABLE `article_error`
+  ADD PRIMARY KEY (`id_error`),
+  ADD KEY `FKbvphkn0168kbcx0i8w2o48imi` (`id_article`),
+  ADD KEY `FKs9h4nix32hhke7ibdtkm0su8o` (`id_user`);
+
+--
 -- Indexes for table `article_rating`
 --
 ALTER TABLE `article_rating`
@@ -316,25 +338,31 @@ ALTER TABLE `user_roles`
 -- AUTO_INCREMENT dla tabeli `article`
 --
 ALTER TABLE `article`
-  MODIFY `id_article` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id_article` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT dla tabeli `article_error`
+--
+ALTER TABLE `article_error`
+  MODIFY `id_error` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT dla tabeli `article_rating`
 --
 ALTER TABLE `article_rating`
-  MODIFY `id_rating` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_rating` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT dla tabeli `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_comment` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT dla tabeli `comment_rating`
 --
 ALTER TABLE `comment_rating`
-  MODIFY `id_rating` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_rating` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT dla tabeli `picture`
@@ -352,7 +380,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT dla tabeli `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_user` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

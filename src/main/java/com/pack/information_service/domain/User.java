@@ -36,6 +36,9 @@ public class User implements UserDetails {
     private List<ArticleRating> articleRatings;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ArticleError> articleErrors;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -109,6 +112,14 @@ public class User implements UserDetails {
 
     public void setArticleRatings(List<ArticleRating> articleRatings) {
         this.articleRatings = articleRatings;
+    }
+
+    public List<ArticleError> getArticleErrors() {
+        return articleErrors;
+    }
+
+    public void setArticleErrors(List<ArticleError> articleErrors) {
+        this.articleErrors = articleErrors;
     }
 
     public List<Comment> getComments() {

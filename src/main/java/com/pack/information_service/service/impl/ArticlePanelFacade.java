@@ -1,6 +1,7 @@
 package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
+import com.pack.information_service.domain.ArticleError;
 import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
@@ -19,6 +20,7 @@ public class ArticlePanelFacade {
     private List<Article> toCheck;
     private List<Article> checked;
     private List<Article> toDisplay;
+    private List<Article> withErrors;
     private List<Article> archive;
 
     private ArticleRepository articleRepository;
@@ -44,6 +46,7 @@ public class ArticlePanelFacade {
             toCheck = articleRepository.findByStatusAndCategory("to check", user.getCategory());
             checked = articleRepository.findByStatusAndCategory("checked", user.getCategory());
             toDisplay = articleRepository.findByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", user.getCategory());
+            withErrors = articleRepository.findByError();
             archive = articleRepository.findByStatusAndCategoryOrUserOrderByPublicationDateDesc("archive", user.getCategory(), user.getIdUser());
         }
         if (role.equals("[EDITOR_IN_CHIEF]")) {
@@ -92,6 +95,14 @@ public class ArticlePanelFacade {
 
     public void setToDisplay(List<Article> toDisplay) {
         this.toDisplay = toDisplay;
+    }
+
+    public List<Article> getWithErrors() {
+        return withErrors;
+    }
+
+    public void setWithErrors(List<Article> withErrors) {
+        this.withErrors = withErrors;
     }
 
     public List<Article> getArchive() {

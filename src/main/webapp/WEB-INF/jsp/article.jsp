@@ -24,9 +24,26 @@
 <p>${article.content}</p>
 <br/>
 
-<%--If logged in user didn't rate the article, he can do it--%>
-
 <c:if test="${pageContext.request.userPrincipal.name != null}">
+
+    <%--If user find error in article he can report this error here--%>
+
+    <input type="button" id="errorButton" onclick="showEditArea('errorButton','errorInfo')"
+           value="<spring:message code="Article.error"/>" style="display:block;">
+
+    <form:form method="post" id="errorInfo" modelAttribute="articleErrorForm" action="/articlePage/addError"
+               style="display:none;">
+        <br/><spring:message code="Article.errorContent"/><br/>
+
+        <input type="hidden" name="idArticle" value="${article.idArticle}">
+        <form:textarea path="content" rows="4" cols="50"/>
+
+        <input type="submit" value="<spring:message code="submit"/>">
+    </form:form>
+
+    <br/>
+    <%--If logged in user didn't rate the article, he can do it--%>
+
     <c:if test="${userArticleMark == 0}">
         <form:form method="post" action="/articlePage/addArticleMark">
             <spring:message code="Article.userMark"/>

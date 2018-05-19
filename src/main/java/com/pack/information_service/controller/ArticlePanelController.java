@@ -2,6 +2,7 @@ package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.Picture;
+import com.pack.information_service.service.ArticleErrorService;
 import com.pack.information_service.service.ArticleService;
 import com.pack.information_service.service.PictureService;
 import com.pack.information_service.service.UserService;
@@ -23,12 +24,15 @@ public class ArticlePanelController {
     private ArticleService articleService;
     private UserService userService;
     private PictureService pictureService;
+    private ArticleErrorService articleErrorService;
 
     @Autowired
-    public ArticlePanelController(ArticleService articleService, UserService userService, PictureService pictureService) {
+    public ArticlePanelController(ArticleService articleService, UserService userService, PictureService pictureService,
+                                  ArticleErrorService articleErrorService) {
         this.articleService = articleService;
         this.userService = userService;
         this.pictureService = pictureService;
+        this.articleErrorService = articleErrorService;
     }
 
     @GetMapping("/addArticle")
@@ -108,6 +112,12 @@ public class ArticlePanelController {
     @GetMapping("/deleteArticle/{idArticle}")
     public String deleteArticle(@PathVariable Long idArticle) {
         articleService.delete(idArticle);
+        return "redirect:/userPanel";
+    }
+
+    @GetMapping("/errorFixed/{idError}")
+    public String errorFixed(@PathVariable Long idError) {
+        articleErrorService.save(idError);
         return "redirect:/userPanel";
     }
 

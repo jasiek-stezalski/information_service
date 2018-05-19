@@ -182,6 +182,32 @@
 
     </c:forEach>
 
+    <h1><spring:message code="userPanel.articleError"/></h1>
+
+    <c:forEach items="${articles.withErrors}" var="article">
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+        <c:forEach items="${article.articleErrors}" var="error">
+            <br/><spring:message code="userPanel.errorContent"/>
+            ${error.content}
+
+            <c:if test="${error.status == 'to check'}">
+                <br/><a href="/articlePanel/updateArticle/${article.idArticle}"><spring:message
+                    code="userPanel.updateArticle"/> </a><br/>
+
+                <form:form method="get" action="/articlePanel/errorFixed/${error.idError}">
+                    <input type="submit" value="<spring:message code="userPanel.errorConfirmed"/> ">
+                </form:form>
+            </c:if>
+
+            <c:if test="${error.status == 'checked'}">
+                <spring:message code="userPanel.errorFixed"/><br/>
+            </c:if>
+
+        </c:forEach>
+
+    </c:forEach>
+
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
     <c:forEach items="${articles.archive}" var="article">

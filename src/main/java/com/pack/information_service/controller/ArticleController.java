@@ -1,6 +1,7 @@
 package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.Article;
+import com.pack.information_service.domain.ArticleError;
 import com.pack.information_service.domain.User;
 import com.pack.information_service.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,18 @@ public class ArticleController {
     private ArticleRatingService articleRatingService;
     private CommentService commentService;
     private CommentRatingService commentRatingService;
+    private ArticleErrorService articleErrorService;
 
     @Autowired
-    public ArticleController(ArticleService articleService, UserService userService, ArticleRatingService articleRatingService, CommentService commentService, CommentRatingService commentRatingService) {
+    public ArticleController(ArticleService articleService, UserService userService, ArticleRatingService articleRatingService,
+                             CommentService commentService, CommentRatingService commentRatingService,
+                             ArticleErrorService articleErrorService) {
         this.articleService = articleService;
         this.userService = userService;
         this.articleRatingService = articleRatingService;
         this.commentService = commentService;
         this.commentRatingService = commentRatingService;
+        this.articleErrorService = articleErrorService;
     }
 
     @GetMapping("/{idArticle}")
@@ -37,6 +42,7 @@ public class ArticleController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         if (!username.equals("anonymousUser")) {
             User loggedUser = userService.findByUsername(username);
+            model.addAttribute("articleErrorForm", new ArticleError());
             model.addAttribute("userArticleMark", articleRatingService.userMark(article, loggedUser));
             model.addAttribute("userCommentMarks", commentRatingService.userMark(article, loggedUser.getIdUser()));
         }
@@ -51,13 +57,13 @@ public class ArticleController {
 
     @PostMapping("/addComment")
     public String addComment(@RequestParam String commentContent, @RequestParam Long idArticle) {
-        commentService.save(commentContent, idArticle);
+        if (!commentContent.equals("")) commentService.save(commentContent, idArticle);
         return "redirect:/articlePage/" + idArticle;
     }
 
     @PostMapping("/editComment")
     public String editComment(@RequestParam String commentContent, @RequestParam Long idArticle, @RequestParam Long idComment) {
-        commentService.edit(commentContent, idComment);
+        if (!commentContent.equals("")) commentService.edit(commentContent, idComment);
         return "redirect:/articlePage/" + idArticle;
     }
 
@@ -89,5 +95,11 @@ public class ArticleController {
     public String searchArticle(@RequestParam String search, Model model) {
         model.addAttribute("articles", articleService.findByTitle(search));
         return "searchPage";
+    }
+
+    @PostMapping("/addError")
+    public String addError(@ModelAttribute ArticleError articleErrorForm, @RequestParam Long idArticle) {
+        if (!articleErrorForm.getContent().equals("")) articleErrorService.save(articleErrorForm, idArticle);
+        return "redirect:/articlePage/" + idArticle;
     }
 }

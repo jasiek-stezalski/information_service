@@ -31,6 +31,9 @@ public class Article {
     private List<ArticleRating> articleRatings;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<ArticleError> articleErrors;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Picture> pictures;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -118,6 +121,14 @@ public class Article {
 
     public void setArticleRatings(List<ArticleRating> articleRatings) {
         this.articleRatings = articleRatings;
+    }
+
+    public List<ArticleError> getArticleErrors() {
+        return articleErrors;
+    }
+
+    public void setArticleErrors(List<ArticleError> articleErrors) {
+        this.articleErrors = articleErrors;
     }
 
     public List<Picture> getPictures() {
