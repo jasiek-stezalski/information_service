@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form:form method="post" action="updateUsername" modelAttribute="userForm">
+<form:form method="post" action="/userPanel/updateUsername" modelAttribute="userForm">
     <h1><spring:message code="userEdition.editUsername"/></h1>
 
     <spring:message code="Registration.username"/>
@@ -19,7 +19,7 @@
     <input type="submit" value="<spring:message code="save"/>">
 </form:form>
 
-<form:form method="post" action="updatePassword" modelAttribute="userForm">
+<form:form method="post" action="/userPanel/updatePassword" modelAttribute="userForm">
     <h1><spring:message code="userEdition.editPassword"/></h1>
 
     <spring:message code="userEdition.oldPassword"/>

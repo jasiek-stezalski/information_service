@@ -20,7 +20,7 @@
 </head>
 <body>
 
-<form:form method="post" action="/addArticle" modelAttribute="articleForm" enctype="multipart/form-data">
+<form:form method="post" action="/articlePanel/addArticle" modelAttribute="articleForm" enctype="multipart/form-data">
     <h1><spring:message code="ArticleEdition.mainTitle"/></h1>
     <form:hidden path="idArticle"/>
     <form:hidden path="status"/>
