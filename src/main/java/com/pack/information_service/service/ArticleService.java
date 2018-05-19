@@ -23,6 +23,10 @@ public interface ArticleService {
 
     void save(Long idArticle, Integer priority);
 
+    void propose(Article article);
+
+    void take(Long idArticle);
+
     void delete(Long idArticle);
 
     Map<String, String> getCategories();

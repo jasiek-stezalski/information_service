@@ -8,6 +8,7 @@ import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
 import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -80,6 +81,23 @@ public class ArticleServiceImpl implements ArticleService {
     public void save(Long idArticle, Integer priority) {
         Article article = articleRepository.findByIdArticle(idArticle);
         article.setPriority(priority);
+        articleRepository.save(article);
+    }
+
+    @Override
+    public void propose(Article article) {
+        article.setStatus("proposed");
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        article.setUser(userRepository.findByUsername(username));
+        articleRepository.save(article);
+    }
+
+    @Override
+    public void take(Long idArticle) {
+        Article article = articleRepository.findByIdArticle(idArticle);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        article.setUser(userRepository.findByUsername(username));
+        article.setStatus("in progress");
         articleRepository.save(article);
     }
 

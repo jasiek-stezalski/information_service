@@ -74,6 +74,28 @@ public class EditorPanelController {
         return "redirect:/userPanel";
     }
 
+    @GetMapping("/proposeArticle")
+    public String proposeArticle(Model model) {
+        model.addAttribute("articleForm", new Article());
+        return "proposeArticle";
+    }
+
+    @PostMapping("/proposeArticle")
+    public String proposeArticle(@ModelAttribute("articleForm") @Valid Article articleForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return "proposeArticle";
+        }
+
+        articleService.propose(articleForm);
+        return "redirect:/userPanel";
+    }
+
+    @GetMapping("article/takeArticle/{idArticle}")
+    public String takeArticle(@PathVariable Long idArticle) {
+        articleService.take(idArticle);
+        return "redirect:/userPanel";
+    }
+
     @GetMapping("updateArticle/{idArticle}")
     public String updateArticle(@PathVariable Long idArticle, Model model) {
         Article article = articleService.findById(idArticle);

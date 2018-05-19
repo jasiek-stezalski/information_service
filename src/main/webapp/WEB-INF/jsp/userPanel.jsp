@@ -19,6 +19,10 @@
 <br/><a href="/updateUser"><spring:message code="userPanel.updateUser"/> </a>
 <br/><a href="/deleteUser"><spring:message code="userPanel.deleteUser"/> </a>
 
+<c:if test="${roles[0] == 'USER'}">
+    <br/><br/><a href="/proposeArticle"><spring:message code="userPanel.proposeArticle"/> </a>
+</c:if>
+
 <%--Journalist panel--%>
 
 <c:if test="${roles[0] == 'JOURNALIST'}">
@@ -45,6 +49,18 @@
         </form:form>
 
     </c:forEach>
+
+    <h1><spring:message code="userPanel.articleProposed"/></h1>
+
+    <c:forEach items="${articles.proposed}" var="article">
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+        <form:form method="get" action="article/takeArticle/${article.idArticle}">
+            <input type="submit" value="<spring:message code="userPanel.articleWrite"/> ">
+        </form:form>
+
+    </c:forEach>
+
 
     <h1><spring:message code="userPanel.oldArticles"/></h1>
 
@@ -76,6 +92,17 @@
                 <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
             </select>
             <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
+    </c:forEach>
+
+    <h1><spring:message code="userPanel.articleProposed"/></h1>
+
+    <c:forEach items="${articles.proposed}" var="article">
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+        <form:form method="get" action="article/takeArticle/${article.idArticle}">
+            <input type="submit" value="<spring:message code="userPanel.articleWrite"/> ">
         </form:form>
 
     </c:forEach>
@@ -185,6 +212,17 @@
                 <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
             </select>
             <input type="submit" value="<spring:message code="submit"/> ">
+        </form:form>
+
+    </c:forEach>
+
+    <h1><spring:message code="userPanel.articleProposed"/></h1>
+
+    <c:forEach items="${articles.proposed}" var="article">
+        <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+        <form:form method="get" action="article/takeArticle/${article.idArticle}">
+            <input type="submit" value="<spring:message code="userPanel.articleWrite"/> ">
         </form:form>
 
     </c:forEach>

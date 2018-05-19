@@ -15,6 +15,7 @@ import java.util.List;
 public class ArticlePanelFacade {
 
     private List<Article> inProgress;
+    private List<Article> proposed;
     private List<Article> toCheck;
     private List<Article> checked;
     private List<Article> toDisplay;
@@ -35,6 +36,7 @@ public class ArticlePanelFacade {
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
         inProgress = articleRepository.findByUserAndStatusLike(user, "in progress");
+        proposed = articleRepository.findByStatus("proposed");
         if (role.equals("[JOURNALIST]")) {
             archive = articleRepository.findByUserAndStatusLikeOrderByPublicationDateDesc(user, "archive");
         }
@@ -58,6 +60,14 @@ public class ArticlePanelFacade {
 
     public void setInProgress(List<Article> inProgress) {
         this.inProgress = inProgress;
+    }
+
+    public List<Article> getProposed() {
+        return proposed;
+    }
+
+    public void setProposed(List<Article> proposed) {
+        this.proposed = proposed;
     }
 
     public List<Article> getToCheck() {
