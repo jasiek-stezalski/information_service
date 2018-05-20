@@ -337,5 +337,42 @@
 
 </c:if>
 
+<%--Admin panel--%>
+
+<h1><spring:message code="userPanel.users"/></h1>
+
+<c:if test="${roles[0] == 'ADMIN'}">
+
+    <table>
+        <thead>
+        <tr>
+            <th><spring:message code="userPanel.username"/></th>
+            <th><spring:message code="userPanel.blocked"/></th>
+            <th><spring:message code="userPanel.role"/></th>
+            <th><spring:message code="userPanel.category"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${users}" var="user">
+            <tr>
+                <td>${user.username}</td>
+                <a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+                <c:if test="${user.blocked == 'false'}">
+                    <td><a href="/userPanel/blocked/${user.idUser}"><spring:message code="userPanel.lock"/></a></td>
+                </c:if>
+                <c:if test="${user.blocked == 'true'}">
+                    <td><a href="/userPanel/blocked/${user.idUser}"><spring:message code="userPanel.unlock"/></a></td>
+                </c:if>
+
+                <td>${user.role.iterator().next().name}</td>
+                <td>${user.category}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+</c:if>
+
 </body>
 </html>

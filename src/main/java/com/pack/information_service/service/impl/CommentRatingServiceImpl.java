@@ -23,7 +23,8 @@ public class CommentRatingServiceImpl implements CommentRatingService {
     private CommentRepository commentRepository;
 
     @Autowired
-    public CommentRatingServiceImpl(UserRepository userRepository, CommentRatingRepository commentRatingRepository, CommentRepository commentRepository) {
+    public CommentRatingServiceImpl(UserRepository userRepository, CommentRatingRepository commentRatingRepository,
+                                    CommentRepository commentRepository) {
         this.userRepository = userRepository;
         this.commentRatingRepository = commentRatingRepository;
         this.commentRepository = commentRepository;
@@ -41,9 +42,9 @@ public class CommentRatingServiceImpl implements CommentRatingService {
         } else {
             for (int i = 0; i < commentList.size(); i++) {
                 markList.add(0);
-                for (int j = 0; j < commentRatingList.size(); j++) {
-                    if (commentList.get(i).equals(commentRatingList.get(j).getComment())) {
-                        markList.set(i, commentRatingList.get(j).getValue());
+                for (CommentRating c : commentRatingList) {
+                    if (commentList.get(i).equals(c.getComment())) {
+                        markList.set(i, c.getValue());
                         break;
                     }
                 }
@@ -62,7 +63,7 @@ public class CommentRatingServiceImpl implements CommentRatingService {
 
         int commentMark = comment.getCommentRatings()
                 .stream()
-                .mapToInt(a -> a.getValue())
+                .mapToInt(CommentRating::getValue)
                 .sum();
 
         comment.setMark(commentMark);

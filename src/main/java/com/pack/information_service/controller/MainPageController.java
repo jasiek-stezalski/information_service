@@ -1,5 +1,6 @@
 package com.pack.information_service.controller;
 
+import com.pack.information_service.service.UserService;
 import com.pack.information_service.service.impl.ArticlePanelFacade;
 import com.pack.information_service.service.impl.MainPageFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +10,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class MainPageController {
 
     private MainPageFacade mainPageFacade;
     private ArticlePanelFacade articlePanelFacade;
+    private UserService userService;
 
     @Autowired
-    public MainPageController(MainPageFacade mainPageFacade, ArticlePanelFacade articlePanelFacade) {
+    public MainPageController(MainPageFacade mainPageFacade, ArticlePanelFacade articlePanelFacade, UserService userService) {
         this.mainPageFacade = mainPageFacade;
         this.articlePanelFacade = articlePanelFacade;
+        this.userService = userService;
     }
 
     @GetMapping({"/", "mainPage"})
-    public String homePage(Model model) {
+    public String homePage(Model model, HttpServletRequest request, HttpServletResponse response) {
+        if (userService.isBlocked(request, response)) {
+            model.addAttribute("blocked", true);
+            return "/login";
+        }
         mainPageFacade.generateContent();
         model.addAttribute("articles", mainPageFacade);
         return "mainPage";
@@ -35,6 +45,8 @@ public class MainPageController {
         if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
             articlePanelFacade.generateContent();
             model.addAttribute("articles", articlePanelFacade);
+        } else if (role.equals("[ADMIN]")) {
+            model.addAttribute("users", userService.findAll());
         }
         return "userPanel";
     }

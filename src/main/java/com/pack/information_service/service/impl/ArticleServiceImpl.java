@@ -119,7 +119,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Map<String, String> getCategories() {
-        Map<String, String> categories = new LinkedHashMap<String, String>() {{
+        return new LinkedHashMap<String, String>() {{
             put("News", "MainPage.article.news");
             put("Sport", "MainPage.article.sport");
             put("Business", "MainPage.article.business");
@@ -127,8 +127,6 @@ public class ArticleServiceImpl implements ArticleService {
             put("Technologies", "MainPage.article.technologies");
             put("Motorization", "MainPage.article.motorization");
         }};
-
-        return categories;
     }
 
 }

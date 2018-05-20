@@ -1,7 +1,6 @@
 package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.User;
-import com.pack.information_service.service.SecurityService;
 import com.pack.information_service.service.UserService;
 import com.pack.information_service.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,11 @@ public class RegistrationController {
 
     private UserService userService;
     private UserValidator userValidator;
-    private SecurityService securityService;
 
     @Autowired
-    public RegistrationController(UserService userService, UserValidator userValidator, SecurityService securityService) {
+    public RegistrationController(UserService userService, UserValidator userValidator) {
         this.userService = userService;
         this.userValidator = userValidator;
-        this.securityService = securityService;
     }
 
     @GetMapping("/registration")
@@ -43,8 +40,6 @@ public class RegistrationController {
         }
 
         userService.save(userForm);
-
-        //securityService.autoLogin(userForm.getUsername(), userForm.getConfirmPassword());
 
         return "login";
     }

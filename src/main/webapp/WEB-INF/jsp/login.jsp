@@ -35,6 +35,9 @@
             <c:if test="${param.error != null}">
                 <div style="color: red"><spring:message code="Login.error"/></div>
             </c:if>
+            <c:if test="${blocked == true}">
+                <div style="color: red"><spring:message code="Login.blocked"/></div>
+            </c:if>
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
