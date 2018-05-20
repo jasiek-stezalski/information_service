@@ -32,6 +32,18 @@ public class UserPanelController {
         return "userEdition";
     }
 
+    @PostMapping("/changeRole")
+    public String changeRole(@RequestParam Long idUser, @RequestParam String role) {
+        userService.changeRole(idUser, role);
+        return "redirect:/userPanel";
+    }
+
+    @PostMapping("/changeCategory")
+    public String changeCategory(@RequestParam Long idUser, @RequestParam String category) {
+        userService.changeCategory(idUser, category);
+        return "redirect:/userPanel";
+    }
+
     @PostMapping("/updateUsername")
     public String updateUsername(@ModelAttribute("userForm") @Valid User userForm, BindingResult result) {
         User user = userValidator.usernameValidate(userForm, result);
@@ -64,6 +76,12 @@ public class UserPanelController {
     public String deleteUser() {
         userService.delete(SecurityContextHolder.getContext().getAuthentication().getName());
         return "redirect:/logout";
+    }
+
+    @GetMapping("/deleteUser/{idUser}")
+    public String deleteUserByAdmin(@PathVariable Long idUser) {
+        userService.delete(idUser);
+        return "redirect:/userPanel";
     }
 
 }

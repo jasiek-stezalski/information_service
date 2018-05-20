@@ -1,5 +1,7 @@
 package com.pack.information_service.controller;
 
+import com.pack.information_service.service.ArticleService;
+import com.pack.information_service.service.RoleService;
 import com.pack.information_service.service.UserService;
 import com.pack.information_service.service.impl.ArticlePanelFacade;
 import com.pack.information_service.service.impl.MainPageFacade;
@@ -19,12 +21,17 @@ public class MainPageController {
     private MainPageFacade mainPageFacade;
     private ArticlePanelFacade articlePanelFacade;
     private UserService userService;
+    private RoleService roleService;
+    private ArticleService articleService;
 
     @Autowired
-    public MainPageController(MainPageFacade mainPageFacade, ArticlePanelFacade articlePanelFacade, UserService userService) {
+    public MainPageController(MainPageFacade mainPageFacade, ArticlePanelFacade articlePanelFacade, UserService userService,
+                              RoleService roleService, ArticleService articleService) {
         this.mainPageFacade = mainPageFacade;
         this.articlePanelFacade = articlePanelFacade;
         this.userService = userService;
+        this.roleService = roleService;
+        this.articleService = articleService;
     }
 
     @GetMapping({"/", "mainPage"})
@@ -47,6 +54,8 @@ public class MainPageController {
             model.addAttribute("articles", articlePanelFacade);
         } else if (role.equals("[ADMIN]")) {
             model.addAttribute("users", userService.findAll());
+            model.addAttribute("allRoles", roleService.findAll());
+            model.addAttribute("categories", articleService.getCategories());
         }
         return "userPanel";
     }

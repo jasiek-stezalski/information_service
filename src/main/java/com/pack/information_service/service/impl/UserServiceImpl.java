@@ -67,6 +67,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void changeRole(Long idUser, String name) {
+        User user = userRepository.findByIdUser(idUser);
+        Role role = roleRepository.findByName(name);
+
+        if (user.getRole().stream().findFirst().get().getName().equals("MODERATOR")) user.setCategory(null);
+
+        Set<Role> roles = new HashSet<Role>() {{
+            add(role);
+        }};
+        user.setRoles(roles);
+
+        if (name.equals("MODERATOR")) user.setCategory("News");
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public void changeCategory(Long idUser, String category) {
+        User user = userRepository.findByIdUser(idUser);
+
+        user.setCategory(category);
+        userRepository.save(user);
+    }
+
+    @Override
     public void lock(Long idUser) {
         User user = userRepository.findByIdUser(idUser);
         user.setBlocked(!user.isBlocked());
@@ -90,6 +115,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(String username) {
         User user = userRepository.findByUsername(username);
+        userRepository.delete(user);
+    }
+
+    @Override
+    public void delete(Long idUser) {
+        User user = userRepository.findByIdUser(idUser);
         userRepository.delete(user);
     }
 

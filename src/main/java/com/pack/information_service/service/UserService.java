@@ -16,10 +16,16 @@ public interface UserService {
 
     void update(User user);
 
+    void changeRole(Long idUser, String name);
+
+    void changeCategory(Long idUser, String category);
+
     void lock(Long idUser);
 
     boolean isBlocked(HttpServletRequest request, HttpServletResponse response);
 
     void delete(String username);
+
+    void delete(Long idUser);
 
 }
