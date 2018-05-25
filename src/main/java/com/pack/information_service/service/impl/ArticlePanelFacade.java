@@ -1,6 +1,7 @@
 package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
+import com.pack.information_service.domain.ArticleError;
 import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
@@ -15,9 +16,11 @@ import java.util.List;
 public class ArticlePanelFacade {
 
     private List<Article> inProgress;
+    private List<Article> proposed;
     private List<Article> toCheck;
     private List<Article> checked;
     private List<Article> toDisplay;
+    private List<Article> withErrors;
     private List<Article> archive;
 
     private ArticleRepository articleRepository;
@@ -35,6 +38,7 @@ public class ArticlePanelFacade {
         String username = authentication.getName();
         User user = userRepository.findByUsername(username);
         inProgress = articleRepository.findByUserAndStatusLike(user, "in progress");
+        proposed = articleRepository.findByStatus("proposed");
         if (role.equals("[JOURNALIST]")) {
             archive = articleRepository.findByUserAndStatusLikeOrderByPublicationDateDesc(user, "archive");
         }
@@ -42,6 +46,7 @@ public class ArticlePanelFacade {
             toCheck = articleRepository.findByStatusAndCategory("to check", user.getCategory());
             checked = articleRepository.findByStatusAndCategory("checked", user.getCategory());
             toDisplay = articleRepository.findByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", user.getCategory());
+            withErrors = articleRepository.findByError();
             archive = articleRepository.findByStatusAndCategoryOrUserOrderByPublicationDateDesc("archive", user.getCategory(), user.getIdUser());
         }
         if (role.equals("[EDITOR_IN_CHIEF]")) {
@@ -58,6 +63,14 @@ public class ArticlePanelFacade {
 
     public void setInProgress(List<Article> inProgress) {
         this.inProgress = inProgress;
+    }
+
+    public List<Article> getProposed() {
+        return proposed;
+    }
+
+    public void setProposed(List<Article> proposed) {
+        this.proposed = proposed;
     }
 
     public List<Article> getToCheck() {
@@ -82,6 +95,14 @@ public class ArticlePanelFacade {
 
     public void setToDisplay(List<Article> toDisplay) {
         this.toDisplay = toDisplay;
+    }
+
+    public List<Article> getWithErrors() {
+        return withErrors;
+    }
+
+    public void setWithErrors(List<Article> withErrors) {
+        this.withErrors = withErrors;
     }
 
     public List<Article> getArchive() {

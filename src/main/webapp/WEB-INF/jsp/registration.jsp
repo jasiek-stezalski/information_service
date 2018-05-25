@@ -33,8 +33,8 @@
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <spring:message code="Registration.username" var="variable1"/>
                 <form:input type="text" path="username" class="form-control" placeholder="${variable1}"
-                            autofocus="true"></form:input>
-                <form:errors path="username"></form:errors>
+                            autofocus="true"/>
+                <form:errors path="username"/>
             </div>
         </spring:bind>
 
@@ -42,8 +42,8 @@
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <spring:message code="Registration.password" var="variable2"/>
                 <form:input type="password" path="password" class="form-control"
-                            placeholder="${variable2}"></form:input>
-                <form:errors path="password"></form:errors>
+                            placeholder="${variable2}"/>
+                <form:errors path="password"/>
             </div>
         </spring:bind>
 
@@ -51,8 +51,8 @@
             <div class="form-group ${status.error ? 'has-error' : ''}">
                 <spring:message code="Registration.confirmPassword" var="variable3"/>
                 <form:input type="password" path="confirmPassword" class="form-control"
-                            placeholder="${variable3}"></form:input>
-                <form:errors path="confirmPassword"></form:errors>
+                            placeholder="${variable3}"/>
+                <form:errors path="confirmPassword"/>
             </div>
         </spring:bind>
 

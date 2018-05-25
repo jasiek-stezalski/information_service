@@ -8,6 +8,7 @@ import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
 import com.pack.information_service.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -46,16 +47,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByStatus(String status) {
-        return articleRepository.findByStatus(status);
-    }
-
-    @Override
-    public List<Article> findByStatusInOrder(String status) {
-        return articleRepository.findByStatusOrderByPriorityAscPublicationDateDesc(status);
-    }
-
-    @Override
     public List<Article> findByTitle(String title) {
         String pattern;
         System.out.print(title);
@@ -65,30 +56,6 @@ public class ArticleServiceImpl implements ArticleService {
             return articleRepository.findByTitle(pattern);
         }
         return null;
-    }
-
-    @Override
-    public List<Article> findByUserAndStatus(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByUserAndStatusLike(user, status);
-    }
-
-    @Override
-    public List<Article> findByUserAndNotStatus(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByUserAndStatusNotLike(user, status);
-    }
-
-    @Override
-    public List<Article> findByStatusAndCategory(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByStatusAndCategory(status, user.getCategory());
-    }
-
-    @Override
-    public List<Article> findByStatusAndCategoryInOrder(String status, String username) {
-        User user = userRepository.findByUsername(username);
-        return articleRepository.findByStatusAndCategoryOrderByPriorityAscPublicationDateDesc(status, user.getCategory());
     }
 
     @Override
@@ -124,6 +91,23 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public void propose(Article article) {
+        article.setStatus("proposed");
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        article.setUser(userRepository.findByUsername(username));
+        articleRepository.save(article);
+    }
+
+    @Override
+    public void take(Long idArticle) {
+        Article article = articleRepository.findByIdArticle(idArticle);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        article.setUser(userRepository.findByUsername(username));
+        article.setStatus("in progress");
+        articleRepository.save(article);
+    }
+
+    @Override
     public void delete(Long idArticle) {
         Article article = articleRepository.findByIdArticle(idArticle);
         try {
@@ -141,7 +125,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Map<String, String> getCategories() {
-        Map<String, String> categories = new LinkedHashMap<>() {{
+        return new LinkedHashMap<String, String>() {{
             put("News", "MainPage.article.news");
             put("Sport", "MainPage.article.sport");
             put("Business", "MainPage.article.business");
@@ -149,8 +133,6 @@ public class ArticleServiceImpl implements ArticleService {
             put("Technologies", "MainPage.article.technologies");
             put("Motorization", "MainPage.article.motorization");
         }};
-
-        return categories;
     }
 
 }

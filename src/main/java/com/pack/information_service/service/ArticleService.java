@@ -13,19 +13,7 @@ public interface ArticleService {
 
     List<Article> findByCategory(String category);
 
-    List<Article> findByStatus(String status);
-
-    List<Article> findByStatusInOrder(String status);
-
     List<Article> findByTitle(String title);
-
-    List<Article> findByUserAndStatus(String status, String username);
-
-    List<Article> findByUserAndNotStatus(String status, String username);
-
-    List<Article> findByStatusAndCategory(String status, String username);
-
-    List<Article> findByStatusAndCategoryInOrder(String status, String username);
 
     List<String> findCommentsAuthors(Long idArticle);
 
@@ -35,8 +23,12 @@ public interface ArticleService {
 
     void save(Long idArticle, Integer priority);
 
+    void propose(Article article);
+
+    void take(Long idArticle);
+
     void delete(Long idArticle);
 
-    Map<String,String> getCategories();
+    Map<String, String> getCategories();
 
 }

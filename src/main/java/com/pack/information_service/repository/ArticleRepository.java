@@ -31,8 +31,6 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findByUserAndStatusLikeOrderByPublicationDateDesc(User user, String status);
 
-    List<Article> findByUserAndStatusNotLike(User user, String status);
-
     List<Article> findByStatusAndCategory(String status, String category);
 
     @Query(nativeQuery = true, value = "SELECT * FROM article WHERE Status =:status AND (Category =:category OR id_user =:idUser) ORDER BY Publication_date DESC")
@@ -43,5 +41,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc(String status, String category);
 
     List<Article> findFirst20ByStatusOrderByPriorityAscPublicationDateDesc(String status);
+
+    @Query(nativeQuery = true, value = "SELECT distinct article.* FROM article JOIN article_error on article.id_article = article_error.id_article")
+    List<Article> findByError();
 
 }

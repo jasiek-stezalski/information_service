@@ -47,7 +47,7 @@ public class ArticleRatingServiceImpl implements ArticleRatingService {
 
         OptionalDouble articleMark = article.getArticleRatings()
                 .stream()
-                .mapToDouble(a -> a.getValue())
+                .mapToDouble(ArticleRating::getValue)
                 .average();
 
         article.setMark(Math.round(articleMark.getAsDouble() * 100) / 100.d);

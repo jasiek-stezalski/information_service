@@ -1,6 +1,8 @@
 package com.pack.information_service.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -11,22 +13,30 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idArticle;
+
+    @Size(min = 3, max = 50)
     private String title;
+
     @Lob
+    @NotEmpty
     private String content;
+
     private String category;
     private int priority;
     private Date publicationDate;
     private String status;
     private double mark;
 
-    @OneToMany(mappedBy = "article" , cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<ArticleRating> articleRatings;
 
-    @OneToMany(mappedBy = "article", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    private List<ArticleError> articleErrors;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private List<Picture> pictures;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_article")
     private List<Comment> comments;
 
@@ -111,6 +121,14 @@ public class Article {
 
     public void setArticleRatings(List<ArticleRating> articleRatings) {
         this.articleRatings = articleRatings;
+    }
+
+    public List<ArticleError> getArticleErrors() {
+        return articleErrors;
+    }
+
+    public void setArticleErrors(List<ArticleError> articleErrors) {
+        this.articleErrors = articleErrors;
     }
 
     public List<Picture> getPictures() {
