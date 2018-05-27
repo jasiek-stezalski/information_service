@@ -17,6 +17,10 @@
     display:inline-block;
 }
 
+.lesserPictureContainer a{
+    text-decoration: none;
+}
+
 .lesserPicture.hover{
     opacity: 0.75;
 }

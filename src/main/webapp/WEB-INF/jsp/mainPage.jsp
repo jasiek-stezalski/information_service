@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -6,75 +5,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><spring:message code="title"/></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="resources/images/newspaper.jpg">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="resources/css/main.css">
-    <script src="resources/js/menu.js"></script>
+    <%@include file="meta.jsp"%>
 </head>
 <body>
-<div id="top">
-    <div class="logo">
-        <img class="logo" src="resources/images/logo.jpg">
-    </div>
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <div id="singedIn">
-                <spring:message code="MainPage.loggedAs"/></br>
-                ${pageContext.request.userPrincipal.name}
-        </div>
-    </c:if>
-</div>
+    <%@include file="top.jsp"%>
 
-<div id="menu" class="bg-primary">
-
-    <a style="float:left;" href="/mainPage">
-        <span class="glyphicon glyphicon-home home"></span>
-    </a>
-    <div class="divider">|</div>
-    <div class="dropdown menuItem">
-        <spring:message code="MainPage.categories"/>
-        <div class="dropdownContent bottomCurve noSelect bg-primary">
-            <c:forEach items="${articles.categories}" var="category">
-                <a href="/articlePage/category/${category.key}"><spring:message code="${category.value}"/></a>
-            </c:forEach>
-        </div>
-    </div>
-    <div style="float: right;">
-        <div class="noForm">
-            <form:form  method="post" action="articlePage/searchArticle">
-        </div>
-                <input id="search" name="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
-                <input type="submit" class="btn registerButton" value="<spring:message code="MainPage.buttonSearch"/>">
-        <div class="noForm">
-            </form:form>
-        </div>
-        <c:if test="${pageContext.request.userPrincipal.name == null}">
-            <a href="/login" class="btn registerButton">
-                <spring:message code="MainPage.signIn"/>
-            </a>
-        </c:if>
-
-        <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <a href="/userPanel" id="panelButton" class="btn">
-                <spring:message code="MainPage.userPanel"/>
-            </a>
-            <a onclick="document.forms['logoutForm'].submit()" class="btn registerButton">
-                <spring:message code="MainPage.signOut"/>
-            </a>
-            <div class="noForm">
-                <form id="logoutForm" method="POST" action="${contextPath}/logout">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                </form>
-            </div>
-        </c:if>
-    </div>
-</div>
 <div id="container" class="">
     <div class="slideShowContainer">
         <c:forEach items="${articles.topNews}" var="article">
@@ -104,7 +39,7 @@
         <c:forEach items="${articles.topNews}" var="article">
             <c:if test="${article.priority==2}">
                 <div class="lesserPictureContainer noSelect">
-                    <a style="text-decoration: none;" href="<spring:url value="/articlePage/${article.idArticle}"/>">
+                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
                         <img class="lesserPicture" src="<c:url value="${(article.pictures[0]).path}"/>">
                         <div class="lesserPictureTitle">${article.title}</div>
                     </a>
@@ -222,6 +157,6 @@
 </div>--%>
 
 </body>
-<script src="resources/js/slideShow.js"></script>
-<script src="resources/js/lesserPicture.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/lesserPicture.js"></script>
 </html>

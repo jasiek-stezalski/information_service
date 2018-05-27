@@ -1,0 +1,24 @@
+
+.searchContainer{
+    padding: 30px;
+    padding-left: 45px;
+}
+
+.searchContainer a{
+    text-decoration: none;
+}
+
+.searchText{
+    color:black;
+    font: bold 21px "Times New Roman", Times, serif;
+}
+
+.searchText:hover{
+    color:darkslategrey;
+}
+
+.searchFor{
+    margin-bottom: 30px;
+    color:black;
+    font: bold 21px "Times New Roman", Times, serif;
+}

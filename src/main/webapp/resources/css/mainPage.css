@@ -26,6 +26,6 @@ body{
     user-select: none;
 }
 
-.noForm{
+.noDisplay{
     display:none;
 }

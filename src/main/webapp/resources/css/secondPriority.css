@@ -13,9 +13,7 @@
 }
 
 .secondPriorityTitle{
-    padding-top:5px;
-    padding-left:5px;
-    padding-right:5px;
+    padding: 5px 5px 0px 5px;
     color:black;
     font: bold 18px "Times New Roman", Times, serif;
 }
