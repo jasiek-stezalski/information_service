@@ -2,31 +2,47 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><spring:message code="title"/></title>
-    <script>
+    <%@include file="meta.jsp"%>
+    <%--<script>
         function showEditArea(id1, id2) {
             document.getElementById(id1).style.display = 'none';
             document.getElementById(id2).style.display = 'block';
         }
-    </script>
+    </script>--%>
 </head>
 <body>
-
-<%--The article content with title and all pictures--%>
+<header>
+    <%@include file="top.jsp"%>
+</header>
+<div id="container">
+    <div class="articleContainer">
+        <div class="articleTitle">
+            ${article.title}
+        </div>
+        <div class="articlePicture">
+            <c:forEach items="${article.pictures}" var="picture">
+                <img src="<c:url value="${picture.path}"/>">
+            </c:forEach>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<%--
+The article content with title and all pictures
 
 <h1>${article.title}</h1>
 <c:forEach items="${article.pictures}" var="picture">
-    <img src="<c:url value="${picture.path}"/>" style="height: 130px; width: calc(130px * 1.78);">
+    <img src="<c:url value="${picture.path}"/>">
 </c:forEach>
 <p>${article.content}</p>
 <br/>
 
 <c:if test="${pageContext.request.userPrincipal.name != null}">
 
-    <%--If user find error in article he can report this error here--%>
+    &lt;%&ndash;If user find error in article he can report this error here&ndash;%&gt;
 
     <input type="button" id="errorButton" onclick="showEditArea('errorButton','errorInfo')"
            value="<spring:message code="Article.error"/>" style="display:block;">
@@ -42,7 +58,7 @@
     </form:form>
 
     <br/>
-    <%--If logged in user didn't rate the article, he can do it--%>
+    &lt;%&ndash;If logged in user didn't rate the article, he can do it&ndash;%&gt;
 
     <c:if test="${userArticleMark == 0}">
         <form:form method="post" action="/articlePage/addArticleMark">
@@ -63,7 +79,7 @@
 </c:if>
 
 
-<%--Information about the article--%>
+&lt;%&ndash;Information about the article&ndash;%&gt;
 
 <br/>
 <spring:message code="Article.Rate"/> ${article.mark}
@@ -76,11 +92,11 @@
 
 <br/><br/>
 
-<%--Comments--%>
+&lt;%&ndash;Comments&ndash;%&gt;
 
 <spring:message code="Article.comments"/>
 
-<%--If user is logged in he can add the comment--%>
+&lt;%&ndash;If user is logged in he can add the comment&ndash;%&gt;
 
 <br/>
 <c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -91,7 +107,7 @@
     </form:form>
 </c:if>
 
-<%--List of all article comments--%>
+&lt;%&ndash;List of all article comments&ndash;%&gt;
 
 <br/>
 <c:forEach items="${article.comments}" var="comment" varStatus="status">
@@ -100,7 +116,7 @@
     <br/><spring:message code="Article.comment.date"/> ${comment.date}
     <br/><spring:message code="Article.comment.mark"/> ${comment.mark}
 
-    <%--If user is the author of the comment or moderator he can edit and remove the comment--%>
+    &lt;%&ndash;If user is the author of the comment or moderator he can edit and remove the comment&ndash;%&gt;
 
     <sec:authentication property="authorities" var="roles" scope="page"/>
     <c:if test="${commentsAuthors[status.index] == pageContext.request.userPrincipal.name or 'MODERATOR' == roles[0]}">
@@ -110,7 +126,7 @@
             <input type="submit" value="<spring:message code="Article.comment.delete"/>">
         </form:form>
 
-        <%--Function to show area to edit the article--%>
+        &lt;%&ndash;Function to show area to edit the article&ndash;%&gt;
 
         <input type="button" id="${status.index}" onclick="showEditArea('${status.index}','${comment.idComment}')"
                value="<spring:message code="Article.comment.edit"/>" style="display:block;">
@@ -124,7 +140,7 @@
     </c:if>
     <br/><br/>
 
-    <%--If user is logged in and he didn't rate this comment he can do it--%>
+    &lt;%&ndash;If user is logged in and he didn't rate this comment he can do it&ndash;%&gt;
 
     <c:if test="${pageContext.request.userPrincipal.name != null and userCommentMarks[status.index] == 0}">
         <form:form method="post" action="/articlePage/commentMark">
@@ -141,7 +157,4 @@
     </c:if>
 
 </c:forEach>
-
-
-</body>
-</html>
+--%>
