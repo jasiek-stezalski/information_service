@@ -49,13 +49,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> findByTitle(String title) {
         String pattern;
-        System.out.print(title);
-        if(title!="") {
+        if (title.length() >= 3) {
             pattern = ".*" + title.toLowerCase() + ".*";
-
             return articleRepository.findByTitle(pattern);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

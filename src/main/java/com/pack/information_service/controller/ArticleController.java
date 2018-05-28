@@ -95,6 +95,15 @@ public class ArticleController {
     public String searchArticle(@RequestParam String search, Model model) {
         model.addAttribute("articles", articleService.findByTitle(search));
         model.addAttribute("categories", articleService.getCategories());
+        model.addAttribute("phrase", search);
+        return "searchPage";
+    }
+
+    @GetMapping("/searchArticle")
+    public String searchArticle(Model model) {
+        model.addAttribute("articles", articleService.findByTitle(""));
+        model.addAttribute("categories", articleService.getCategories());
+        model.addAttribute("phrase", "");
         return "searchPage";
     }
 

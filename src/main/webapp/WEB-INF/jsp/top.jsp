@@ -31,7 +31,7 @@
     </div>
     <div style="float: right;">
         <div class="noDisplay">
-            <form:form  method="post" action="articlePage/searchArticle">
+            <form:form  method="post" action="/articlePage/searchArticle">
         </div>
         <input id="search" name="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
         <input class="noDisplay" type="submit" class="btn registerButton" value="<spring:message code="MainPage.buttonSearch"/>">
