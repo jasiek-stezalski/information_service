@@ -1,6 +1,7 @@
 package com.pack.information_service.service;
 
 import com.pack.information_service.domain.Article;
+import com.pack.information_service.domain.Statistic;
 
 import java.util.List;
 import java.util.Map;
@@ -30,5 +31,7 @@ public interface ArticleService {
     void delete(Long idArticle);
 
     Map<String, String> getCategories();
+
+    List<Statistic> getStatistics();
 
 }
