@@ -8,9 +8,9 @@
     <%@include file="meta.jsp"%>
 </head>
 <body>
-<div>
+<header>
     <%@include file="top.jsp"%>
-</div>
+</header>
 <div id="container">
     <div class="searchContainer">
         <div class="searchFor">
