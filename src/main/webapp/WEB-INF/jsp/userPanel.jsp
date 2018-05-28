@@ -341,10 +341,10 @@
         <thead>
         <tr>
             <th><spring:message code="userPanel.username"/></th>
-            <th>Liczba artykułów w ostatnim roku</th>
-            <th>Średnia ocen</th>
-            <th>Liczba artykułów w ostatnim miesiącu</th>
-            <th>Średnia ocen</th>
+            <th><spring:message code="userPanel.articlesInYear"/></th>
+            <th><spring:message code="userPanel.averageMark"/></th>
+            <th><spring:message code="userPanel.articlesInMonth"/></th>
+            <th><spring:message code="userPanel.averageMark"/></th>
         </tr>
         </thead>
         <tbody>
