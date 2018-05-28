@@ -48,7 +48,7 @@
         <form:form method="post" action="/articlePage/addArticleMark">
             <spring:message code="Article.userMark"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <select name="mark" size="1">
+            <select name="yearMark" size="1">
                 <c:forEach var="i" begin="1" end="10">
                     <option value="${i}">${i}</option>
                 </c:forEach>
@@ -66,7 +66,7 @@
 <%--Information about the article--%>
 
 <br/>
-<spring:message code="Article.Rate"/> ${article.mark}
+<spring:message code="Article.Rate"/> ${article.yearMark}
 <br/><spring:message code="Article.Date"/> ${article.publicationDate}
 
 <br/><spring:message code="Article.articleAuthor"/>
@@ -98,7 +98,7 @@
     ${comment.content}
     <br/><spring:message code="Article.comment.author"/> ${commentsAuthors[status.index]}
     <br/><spring:message code="Article.comment.date"/> ${comment.date}
-    <br/><spring:message code="Article.comment.mark"/> ${comment.mark}
+    <br/><spring:message code="Article.comment.yearMark"/> ${comment.yearMark}
 
     <%--If user is the author of the comment or moderator he can edit and remove the comment--%>
 
@@ -128,10 +128,10 @@
 
     <c:if test="${pageContext.request.userPrincipal.name != null and userCommentMarks[status.index] == 0}">
         <form:form method="post" action="/articlePage/commentMark">
-            <spring:message code="Article.comment.mark"/>
+            <spring:message code="Article.comment.yearMark"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
             <input type="hidden" name="idComment" value="${comment.idComment}">
-            <select name="mark" size="1">
+            <select name="yearMark" size="1">
                 <option value="-1">-</option>
                 <option value="1">+</option>
             </select>

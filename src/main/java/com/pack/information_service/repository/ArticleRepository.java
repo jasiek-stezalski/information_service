@@ -24,8 +24,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findByStatusOrderByPublicationDateDesc(String status);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM article WHERE LOWER(Title) regexp ?1")
-    List<Article> findByTitle(String pattern);
+    @Query(nativeQuery = true, value = "SELECT * FROM article WHERE LOWER(Title) regexp ?1 and publication_date is not null")
+    List<Article> findByTitleAndPublicationDate(String pattern);
 
     List<Article> findByUserAndStatusLike(User user, String status);
 
@@ -44,5 +44,40 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     @Query(nativeQuery = true, value = "SELECT distinct article.* FROM article JOIN article_error on article.id_article = article_error.id_article")
     List<Article> findByError();
+
+    @Query(nativeQuery = true,
+            value = "SELECT user.id_user, COUNT(article.id_article), AVG(article.mark)" +
+                    "from article " +
+                    "right join user on article.id_user = user.id_user " +
+                    "left join user_roles on user.id_user = user_roles.user_id " +
+                    "where (user_roles.role_id = 3 " +
+                    "OR user_roles.role_id = 4 " +
+                    "OR user_roles.role_id = 5) " +
+                    "AND article.publication_date >= (CURDATE() + INTERVAL -1 YEAR) " +
+                    "GROUP BY user.id_user")
+    List<Object[]> findYearStatistics();
+
+    @Query(nativeQuery = true,
+            value = "SELECT user.id_user, COUNT(article.id_article), AVG(article.mark)" +
+                    "from article " +
+                    "right join user on article.id_user = user.id_user " +
+                    "left join user_roles on user.id_user = user_roles.user_id " +
+                    "where (user_roles.role_id = 3 " +
+                    "OR user_roles.role_id = 4 " +
+                    "OR user_roles.role_id = 5) " +
+                    "AND article.publication_date >= (CURDATE() + INTERVAL -1 MONTH) " +
+                    "GROUP BY user.id_user")
+    List<Object[]> findMonthStatistics();
+
+    @Query(nativeQuery = true,
+            value = "SELECT user.id_user " +
+                    "from article " +
+                    "right join user on article.id_user = user.id_user " +
+                    "left join user_roles on user.id_user = user_roles.user_id " +
+                    "where user_roles.role_id = 3 " +
+                    "OR user_roles.role_id = 4 " +
+                    "OR user_roles.role_id = 5 " +
+                    "GROUP BY user.id_user")
+    List<Object> findUsers();
 
 }

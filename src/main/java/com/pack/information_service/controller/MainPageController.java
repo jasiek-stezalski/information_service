@@ -52,6 +52,7 @@ public class MainPageController {
         if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
             articlePanelFacade.generateContent();
             model.addAttribute("articles", articlePanelFacade);
+            if (role.equals("[EDITOR_IN_CHIEF]")) model.addAttribute("statistics", articleService.getStatistics());
         } else if (role.equals("[ADMIN]")) {
             model.addAttribute("users", userService.findAll());
             model.addAttribute("allRoles", roleService.findAll());
