@@ -17,7 +17,6 @@ import static org.mockito.Mockito.when;
 
 public class UserValidatorTest {
 
-
     private static final String USERNAME_SHORTER_THAN_8_CHARS = "Tom";
     private static final String USERNAME_LONGER_THAN_32_CHARS = "Roberto Augustin Miguel Santiago Samuel Perez de la Santa Conception Trujillo Veracruz Batista";
     private static final String USERNAME_WITH_VALID_LENGTH = "Caius Cosades";
@@ -78,7 +77,7 @@ public class UserValidatorTest {
         when(mockUserForm.getConfirmPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
 
         UserValidator UV = new UserValidator(mockUserService, mockPasswordEncoder);
-        UV.usernameValidate(mockUserForm, errors);
+        UV.validate(mockUserForm, errors);
 
         assertTrue(errors.hasErrors());
     }
@@ -92,9 +91,11 @@ public class UserValidatorTest {
         when(mockUserForm.getUsername()).thenReturn(USERNAME_WITH_VALID_LENGTH);
         when(mockUser.getUsername()).thenReturn(USERNAME_WITH_VALID_LENGTH);
         when(mockUserService.findByUsername(USERNAME_WITH_VALID_LENGTH)).thenReturn(mockUser); //return not null
+        when(mockUserForm.getPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
+        when(mockUserForm.getConfirmPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
 
         UserValidator UV = new UserValidator(mockUserService, mockPasswordEncoder);
-        UV.usernameValidate(mockUserForm, errors);
+        UV.validate(mockUserForm, errors);
 
         assertTrue(errors.hasErrors());
     }
@@ -110,7 +111,7 @@ public class UserValidatorTest {
         when(mockUserForm.getConfirmPassword()).thenReturn(PASSWORD_SHORTER_THAN_8_CHARS);
 
         UserValidator UV = new UserValidator(mockUserService, mockPasswordEncoder);
-        UV.passwordValidate(mockUserForm, errors);
+        UV.validate(mockUserForm, errors);
 
         assertTrue(errors.hasErrors());
     }
@@ -130,7 +131,22 @@ public class UserValidatorTest {
 
         assertTrue(errors.hasErrors());
     }
-        //TODO: validate -> testy passworda
+    @Test
+    public void validate_PasswordNotEqualsConfirmPassword_HasErrors(){
+
+        System.out.println("validate_PasswordNotEqualsConfirmPassword_HasErrors test");
+
+        when(mockUserForm.getUsername()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
+        when(mockUserService.findByUsername("test")).thenReturn(mockUser);
+        when(mockUserForm.getPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
+        when(mockUserForm.getConfirmPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH_2);
+        when(mockUserForm.getOldPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH_2);
+
+        UserValidator UV = new UserValidator(mockUserService, mockPasswordEncoder);
+        UV.validate(mockUserForm, errors);
+
+        assertTrue(errors.hasErrors());
+    }
 
     @Test
     public void usernameValidate_UsernameLessThan8Characters_HasErrors(){
