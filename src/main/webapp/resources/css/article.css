@@ -4,10 +4,111 @@
 }
 
 .articleTitle{
-    color:black;
-    font: bold 21px "Times New Roman", Times, serif;
+    margin-bottom:5px;
+    color: black;
+    font: bold 25px "Times New Roman", Times, serif;
 }
 
 .articlePicture{
+    height: 400px;
+    width: calc(400px * 1.78);
+}
 
+.articlePictureContainer{
+    overflow:auto;
+    display:inline-block;
+}
+
+.optionsContainer{
+    height: 400px;
+    width: calc(1100px - 2 * 30px - 400px * 1.78 - 15px);
+    margin-left:10px;
+    padding: 5px;
+    border-style: solid;
+    border-width: 5px;
+    vertical-align: top;
+    display:inline-block;
+}
+
+.articleData{
+    margin-left: 15px;
+    margin-bottom: 10px;
+}
+
+.articleAuthor{
+    text-decoration: none;
+    color: darkslategrey;
+}
+
+.articleAuthor:hover{
+    text-decoration: none;
+    opacity: 0.75;
+}
+
+.articleDivider{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.commentsTitle{
+    margin-top:40px;
+    margin-bottom:20px;
+    font: bold 25px "Times New Roman", Times, serif;
+}
+
+.commentContainer{
+    margin-left: 10px;
+}
+
+.commentAuthor{
+    color: #0b2e66;
+    font: bold 20px "Times New Roman", Times, serif;
+    margin-bottom: 5px;
+}
+
+.commentContext{
+    margin-bottom: 7px;
+}
+
+.commentAdditional{
+    margin-bottom: 15px;
+}
+
+.commentMark{
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 1px;
+    width: 35px;
+    background-color: black;
+    color: white;
+    display:inline-block;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.commentRate{
+    color: darkslategrey;
+    text-decoration: none;
+}
+
+.commentRate:hover{
+    text-decoration: none;
+    cursor:pointer;
+    opacity: 0.75;
+}
+
+.commentDate{
+    margin-left: 10px;
+}
+
+.commentDelete{
+    margin-left: 10px;
+}
+
+.commentDelete:hover{
+    text-decoration: none;
+}
+
+.articleContent{
+    margin-top:40px;
 }

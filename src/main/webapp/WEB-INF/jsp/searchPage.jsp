@@ -14,10 +14,14 @@
 <div id="container">
     <div class="searchContainer">
         <div class="searchFor">
-            <spring:message code="SearchPage.searchFor"/> ${phrase}
-            <c:if test="${phrase.length() < 3}">
-                <br/><spring:message code="SearchPage.toShortPhrase"/>
-            </c:if>
+            <c:choose>
+                <c:when test="${phrase.length() < 3}">
+                    <spring:message code="SearchPage.toShortPhrase"/>
+                </c:when>
+                <c:otherwise>
+                    <spring:message code="SearchPage.searchFor"/> "${phrase}"
+                </c:otherwise>
+            </c:choose>
         </div>
             <c:forEach items="${articles}" var="article">
                 <div class="lesserPictureContainer noSelect">
