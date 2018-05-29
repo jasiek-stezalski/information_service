@@ -335,13 +335,39 @@
         <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
     </c:forEach>
 
+    <h1><spring:message code="userPanel.Statistics"/></h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th><spring:message code="userPanel.username"/></th>
+            <th><spring:message code="userPanel.articlesInYear"/></th>
+            <th><spring:message code="userPanel.averageMark"/></th>
+            <th><spring:message code="userPanel.articlesInMonth"/></th>
+            <th><spring:message code="userPanel.averageMark"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${statistics}" var="statistic">
+            <tr>
+                <td>${statistic.user.username}</td>
+                <td>${statistic.yearCount}</td>
+                <td>${statistic.yearMark}</td>
+                <td>${statistic.monthCount}</td>
+                <td>${statistic.monthMark}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+
 </c:if>
 
 <%--Admin panel--%>
 
-<h1><spring:message code="userPanel.users"/></h1>
-
 <c:if test="${roles[0] == 'ADMIN'}">
+
+    <h1><spring:message code="userPanel.users"/></h1>
 
     <table>
         <thead>
