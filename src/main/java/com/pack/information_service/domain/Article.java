@@ -5,6 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.text.*;
 
 @Entity
 @Table(name = "article")
@@ -91,8 +92,11 @@ public class Article {
         this.priority = priority;
     }
 
-    public Date getPublicationDate() {
-        return publicationDate;
+    public String getPublicationDate() {
+        DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String outputDate = outputFormat.format(publicationDate);
+
+        return outputDate;
     }
 
     public void setPublicationDate(Date publicationDate) {

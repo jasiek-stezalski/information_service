@@ -2,6 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <html>
 <head>
     <%@include file="meta.jsp"%>
@@ -24,13 +25,52 @@
             <div class="articleDivider inline">|</div>
             <div class="inline">${article.publicationDate}</div>
         </div>
-        <div class="articlePictureContainer">
+        <div class="articlePictureContainer emphasize-dark">
             <c:forEach items="${article.pictures}" var="picture">
-                <img class="articlePicture" src="<c:url value="${picture.path}"/>">
+                <img class="articlePicture emphasize-dark" src="<c:url value="${picture.path}"/>">
             </c:forEach>
         </div>
         <div class="optionsContainer">
-            <spring:message code="Article.Rate"/> ${article.mark}
+            <div class="rateContainer">
+                <spring:message code="Article.Rate"/></br>
+                <c:choose>
+                    <c:when test="${article.mark == 0.0}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate0.png"/>
+                    </c:when>
+                    <c:when test="${article.mark > 0.0 && article.mark < 1.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate1.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 1.50 && article.mark < 2.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate2.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 2.50 && article.mark < 3.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate3.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 3.50 && article.mark < 4.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate4.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 4.50 && article.mark < 5.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate5.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 5.50 && article.mark < 6.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate6.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 6.50 && article.mark < 7.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate7.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 7.50 && article.mark < 8.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate8.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 8.50 && article.mark < 9.50}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate9.png"/>
+                    </c:when>
+                    <c:when test="${article.mark >= 9.25 && article.mark <=10.0}">
+                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate10.png"/>
+                    </c:when>
+                </c:choose>
+                </br>
+                ${article.mark}
+            </div>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
 
                 <input type="button" id="errorButton" onclick="showEditArea('errorButton','errorInfo')"
@@ -140,16 +180,16 @@
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/commentEdit.js"></script>
 </html>
+<%--
 
-<%--The article content with title and all pictures
+The article content with title and all pictures
 
 <h1>${article.title}</h1>
 <c:forEach items="${article.pictures}" var="picture">
     <img src="<c:url value="${picture.path}"/>">
 </c:forEach>
 <p>${article.content}</p>
-<br/>--%>
-<%--
+<br/>
 
 <c:if test="${pageContext.request.userPrincipal.name != null}">
 
@@ -188,10 +228,9 @@
         <spring:message code="Article.userMark"/> ${userMark}
     </c:if>
 </c:if>
---%>
 
 
-<%--&lt;%&ndash;Information about the article&ndash;%&gt;
+&lt;%&ndash;Information about the article&ndash;%&gt;
 
 <br/>
 <spring:message code="Article.Rate"/> ${article.yearMark}
@@ -202,9 +241,9 @@
     ${article.user.username}
 </a>
 
-<br/><br/>--%>
+<br/><br/>
 
-<%--&lt;%&ndash;Comments&ndash;%&gt;
+&lt;%&ndash;Comments&ndash;%&gt;
 
 <spring:message code="Article.comments"/>
 
@@ -219,9 +258,8 @@
     </form:form>
 </c:if>
 
-&lt;&lt;%&ndash;%&ndash;List of all article comments&ndash;%&gt;--%>
+&lt;&lt;%&ndash;%&ndash;List of all article comments&ndash;%&gt;
 
-<%--
 <br/>
 <c:forEach items="${article.comments}" var="comment" varStatus="status">
     ${comment.content}
@@ -252,9 +290,8 @@
         </form:form>
     &lt;%&ndash;</c:if>&ndash;%&gt;
     <br/><br/>&ndash;%&gt;
---%>
 
-    <%--&lt;%&ndash;If user is logged in and he didn't rate this comment he can do it&ndash;%&gt;
+    &lt;%&ndash;If user is logged in and he didn't rate this comment he can do it&ndash;%&gt;
 
     <c:if test="${pageContext.request.userPrincipal.name != null and userCommentMarks[status.index] == 0}">
         <form:form method="post" action="/articlePage/commentMark">
@@ -268,7 +305,7 @@
             <input type="submit" value="<spring:message code="submit"/> ">
             </br>
         </form:form>
-    </c:if>--%>
-<%--
-</c:forEach>--%>
+    </c:if>
+</c:forEach>
 
+--%>
