@@ -15,7 +15,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idArticle;
 
-    @Size(min = 3, max = 50)
+    @Size(min = 3, max = 100)
     private String title;
 
     @Lob
