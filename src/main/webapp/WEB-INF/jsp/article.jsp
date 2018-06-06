@@ -224,7 +224,7 @@ The article content with title and all pictures
         <form:form method="post" action="/articlePage/addArticleMark">
             <spring:message code="Article.userMark"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
-            <select name="yearMark" size="1">
+            <select name="mark" size="1">
                 <c:forEach var="i" begin="1" end="10">
                     <option value="${i}">${i}</option>
                 </c:forEach>
@@ -242,7 +242,7 @@ The article content with title and all pictures
 &lt;%&ndash;Information about the article&ndash;%&gt;
 
 <br/>
-<spring:message code="Article.Rate"/> ${article.yearMark}
+<spring:message code="Article.Rate"/> ${article.mark}
 <br/><spring:message code="Article.Date"/> ${article.publicationDate}
 
 <br/><spring:message code="Article.articleAuthor"/>
@@ -274,7 +274,7 @@ The article content with title and all pictures
     ${comment.content}
     <br/><spring:message code="Article.comment.author"/> ${commentsAuthors[status.index]}
     <br/><spring:message code="Article.comment.date"/> ${comment.date}
-    <br/><spring:message code="Article.comment.yearMark"/> ${comment.yearMark}
+    <br/><spring:message code="Article.comment.mark"/> ${comment.mark}
 
     &lt;&lt;%&ndash;%&ndash;If user is the author of the comment or moderator he can edit and remove the comment&ndash;%&gt;
 
@@ -304,10 +304,10 @@ The article content with title and all pictures
 
     <c:if test="${pageContext.request.userPrincipal.name != null and userCommentMarks[status.index] == 0}">
         <form:form method="post" action="/articlePage/commentMark">
-            <spring:message code="Article.comment.yearMark"/>
+            <spring:message code="Article.comment.mark"/>
             <input type="hidden" name="idArticle" value="${article.idArticle}">
             <input type="hidden" name="idComment" value="${comment.idComment}">
-            <select name="yearMark" size="1">
+            <select name="mark" size="1">
                 <option value="-1">-</option>
                 <option value="1">+</option>
             </select>
