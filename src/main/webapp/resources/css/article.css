@@ -24,10 +24,15 @@
     width: calc(1100px - 2 * 30px - 400px * 1.78 - 15px);
     margin-left:10px;
     padding: 5px;
-    border-style: solid;
-    border-width: 5px;
+    background-color: #d1ca92;
+    border-radius: 3px;
     vertical-align: top;
     display:inline-block;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow:
+            inset 0 2px 3px rgba(255,255,255,0.3),
+            inset 0 -2px 3px rgba(0,0,0,0.3),
+            0 1px 1px rgba(255,255,255,0.9);
 }
 
 .articleData{
@@ -111,4 +116,22 @@
 
 .articleContent{
     margin-top:40px;
+}
+
+.optionsContainer{
+    text-align: center;
+}
+
+.rateContainer{
+    margin-top: 5px;
+    font: bold 18px "Times New Roman", Times, serif;
+}
+
+.ratePicture{
+    width: 180px;
+    height: calc(150px / 5.18);
+}
+
+.emphasize-dark {
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
 }
