@@ -34,7 +34,7 @@
     </form:select>
 
     <br/><br/><spring:message code="ArticleEdition.title"/>
-    <form:input path="title" size="50"/>
+    <form:input path="title" size="100"/>
     <form:errors path="title"><spring:message code="ArticleEdition.TitleError"/> </form:errors>
 
     <br/><br/><spring:message code="ArticleEdition.content"/>

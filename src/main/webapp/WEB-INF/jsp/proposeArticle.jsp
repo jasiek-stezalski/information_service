@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form:form method="post" action="/proposeArticle" modelAttribute="articleForm">
+<form:form method="post" action="/articlePanel/proposeArticle" modelAttribute="articleForm">
     <h1><spring:message code="userPanel.proposeArticle"/></h1>
 
     <br/><br/><spring:message code="ArticleEdition.title"/>
