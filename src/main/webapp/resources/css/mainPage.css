@@ -39,3 +39,10 @@ body{
 .noResize{
     resize: none;
 }
+
+.customButton{
+    border-color: #565236;
+    border-radius: 10px;
+    color: white;
+    background-color: #565236;
+}

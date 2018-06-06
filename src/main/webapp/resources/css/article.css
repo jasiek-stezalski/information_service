@@ -124,12 +124,22 @@
 
 .rateContainer{
     margin-top: 5px;
+    margin-bottom: 15px;
     font: bold 18px "Times New Roman", Times, serif;
 }
 
 .ratePicture{
     width: 180px;
     height: calc(150px / 5.18);
+}
+
+.stars{
+    margin-top: 10px;
+}
+
+.butmarg{
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .emphasize-dark {

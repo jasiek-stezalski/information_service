@@ -32,78 +32,85 @@
         </div>
         <div class="optionsContainer">
             <div class="rateContainer">
-                <spring:message code="Article.Rate"/></br>
-                <c:choose>
-                    <c:when test="${article.mark == 0.0}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate0.png"/>
-                    </c:when>
-                    <c:when test="${article.mark > 0.0 && article.mark < 1.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate1.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 1.50 && article.mark < 2.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate2.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 2.50 && article.mark < 3.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate3.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 3.50 && article.mark < 4.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate4.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 4.50 && article.mark < 5.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate5.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 5.50 && article.mark < 6.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate6.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 6.50 && article.mark < 7.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate7.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 7.50 && article.mark < 8.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate8.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 8.50 && article.mark < 9.50}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate9.png"/>
-                    </c:when>
-                    <c:when test="${article.mark >= 9.25 && article.mark <=10.0}">
-                        <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate10.png"/>
-                    </c:when>
-                </c:choose>
-                </br>
-                ${article.mark}
+                <spring:message code="Article.Rate"/> - ${article.mark}</br>
+                <div class="stars">
+                    <c:choose>
+                        <c:when test="${article.mark == 0.0}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate0.png"/>
+                        </c:when>
+                        <c:when test="${article.mark > 0.0 && article.mark < 1.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate1.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 1.50 && article.mark < 2.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate2.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 2.50 && article.mark < 3.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate3.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 3.50 && article.mark < 4.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate4.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 4.50 && article.mark < 5.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate5.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 5.50 && article.mark < 6.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate6.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 6.50 && article.mark < 7.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate7.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 7.50 && article.mark < 8.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate8.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 8.50 && article.mark < 9.50}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate9.png"/>
+                        </c:when>
+                        <c:when test="${article.mark >= 9.25 && article.mark <=10.0}">
+                            <img class="ratePicture" src="${pageContext.request.contextPath}/resources/images/rate10.png"/>
+                        </c:when>
+                    </c:choose>
+                </div>
             </div>
             <c:if test="${pageContext.request.userPrincipal.name != null}">
 
-                <input type="button" id="errorButton" onclick="showEditArea('errorButton','errorInfo')"
-                       value="<spring:message code="Article.error"/>" style="display:block;">
-
-                <form:form method="post" id="errorInfo" modelAttribute="articleErrorForm" action="/articlePage/addError"
-                           style="display:none;">
-                    <br/><spring:message code="Article.errorContent"/><br/>
-
-                    <input type="hidden" name="idArticle" value="${article.idArticle}">
-                    <form:textarea path="content" rows="4" cols="50"/>
-
-                    <input type="submit" value="<spring:message code="submit"/>">
-                </form:form>
-
-                <br/>
-
                 <c:if test="${userArticleMark == 0}">
-                    <form:form method="post" action="/articlePage/addArticleMark">
-                        <spring:message code="Article.userMark"/>
+                    <div class="noDisplay">
+                        <form:form method="post" action="/articlePage/addArticleMark">
+                    </div>
+                        <spring:message code="Article.mark"/>
                         <input type="hidden" name="idArticle" value="${article.idArticle}">
                         <select name="mark" size="1">
                             <c:forEach var="i" begin="1" end="10">
                                 <option value="${i}">${i}</option>
                             </c:forEach>
                         </select>
-                        <input type="submit" value="<spring:message code="submit"/> ">
-                        </br>
-                    </form:form>
+                        <input class="customButton" type="submit" value="<spring:message code="submit"/> ">
+                    <div class="noDisplay">
+                        </form:form>
+                    </div>
                 </c:if>
                 <c:if test="${userArticleMark != 0}">
-                    <spring:message code="Article.userMark"/> ${userMark}
+                    <spring:message code="Article.userMark"/> ${userArticleMark}
                 </c:if>
+                </br>
+                <input type="button" class="customButton butmarg" id="commentButton" value="<spring:message code="Article.addComment"/>"/>
+                </br>
+                <input type="button" class="customButton" id="errorButton" onclick="showEditArea('errorButton','errorInfo','hideButton')"
+                       value="<spring:message code="Article.error"/>">
+                <input type="button" class="customButton" id="hideButton" onclick="hideEditArea('errorButton','errorInfo','hideButton')"
+                       value="<spring:message code="Article.errorHide"/>" style="display:none">
+
+                <form:form method="post" id="errorInfo" modelAttribute="articleErrorForm" action="/articlePage/addError"
+                           style="display:none;">
+                    <br/><spring:message code="Article.errorContent"/><br/>
+
+                    <input type="hidden" name="idArticle" value="${article.idArticle}">
+                    <form:textarea path="content" rows="7" cols="40"/>
+
+                    <input type="submit" class="customButton butmarg" value="<spring:message code="submit"/>">
+                </form:form>
+
+                <br/>
             </c:if>
         </div>
         <p class="articleContent">${article.content}</p>
@@ -179,6 +186,7 @@
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/commentEdit.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/moveToComment.js"></script>
 </html>
 <%--
 
