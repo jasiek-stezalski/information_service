@@ -15,7 +15,7 @@
     </c:if>
 </div>
 
-<div id="menu" class="bg-primary">
+<div id="menu">
 
     <a style="float:left;" href="/mainPage">
         <span class="glyphicon glyphicon-home home"></span>
@@ -31,6 +31,10 @@
             <a href="/articlePage/category/Technologies"><spring:message code="Technologies"/></a>
             <a href="/articlePage/category/Motorization"><spring:message code="Motorization"/></a>
         </div>
+    </div>
+    <div class="divider">|</div>
+    <div class="dropdown menuItem">
+        Kontakt
     </div>
     <div style="float: right;">
         <div class="noDisplay">

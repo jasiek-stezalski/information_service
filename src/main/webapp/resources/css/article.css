@@ -124,6 +124,7 @@
 
 .rateContainer{
     margin-top: 5px;
+    margin-bottom: 15px;
     font: bold 18px "Times New Roman", Times, serif;
 }
 
@@ -132,6 +133,23 @@
     height: calc(150px / 5.18);
 }
 
+.stars{
+    margin-top: 10px;
+}
+
+.butmarg{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .emphasize-dark {
     box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
+}
+
+.moveLeft{
+    margin-left: 20px;
+}
+
+.moreToLeft{
+    margin-left: 28px;
 }
