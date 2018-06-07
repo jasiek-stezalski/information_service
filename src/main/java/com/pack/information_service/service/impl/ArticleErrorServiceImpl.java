@@ -1,4 +1,4 @@
-package com.pack.information_service.service;
+package com.pack.information_service.service.impl;
 
 import com.pack.information_service.domain.Article;
 import com.pack.information_service.domain.ArticleError;
@@ -6,6 +6,7 @@ import com.pack.information_service.domain.User;
 import com.pack.information_service.repository.ArticleErrorRepository;
 import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
+import com.pack.information_service.service.ArticleErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

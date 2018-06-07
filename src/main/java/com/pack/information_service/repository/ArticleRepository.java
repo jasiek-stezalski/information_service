@@ -16,7 +16,9 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findByUser(User user);
 
-    List<Article> findByCategory(String category);
+    List<Article> findByUserAndPublicationDateIsNotNull(User user);
+
+    List<Article> findByCategoryAndPublicationDateIsNotNull(String category);
 
     List<Article> findByStatus(String status);
 
@@ -25,7 +27,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     List<Article> findByStatusOrderByPublicationDateDesc(String status);
 
     @Query(nativeQuery = true, value = "SELECT * FROM article WHERE LOWER(Title) regexp ?1 and publication_date is not null")
-    List<Article> findByTitleAndPublicationDate(String pattern);
+    List<Article> findByTitleAndPublicationDateIsNotNull(String pattern);
 
     List<Article> findByUserAndStatusLike(User user, String status);
 
