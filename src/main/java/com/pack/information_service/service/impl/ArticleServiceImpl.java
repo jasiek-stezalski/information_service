@@ -20,6 +20,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
     private UserRepository userRepository;
 
+
+
     @Autowired
     public ArticleServiceImpl(ArticleRepository articleRepository, UserRepository userRepository) {
         this.articleRepository = articleRepository;
