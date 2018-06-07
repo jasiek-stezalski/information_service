@@ -15,7 +15,7 @@
     </c:if>
 </div>
 
-<div id="menu" class="bg-primary">
+<div id="menu">
 
     <a style="float:left;" href="/mainPage">
         <span class="glyphicon glyphicon-home home"></span>
@@ -28,6 +28,10 @@
                 <a href="/articlePage/category/${category.key}"><spring:message code="${category.value}"/></a>
             </c:forEach>--%>
         </div>
+    </div>
+    <div class="divider">|</div>
+    <div class="dropdown menuItem">
+        Kontakt
     </div>
     <div style="float: right;">
         <div class="noDisplay">

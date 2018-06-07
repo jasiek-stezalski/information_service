@@ -4,8 +4,9 @@
     height: 55px;
     margin: auto;
     border-radius: 15px;
-    border: 2px solid blue;
+    border: 2px solid #565236;
     z-index: 1;
+    background-color:#d1ca92;
 }
 
 #menu.affix{
@@ -62,7 +63,7 @@
 }
 
 .menuItem{
-    width:134px;
+    min-width:134px;
     height:51px;
     padding-top:13px;
     float:left;
