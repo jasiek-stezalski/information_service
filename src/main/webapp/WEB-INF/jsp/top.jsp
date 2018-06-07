@@ -24,17 +24,21 @@
     <div class="dropdown menuItem">
         <spring:message code="MainPage.categories"/>
         <div class="dropdownContent bottomCurve noSelect bg-primary">
-            <%--<c:forEach items="${articles.categories}" var="category">
-                <a href="/articlePage/category/${category.key}"><spring:message code="${category.value}"/></a>
-            </c:forEach>--%>
+            <a href="/articlePage/category/News"><spring:message code="News"/></a>
+            <a href="/articlePage/category/Sport"><spring:message code="Sport"/></a>
+            <a href="/articlePage/category/Business"><spring:message code="Business"/></a>
+            <a href="/articlePage/category/Entertainment"><spring:message code="Entertainment"/></a>
+            <a href="/articlePage/category/Technologies"><spring:message code="Technologies"/></a>
+            <a href="/articlePage/category/Motorization"><spring:message code="Motorization"/></a>
         </div>
     </div>
     <div style="float: right;">
         <div class="noDisplay">
-            <form:form  method="post" action="/articlePage/searchArticle">
+            <form:form method="post" action="/articlePage/searchArticle">
         </div>
         <input id="search" name="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
-        <input class="noDisplay" type="submit" class="btn registerButton" value="<spring:message code="MainPage.buttonSearch"/>">
+        <input class="noDisplay" type="submit" class="btn registerButton"
+               value="<spring:message code="MainPage.buttonSearch"/>">
         <div class="noDisplay">
             </form:form>
         </div>

@@ -10,11 +10,11 @@ public interface ArticleService {
 
     Article findById(Long idArticle);
 
-    List<Article> findByIdUser(Long idUser);
+    List<Article> findByIdUserAndPublicationDate(Long idUser);
 
-    List<Article> findByCategory(String category);
+    List<Article> findByCategoryAndPublicationDate(String category);
 
-    List<Article> findByTitle(String title);
+    List<Article> findByTitleAndPublicationDate(String title);
 
     List<String> findCommentsAuthors(Long idArticle);
 

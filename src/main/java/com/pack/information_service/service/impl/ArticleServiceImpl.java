@@ -34,22 +34,22 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByIdUser(Long idUser) {
+    public List<Article> findByIdUserAndPublicationDate(Long idUser) {
         User user = userRepository.findByIdUser(idUser);
-        return articleRepository.findByUser(user);
+        return articleRepository.findByUserAndPublicationDateIsNotNull(user);
     }
 
     @Override
-    public List<Article> findByCategory(String category) {
-        return articleRepository.findByCategory(category);
+    public List<Article> findByCategoryAndPublicationDate(String category) {
+        return articleRepository.findByCategoryAndPublicationDateIsNotNull(category);
     }
 
     @Override
-    public List<Article> findByTitle(String title) {
+    public List<Article> findByTitleAndPublicationDate(String title) {
         String pattern;
         if (title.length() >= 3) {
             pattern = ".*" + title.toLowerCase() + ".*";
-            return articleRepository.findByTitleAndPublicationDate(pattern);
+            return articleRepository.findByTitleAndPublicationDateIsNotNull(pattern);
         }
         return new ArrayList<>();
     }
@@ -122,12 +122,12 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Map<String, String> getCategories() {
         return new LinkedHashMap<String, String>() {{
-            put("News", "MainPage.article.news");
-            put("Sport", "MainPage.article.sport");
-            put("Business", "MainPage.article.business");
-            put("Entertainment", "MainPage.article.entertainment");
-            put("Technologies", "MainPage.article.technologies");
-            put("Motorization", "MainPage.article.motorization");
+            put("News", "news");
+            put("Sport", "sport");
+            put("Business", "business");
+            put("Entertainment", "entertainment");
+            put("Technologies", "technologies");
+            put("Motorization", "motorization");
         }};
     }
 

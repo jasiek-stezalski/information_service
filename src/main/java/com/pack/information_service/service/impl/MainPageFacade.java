@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class MainPageFacade {
@@ -19,7 +18,6 @@ public class MainPageFacade {
     private List<Article> entertainment;
     private List<Article> technologies;
     private List<Article> motorization;
-    private Map<String, String> categories;
 
     private ArticleRepository articleRepository;
     private ArticleService articleService;
@@ -45,7 +43,6 @@ public class MainPageFacade {
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Technologies");
         motorization = articleRepository
                 .findFirst10ByStatusAndCategoryOrderByPriorityAscPublicationDateDesc("to display", "Motorization");
-        categories = articleService.getCategories();
     }
 
     public List<Article> getTopNews() {
@@ -104,11 +101,4 @@ public class MainPageFacade {
         this.motorization = motorization;
     }
 
-    public Map<String, String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Map<String, String> categories) {
-        this.categories = categories;
-    }
 }

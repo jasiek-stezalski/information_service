@@ -15,11 +15,11 @@ public class AuthenticationSuccessHandlerConfiguration implements Authentication
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
         HttpSession session = httpServletRequest.getSession();
         String previousUrl = (String) session.getAttribute("previousUrl");
-        if (previousUrl != null) {
+        if (previousUrl == null || previousUrl.substring(previousUrl.length() - 5).equals("login")) {
+            httpServletResponse.sendRedirect("/mainPage");
+        } else {
             session.removeAttribute("previousUrl");
             httpServletResponse.sendRedirect(previousUrl);
-        } else {
-            httpServletResponse.sendRedirect("/mainPage");
         }
 
     }
