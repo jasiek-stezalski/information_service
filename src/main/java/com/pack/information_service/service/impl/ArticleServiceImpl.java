@@ -1,9 +1,6 @@
 package com.pack.information_service.service.impl;
 
-import com.pack.information_service.domain.Article;
-import com.pack.information_service.domain.Comment;
-import com.pack.information_service.domain.Picture;
-import com.pack.information_service.domain.User;
+import com.pack.information_service.domain.*;
 import com.pack.information_service.repository.ArticleRepository;
 import com.pack.information_service.repository.UserRepository;
 import com.pack.information_service.service.ArticleService;
@@ -14,6 +11,7 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
 import java.util.*;
 
 @Service
@@ -21,6 +19,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     private ArticleRepository articleRepository;
     private UserRepository userRepository;
+
+
 
     @Autowired
     public ArticleServiceImpl(ArticleRepository articleRepository, UserRepository userRepository) {
@@ -36,26 +36,24 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByIdUser(Long idUser) {
+    public List<Article> findByIdUserAndPublicationDate(Long idUser) {
         User user = userRepository.findByIdUser(idUser);
-        return articleRepository.findByUser(user);
+        return articleRepository.findByUserAndPublicationDateIsNotNull(user);
     }
 
     @Override
-    public List<Article> findByCategory(String category) {
-        return articleRepository.findByCategory(category);
+    public List<Article> findByCategoryAndPublicationDate(String category) {
+        return articleRepository.findByCategoryAndPublicationDateIsNotNull(category);
     }
 
     @Override
-    public List<Article> findByTitle(String title) {
+    public List<Article> findByTitleAndPublicationDate(String title) {
         String pattern;
-        System.out.print(title);
-        if(title!="") {
+        if (title.length() >= 3) {
             pattern = ".*" + title.toLowerCase() + ".*";
-
-            return articleRepository.findByTitle(pattern);
+            return articleRepository.findByTitleAndPublicationDateIsNotNull(pattern);
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -126,13 +124,43 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Map<String, String> getCategories() {
         return new LinkedHashMap<String, String>() {{
-            put("News", "MainPage.article.news");
-            put("Sport", "MainPage.article.sport");
-            put("Business", "MainPage.article.business");
-            put("Entertainment", "MainPage.article.entertainment");
-            put("Technologies", "MainPage.article.technologies");
-            put("Motorization", "MainPage.article.motorization");
+            put("News", "news");
+            put("Sport", "sport");
+            put("Business", "business");
+            put("Entertainment", "entertainment");
+            put("Technologies", "technologies");
+            put("Motorization", "motorization");
         }};
+    }
+
+    @Override
+    public List<Statistic> getStatistics() {
+        List<Object> users = articleRepository.findUsers();
+        List<Object[]> yearStatistics = articleRepository.findYearStatistics();
+        List<Object[]> monthStatistics = articleRepository.findMonthStatistics();
+        List<Statistic> statistics = new ArrayList<>();
+        User user;
+
+        for (int i = 0; i < users.size(); i++) {
+            user = userRepository.findByIdUser(((BigInteger) users.get(i)).longValue());
+
+            if (yearStatistics.size() > i && users.get(i).equals(yearStatistics.get(i)[0])) {
+                if (monthStatistics.size() > i && users.get(i).equals(monthStatistics.get(i)[0])) {
+                    statistics.add(
+                            new Statistic(
+                                    user,
+                                    ((BigInteger) yearStatistics.get(i)[1]).intValue(),
+                                    (yearStatistics.get(i)[2] != null) ? (double) yearStatistics.get(i)[2] : 0D,
+                                    ((BigInteger) monthStatistics.get(i)[1]).intValue(),
+                                    (monthStatistics.get(i)[2] != null) ? (double) monthStatistics.get(i)[2] : 0D));
+                } else {
+                    statistics.add(new Statistic(user,
+                            ((BigInteger) yearStatistics.get(i)[1]).intValue(),
+                            (yearStatistics.get(i)[2] != null) ? (double) yearStatistics.get(i)[2] : 0D, 0, 0D));
+                }
+            } else statistics.add(new Statistic(user, 0, 0D, 0, 0D));
+        }
+        return statistics;
     }
 
 }

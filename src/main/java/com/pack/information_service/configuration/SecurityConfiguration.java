@@ -24,12 +24,13 @@ import java.util.Set;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private UserRepository userRepository;
+    private AuthenticationSuccessHandlerConfiguration authenticationSuccessHandler;
 
     @Autowired
-    public SecurityConfiguration(UserRepository userRepository) {
+    public SecurityConfiguration(UserRepository userRepository, AuthenticationSuccessHandlerConfiguration authenticationSuccessHandler) {
         this.userRepository = userRepository;
+        this.authenticationSuccessHandler = authenticationSuccessHandler;
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -63,6 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .and()
                 .formLogin()
+                .successHandler(authenticationSuccessHandler)
                 .loginPage("/login")
                 .failureUrl("/login?error=true")
                 .and()

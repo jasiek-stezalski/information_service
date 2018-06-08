@@ -81,20 +81,29 @@ public class ArticleController {
 
     @GetMapping("/journalist/{idUser}")
     public String getJournalistArticles(@PathVariable Long idUser, Model model) {
-        model.addAttribute("articles", articleService.findByIdUser(idUser));
+        model.addAttribute("articles", articleService.findByIdUserAndPublicationDate(idUser));
+        model.addAttribute("author", userService.findById(idUser));
         return "searchPage";
     }
 
     @GetMapping("/category/{category}")
     public String getCategoryArticles(@PathVariable String category, Model model) {
-        model.addAttribute("articles", articleService.findByCategory(category));
+        model.addAttribute("articles", articleService.findByCategoryAndPublicationDate(category));
+        model.addAttribute("category", category);
         return "searchPage";
     }
 
     @PostMapping("/searchArticle")
     public String searchArticle(@RequestParam String search, Model model) {
-        model.addAttribute("articles", articleService.findByTitle(search));
-        model.addAttribute("categories", articleService.getCategories());
+        model.addAttribute("articles", articleService.findByTitleAndPublicationDate(search));
+        model.addAttribute("phrase", search);
+        return "searchPage";
+    }
+
+    @GetMapping("/searchArticle")
+    public String searchArticle(Model model) {
+        model.addAttribute("articles", articleService.findByTitleAndPublicationDate(""));
+        model.addAttribute("phrase", "");
         return "searchPage";
     }
 
