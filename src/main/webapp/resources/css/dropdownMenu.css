@@ -9,8 +9,9 @@
     position: absolute;
     margin-top:16px;
     z-index: 1;
-    border: 2px solid blue;
+    border: 2px solid #565236;
     border-top: none;
+    background-color:#d1ca92;
 }
 
 .dropdown:hover .dropdownContent {
@@ -28,12 +29,12 @@
 }
 
 .dropdownContent a:hover{
-    background-color: #1b6d85;
+    background-color: #565236;
 }
 
 .dropdown a:last-child:hover{
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
 }
 
 .bottomCurve{

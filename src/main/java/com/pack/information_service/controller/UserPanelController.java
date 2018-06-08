@@ -57,7 +57,7 @@ public class UserPanelController {
 
         userService.update(user);
 
-        return "redirect:/userPanel";
+        return "redirect:/userPanel/updateUser";
     }
 
     @PostMapping("/updatePassword")
@@ -68,7 +68,7 @@ public class UserPanelController {
 
         userService.update(user);
 
-        return "redirect:/userPanel";
+        return "redirect:/userPanel/updateUser";
     }
 
     @GetMapping("/blocked/{idUser}")
@@ -88,5 +88,4 @@ public class UserPanelController {
         userService.delete(idUser);
         return "redirect:/userPanel";
     }
-
 }

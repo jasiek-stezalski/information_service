@@ -11,3 +11,15 @@
 .userPanelButtons{
     margin-top: 20px;
 }
+
+.space{
+    margin-left: 10px;
+}
+
+.error{
+    color: red;
+}
+
+.spaceTop{
+    margin-top: 10px;
+}

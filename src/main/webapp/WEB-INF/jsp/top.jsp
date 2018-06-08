@@ -23,7 +23,7 @@
     <div class="divider">|</div>
     <div class="dropdown menuItem">
         <spring:message code="MainPage.categories"/>
-        <div class="dropdownContent bottomCurve noSelect bg-primary">
+        <div class="dropdownContent bottomCurve noSelect">
             <a href="/articlePage/category/News"><spring:message code="News"/></a>
             <a href="/articlePage/category/Sport"><spring:message code="Sport"/></a>
             <a href="/articlePage/category/Business"><spring:message code="Business"/></a>
@@ -41,8 +41,7 @@
             <form:form method="post" action="/articlePage/searchArticle">
         </div>
         <input id="search" name="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
-        <input class="noDisplay" type="submit" class="btn registerButton"
-               value="<spring:message code="MainPage.buttonSearch"/>">
+        <input class="noDisplay" type="submit" class="btn registerButton" value="<spring:message code="MainPage.buttonSearch"/>">
         <div class="noDisplay">
             </form:form>
         </div>
@@ -57,9 +56,10 @@
             </a>
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-            <a href="/userPanel" id="panelButton" class="btn">
+            <input id="panelButton" type="button" class="customButton" onclick="window.location.href='/userPanel'" value="<spring:message code="MainPage.userPanel"/>">
+            <%--<a href="/userPanel" id="panelButton" class="btn">
                 <spring:message code="MainPage.userPanel"/>
-            </a>
+            </a>--%>
             <a onclick="document.forms['logoutForm'].submit()" class="btn registerButton">
                 <spring:message code="MainPage.signOut"/>
             </a>
