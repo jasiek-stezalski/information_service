@@ -34,7 +34,7 @@
     </div>
     <div class="divider">|</div>
     <div class="dropdown menuItem">
-        Kontakt
+        <a href="/contact"><spring:message code="contact"/></a>
     </div>
     <div style="float: right;">
         <div class="noDisplay">

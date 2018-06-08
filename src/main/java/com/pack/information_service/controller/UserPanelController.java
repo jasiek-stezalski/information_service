@@ -44,6 +44,11 @@ public class UserPanelController {
         return "redirect:/userPanel";
     }
 
+    @GetMapping("/updateUsername")
+    public String updateUsername() {
+        return "redirect:/userPanel/updateUser";
+    }
+
     @PostMapping("/updateUsername")
     public String updateUsername(@ModelAttribute("userForm") @Valid User userForm, BindingResult result) {
         User user = userValidator.usernameValidate(userForm, result);

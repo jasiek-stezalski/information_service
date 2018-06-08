@@ -17,8 +17,12 @@ public class LoginController {
     public String login(HttpServletRequest request) {
         String referrer = request.getHeader("Referer");
         request.getSession().setAttribute("previousUrl", referrer);
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (!username.equals("anonymousUser"))
+            return "redirect:/mainPage";
         return "login";
     }
+
 
     @GetMapping("/logout")
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
@@ -26,6 +30,10 @@ public class LoginController {
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
+        String referer = request.getHeader("Referer");
+        if (referer.contains("userPanel") || referer.contains("articlePanel"))
+            return "redirect:/mainPage";
         return "redirect:" + request.getHeader("Referer");
     }
+
 }

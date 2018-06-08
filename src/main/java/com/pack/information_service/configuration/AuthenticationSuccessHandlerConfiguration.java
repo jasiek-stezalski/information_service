@@ -12,10 +12,11 @@ import java.io.IOException;
 @Component
 public class AuthenticationSuccessHandlerConfiguration implements AuthenticationSuccessHandler {
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
+    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                        Authentication authentication) throws IOException {
         HttpSession session = httpServletRequest.getSession();
         String previousUrl = (String) session.getAttribute("previousUrl");
-        if (previousUrl == null || previousUrl.substring(previousUrl.length() - 5).equals("login")) {
+        if (previousUrl == null || previousUrl.contains("login")) {
             httpServletResponse.sendRedirect("/mainPage");
         } else {
             session.removeAttribute("previousUrl");

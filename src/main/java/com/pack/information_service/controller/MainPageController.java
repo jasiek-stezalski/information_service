@@ -49,7 +49,10 @@ public class MainPageController {
     public String userPanel(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String role = String.valueOf(authentication.getAuthorities());
-        if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
+        String username = authentication.getName();
+        if (username.equals("anonymousUser")) {
+            return "redirect:/mainPage";
+        } else if (role.equals("[JOURNALIST]") || role.equals("[MODERATOR]") || role.equals("[EDITOR_IN_CHIEF]")) {
             articlePanelFacade.generateContent();
             model.addAttribute("articles", articlePanelFacade);
             if (role.equals("[EDITOR_IN_CHIEF]")) model.addAttribute("statistics", articleService.getStatistics());
@@ -59,6 +62,11 @@ public class MainPageController {
             model.addAttribute("categories", articleService.getCategories());
         }
         return "userPanel";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
     }
 
 }
