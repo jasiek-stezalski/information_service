@@ -32,9 +32,6 @@
     width: 145px;
     height: 35px;
     margin-right:10px;
-    /*color: white;
-    background-color: #16b50e;
-    text-decoration: none;*/
 
 }
 
@@ -69,7 +66,6 @@
     font: bold 18px "Times New Roman", Times, serif;
     cursor:pointer;
 }
-
 
 .menuItem:hover{
     text-shadow: 1px 0px 12px rgba(255, 255, 255, 1);

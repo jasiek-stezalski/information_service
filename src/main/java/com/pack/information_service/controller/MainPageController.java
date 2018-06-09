@@ -64,9 +64,4 @@ public class MainPageController {
         return "userPanel";
     }
 
-    @GetMapping("/contact")
-    public String contact() {
-        return "contact";
-    }
-
 }

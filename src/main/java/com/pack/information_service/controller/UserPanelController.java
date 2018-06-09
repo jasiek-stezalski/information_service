@@ -4,6 +4,7 @@ import com.pack.information_service.domain.User;
 import com.pack.information_service.service.UserService;
 import com.pack.information_service.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -88,4 +89,5 @@ public class UserPanelController {
         userService.delete(idUser);
         return "redirect:/userPanel";
     }
+
 }
