@@ -46,23 +46,14 @@
             </form:form>
         </div>
         <c:if test="${pageContext.request.userPrincipal.name == null}">
-            <a href="/login" class="btn registerButton">
-                <spring:message code="MainPage.signIn"/>
-            </a>
+            <input class="registerButton customButton" type="button" onclick="window.location.href='/login'" value="<spring:message code="MainPage.signIn"/>">
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name == null}">
-            <a href="/registration" class="btn registerButton">
-                <spring:message code="MainPage.register"/>
-            </a>
+            <input class="registerButton customButton" type="button" onclick="window.location.href='/registration'" value="<spring:message code="MainPage.register"/>">
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <input id="panelButton" type="button" class="customButton" onclick="window.location.href='/userPanel'" value="<spring:message code="MainPage.userPanel"/>">
-            <%--<a href="/userPanel" id="panelButton" class="btn">
-                <spring:message code="MainPage.userPanel"/>
-            </a>--%>
-            <a onclick="document.forms['logoutForm'].submit()" class="btn registerButton">
-                <spring:message code="MainPage.signOut"/>
-            </a>
+            <input class="registerButton customButton" type="button" onclick="document.forms['logoutForm'].submit()" value="<spring:message code="MainPage.signOut"/>">
             <div class="noDisplay">
                 <form id="logoutForm" method="POST" action="${contextPath}/logout">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
