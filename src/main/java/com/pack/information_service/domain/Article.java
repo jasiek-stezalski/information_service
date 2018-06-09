@@ -3,9 +3,10 @@ package com.pack.information_service.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.text.*;
 
 @Entity
 @Table(name = "article")
@@ -94,9 +95,9 @@ public class Article {
 
     public String getPublicationDate() {
         DateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String outputDate = outputFormat.format(publicationDate);
-
-        return outputDate;
+        if (publicationDate != null)
+            return outputFormat.format(publicationDate);
+        return "";
     }
 
     public void setPublicationDate(Date publicationDate) {
