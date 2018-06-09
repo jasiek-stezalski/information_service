@@ -18,8 +18,8 @@
                 <c:when test="${category != null}">
                     <spring:message code="SearchPage.searchCategory"/> <spring:message code="${category}"/>
                 </c:when>
-                <c:when test="${journalist != null}">
-                    <spring:message code="SearchPage.searchAuthor"/> ${journalist}
+                <c:when test="${author != null}">
+                    <spring:message code="SearchPage.searchAuthor"/> ${author.username}
                 </c:when>
                 <c:when test="${phrase.length() < 3}">
                     <spring:message code="SearchPage.toShortPhrase"/>

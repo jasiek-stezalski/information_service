@@ -122,12 +122,12 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Map<String, String> getCategories() {
         return new LinkedHashMap<String, String>() {{
-            put("News", "news");
-            put("Sport", "sport");
-            put("Business", "business");
-            put("Entertainment", "entertainment");
-            put("Technologies", "technologies");
-            put("Motorization", "motorization");
+            put("News", "News");
+            put("Sport", "Sport");
+            put("Business", "Business");
+            put("Entertainment", "Entertainment");
+            put("Technologies", "Technologies");
+            put("Motorization", "Motorization");
         }};
     }
 
