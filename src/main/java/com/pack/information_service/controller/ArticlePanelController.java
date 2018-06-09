@@ -56,7 +56,7 @@ public class ArticlePanelController {
         if (!file.isEmpty()) {
             pictureService.save(file, description, articleFrom);
         }
-        return "redirect:/userPanel";
+        return "redirect:/articlePanel/yourArticles";
     }
 
     @GetMapping("/proposeArticle")
@@ -78,7 +78,7 @@ public class ArticlePanelController {
     @GetMapping("/takeArticle/{idArticle}")
     public String takeArticle(@PathVariable Long idArticle) {
         articleService.take(idArticle);
-        return "redirect:/userPanel";
+        return "redirect:/articlePanel/updateArticle/" + idArticle;
     }
 
     @GetMapping("/updateArticle/{idArticle}")
@@ -100,7 +100,7 @@ public class ArticlePanelController {
     @PostMapping("/changeStatus")
     public String changeStatus(@RequestParam Long idArticle, @RequestParam String status) {
         articleService.save(idArticle, status);
-        return "redirect:/userPanel";
+        return "redirect:/articlePanel/yourArticles";
     }
 
     @PostMapping("/setPriority")
@@ -112,13 +112,86 @@ public class ArticlePanelController {
     @GetMapping("/deleteArticle/{idArticle}")
     public String deleteArticle(@PathVariable Long idArticle) {
         articleService.delete(idArticle);
-        return "redirect:/userPanel";
+        return "redirect:/articlePanel/yourArticles";
     }
 
     @GetMapping("/errorFixed/{idError}")
     public String errorFixed(@PathVariable Long idError) {
         articleErrorService.save(idError);
         return "redirect:/userPanel";
+    }
+
+    @GetMapping("/yourArchive")
+    public String archiveArticle(Model model) {
+        model.addAttribute("articles", articleService.findByStatusAndCategoryOrUser("archive"));
+        return "archive";
+    }
+
+    @GetMapping("/moderatorArchive")
+    public String moderatorArchive(Model model) {
+        model.addAttribute("articles", articleService.findByStatusAndUser("archive"));
+        return "archive";
+    }
+
+    @GetMapping("/allArchive")
+    public String allArchive(Model model) {
+        model.addAttribute("articles", articleService.findByStatus("archive"));
+        return "archive";
+    }
+
+    @GetMapping("/yourArticles")
+    public String yourArticles(Model model) {
+        model.addAttribute("articles", articleService.findByStatusAndUser("in progress"));
+        return "yourArticles";
+    }
+
+    @GetMapping("/proposedArticles")
+    public String proposedArticles(Model model) {
+        model.addAttribute("articles", articleService.findByStatus("proposed"));
+        return "proposedArticles";
+    }
+
+    @GetMapping("/displayedCategoryArticles")
+    public String displayedCategoryArticles(Model model) {
+        model.addAttribute("articles", articleService.findByStatusAndCategoryOrderByPriority("to display"));
+        return "displayedArticles";
+    }
+
+    @GetMapping("/displayedAllArticles")
+    public String displayedAllArticles(Model model) {
+        model.addAttribute("articles", articleService.findByStatusOrderByPriority("to display"));
+        return "displayedArticles";
+    }
+
+    @GetMapping("/articlesCategoryToDisplay")
+    public String articlesCategoryToDisplay(Model model) {
+        model.addAttribute("articles", articleService.findByStatusAndCategoryOrderByPriority("checked"));
+        return "articlesToDisplay";
+    }
+
+    @GetMapping("/allArticlesToDisplay")
+    public String allArticlesToDisplay(Model model) {
+        model.addAttribute("articles", articleService.findByStatusOrderByPriority("checked"));
+        return "articlesToDisplay";
+    }
+
+
+    @GetMapping("/articlesCategoryToCheck")
+    public String articlesCategoryToCheck(Model model) {
+        model.addAttribute("articles", articleService.findByStatusAndCategoryOrderByPriority("to check"));
+        return "articlesToCheck";
+    }
+
+    @GetMapping("/allArticlesToCheck")
+    public String allArticlesToCheck(Model model) {
+        model.addAttribute("articles", articleService.findByStatusOrderByPriority("to check"));
+        return "articlesToCheck";
+    }
+
+    @GetMapping("/errorsInArticles")
+    public String errorsInArticles(Model model) {
+        model.addAttribute("articles", articleService.findByError());
+        return "errorsInArticles";
     }
 
 }

@@ -14,7 +14,7 @@
         </div>
         <div class="userPanelButtons moveLeft">
             <sec:authentication property="authorities" var="roles" scope="page"/>
-            <c:forEach items="${articles.proposed}" var="article">
+            <c:forEach items="${articles}" var="article">
                 <div class="inline">
                     <form:form method="get" action="/articlePanel/takeArticle/${article.idArticle}">
                         <input type="button" class="customButton" onclick="$(this).closest('form').submit();" value="<spring:message code="userPanel.articleWrite"/>">

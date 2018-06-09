@@ -14,11 +14,6 @@
         </div>
         <div class="userPanelButtons moveLeft">
             <sec:authentication property="authorities" var="roles" scope="page"/>
-            <c:forEach items="${articles.archive}" var="article">
-                <div class="userPanelArticles">
-                    <a href="/articlePage/${article.idArticle}">${article.title}</a>
-                </div>
-            </c:forEach>
         </div>
     </div>
 </div>

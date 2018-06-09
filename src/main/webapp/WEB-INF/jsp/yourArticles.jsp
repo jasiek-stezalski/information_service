@@ -17,7 +17,7 @@
 
             <input type="button" class="customButton" onclick="window.location.href='/articlePanel/addArticle'" value="<spring:message code="userPanel.addArticle"/>"><br><br>
 
-            <c:forEach items="${articles.inProgress}" var="article">
+            <c:forEach items="${articles}" var="article">
                 <input type="button" class="customButton" onclick="window.location.href='/articlePanel/updateArticle/${article.idArticle}'" value="<spring:message code="userPanel.updateArticle"/>">
                 <input type="button" class="customButton" onclick="window.location.href='/articlePanel/deleteArticle/${article.idArticle}'" value="<spring:message code="userPanel.deleteArticle"/>">
 
