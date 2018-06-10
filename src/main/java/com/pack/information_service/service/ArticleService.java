@@ -10,6 +10,16 @@ public interface ArticleService {
 
     Article findById(Long idArticle);
 
+    List<Article> findByStatus(String status);
+
+    List<Article> findByStatusAndUser(String status);
+
+    List<Article> findByStatusOrderByPriority(String status);
+
+    List<Article> findByStatusAndCategoryOrderByPriority(String status);
+
+    List<Article> findByStatusAndCategoryOrUser(String status);
+
     List<Article> findByIdUserAndPublicationDate(Long idUser);
 
     List<Article> findByCategoryAndPublicationDate(String category);
@@ -17,6 +27,8 @@ public interface ArticleService {
     List<Article> findByTitleAndPublicationDate(String title);
 
     List<String> findCommentsAuthors(Long idArticle);
+
+    List<Article> findByError();
 
     Article save(Article article);
 

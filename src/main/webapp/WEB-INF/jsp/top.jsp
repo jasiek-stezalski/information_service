@@ -42,45 +42,56 @@
             <form:form method="post" action="/articlePage/searchArticle">
         </div>
         <input id="search" name="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
-        <input class="noDisplay" type="submit" class="btn registerButton" value="<spring:message code="MainPage.buttonSearch"/>">
+        <input class="noDisplay" type="submit" class="btn registerButton"
+               value="<spring:message code="MainPage.buttonSearch"/>">
         <div class="noDisplay">
             </form:form>
         </div>
         <c:if test="${pageContext.request.userPrincipal.name == null}">
-            <input class="registerButton customButton" type="button" onclick="window.location.href='/login'" value="<spring:message code="MainPage.signIn"/>">
+            <input class="registerButton customButton" type="button" onclick="window.location.href='/login'"
+                   value="<spring:message code="MainPage.signIn"/>">
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name == null}">
-            <input class="registerButton customButton" type="button" onclick="window.location.href='/registration'" value="<spring:message code="MainPage.register"/>">
+            <input class="registerButton customButton" type="button" onclick="window.location.href='/registration'"
+                   value="<spring:message code="MainPage.register"/>">
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <sec:authentication property="authorities" var="roles" scope="page"/>
+            <sec:authentication property="authorities" var="roles" scope="page"/>
             <div class="dropdown menuItem" style="float:none;">
                 <spring:message code="MainPage.userPanel"/>
                 <div class="dropdownContent bottomCurve noSelect">
                     <a href="/userPanel"><spring:message code="Account"/></a>
 
-                <c:if test="${(roles[0] == 'JOURNALIST') || (roles[0] =='MODERATOR') || (roles[0] =='EDITOR_IN_CHIEF')}">
-                    <a href="/archive"><spring:message code="Archives"/></a>
-                    <a href="/yourArticles"><spring:message code="ActualArticles"/></a>
-                    <a href="/proposedArticles"><spring:message code="ProposedArticles"/></a>
-                    <c:if test="${(roles[0] == 'MODERATOR') || (roles[0] =='EDITOR_IN_CHIEF')}">
-                        <a href="/displayedArticles"><spring:message code="DisplayedArticles"/></a>
-                        <a href="/articlesToDisplay"><spring:message code="ArticlesToDisplay"/></a>
-                        <a href="/articlesToCheck"><spring:message code="ArticlesToCheck"/></a>
+                    <c:if test="${(roles[0] == 'JOURNALIST') || (roles[0] =='MODERATOR') || (roles[0] =='EDITOR_IN_CHIEF')}">
+                        <a href="/articlePanel/yourArticles"><spring:message code="ActualArticles"/></a>
+                        <a href="/articlePanel/proposedArticles"><spring:message code="ProposedArticles"/></a>
+                        <c:if test="${roles[0] == 'JOURNALIST'}">
+                            <a href="/articlePanel/yourArchive"><spring:message code="Archives"/></a>
+                        </c:if>
+                        <c:if test="${roles[0] == 'MODERATOR'}">
+                            <a href="/articlePanel/displayedCategoryArticles"><spring:message
+                                    code="DisplayedArticles"/></a>
+                            <a href="/articlePanel/articlesCategoryToDisplay"><spring:message
+                                    code="ArticlesToDisplay"/></a>
+                            <a href="/articlePanel/articlesCategoryToCheck"><spring:message code="ArticlesToCheck"/></a>
+                            <a href="/articlePanel/errorsInArticles"><spring:message code="ErrorsInArticles"/></a>
+                            <a href="/articlePanel/moderatorArchive"><spring:message code="Archives"/></a>
+                        </c:if>
+                        <c:if test="${roles[0] == 'EDITOR_IN_CHIEF'}">
+                            <a href="/articlePanel/displayedAllArticles"><spring:message code="DisplayedArticles"/></a>
+                            <a href="/articlePanel/allArticlesToDisplay"><spring:message code="ArticlesToDisplay"/></a>
+                            <a href="/articlePanel/allArticlesToCheck"><spring:message code="ArticlesToCheck"/></a>
+                            <a href="/userPanel/stats"><spring:message code="Stats"/></a>
+                            <a href="/articlePanel/allArchive"><spring:message code="Archives"/></a>
+                        </c:if>
                     </c:if>
-                    <c:if test="${roles[0] == 'MODERATOR'}">
-                        <a href="/errorsInArticles"><spring:message code="ErrorsInArticles"/></a>
+                    <c:if test="${roles[0] == 'ADMIN'}">
+                        <a href="/userPanel/usersList"><spring:message code="UsersList"/></a>
                     </c:if>
-                    <c:if test="${roles[0] == 'EDITOR_IN_CHIEF'}">
-                        <a href="/stats"><spring:message code="Stats"/></a>
-                    </c:if>
-                </c:if>
-                <c:if test="${roles[0] == 'ADMIN'}">
-                    <a href="/usersList"><spring:message code="UsersList"/></a>
-                </c:if>
                 </div>
             </div>
-            <input class="registerButton customButton" type="button" onclick="document.forms['logoutForm'].submit()" value="<spring:message code="MainPage.signOut"/>">
+            <input class="registerButton customButton" type="button" onclick="document.forms['logoutForm'].submit()"
+                   value="<spring:message code="MainPage.signOut"/>">
             <div class="noDisplay">
                 <form id="logoutForm" method="POST" action="${contextPath}/logout">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

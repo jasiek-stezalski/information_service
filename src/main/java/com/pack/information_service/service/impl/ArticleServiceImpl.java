@@ -34,6 +34,38 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> findByStatus(String status) {
+        return articleRepository.findByStatus(status);
+    }
+
+    @Override
+    public List<Article> findByStatusAndUser(String status) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        return articleRepository.findByUserAndStatusLikeOrderByPublicationDateDesc(user, status);
+    }
+
+    @Override
+    public List<Article> findByStatusOrderByPriority(String status) {
+        return articleRepository.findByStatusOrderByPriorityAscPublicationDateDesc(status);
+    }
+
+    @Override
+    public List<Article> findByStatusAndCategoryOrderByPriority(String status) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        return articleRepository.findByStatusAndCategoryOrderByPriorityAscPublicationDateDesc(status, user.getCategory());
+    }
+
+    @Override
+    public List<Article> findByStatusAndCategoryOrUser(String status) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByUsername(username);
+        return articleRepository.findByStatusAndCategoryOrUserOrderByPublicationDateDesc("archive",
+                user.getCategory(), user.getIdUser());
+    }
+
+    @Override
     public List<Article> findByIdUserAndPublicationDate(Long idUser) {
         User user = userRepository.findByIdUser(idUser);
         return articleRepository.findByUserAndPublicationDateIsNotNull(user);
@@ -64,6 +96,11 @@ public class ArticleServiceImpl implements ArticleService {
             commentsAuthors.add(user.getUsername());
         }
         return commentsAuthors;
+    }
+
+    @Override
+    public List<Article> findByError() {
+        return articleRepository.findByError();
     }
 
     @Override

@@ -1,10 +1,11 @@
 package com.pack.information_service.controller;
 
 import com.pack.information_service.domain.User;
+import com.pack.information_service.service.ArticleService;
+import com.pack.information_service.service.RoleService;
 import com.pack.information_service.service.UserService;
 import com.pack.information_service.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,11 +20,23 @@ public class UserPanelController {
 
     private UserService userService;
     private UserValidator userValidator;
+    private ArticleService articleService;
+    private RoleService roleService;
 
     @Autowired
-    public UserPanelController(UserService userService, UserValidator userValidator) {
+    public UserPanelController(UserService userService, UserValidator userValidator, ArticleService articleService
+            , RoleService roleService) {
         this.userService = userService;
         this.userValidator = userValidator;
+        this.articleService = articleService;
+        this.roleService = roleService;
+    }
+
+    @GetMapping("")
+    public String userPanel() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (username.equals("anonymousUser")) return "redirect:/mainPage";
+        return "userPanel";
     }
 
     @GetMapping("/updateUser")
@@ -88,6 +101,20 @@ public class UserPanelController {
     public String deleteUserByAdmin(@PathVariable Long idUser) {
         userService.delete(idUser);
         return "redirect:/userPanel";
+    }
+
+    @GetMapping("/stats")
+    public String stats(Model model) {
+        model.addAttribute("statistics", articleService.getStatistics());
+        return "stats";
+    }
+
+    @GetMapping("/usersList")
+    public String usersList(Model model) {
+        model.addAttribute("users", userService.findAll());
+        model.addAttribute("allRoles", roleService.findAll());
+        model.addAttribute("categories", articleService.getCategories());
+        return "usersList";
     }
 
 }
