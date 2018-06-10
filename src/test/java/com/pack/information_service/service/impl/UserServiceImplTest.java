@@ -117,7 +117,6 @@ public class UserServiceImplTest {
     }
 
 
-
     @Test
     public void changeRole_Role_Changed(){
 
@@ -125,14 +124,12 @@ public class UserServiceImplTest {
             add(role);
         }};
 
-
         realUser.setRoles(roles);
 
         if (NAME.equals("MODERATOR")) realUser.setCategory("News");
 
         assertEquals("News",realUser.getCategory());
         assertEquals(roles,realUser.getRoles());
-
     }
 
     @Test
@@ -140,7 +137,6 @@ public class UserServiceImplTest {
         assertEquals("Sport",realUser.getCategory());
         realUser.setCategory("Business");
         assertEquals("Business",realUser.getCategory());
-
     }
 
 
@@ -152,10 +148,7 @@ public class UserServiceImplTest {
         }).when(mockUserRepository).delete(any(User.class));
 
         usi.delete(USERNAME_OF_EXISTING_USER);
-
         assertNull(mockUser);
-
-
     }
 
     @Test
@@ -166,10 +159,7 @@ public class UserServiceImplTest {
         }).when(mockUserRepository).delete(any(User.class));
 
         usi.delete(ID_OF_EXISTING_USER);
-
         assertNull(realUser);
-
     }
-
 
 }
