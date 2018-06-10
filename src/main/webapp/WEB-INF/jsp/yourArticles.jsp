@@ -25,7 +25,9 @@
                     <form:form method="post" action="/articlePanel/changeStatus">
                         <input type="hidden" name="idArticle" value="${article.idArticle}">
                         <select name="status" size="1">
-                            <option value="to check"><spring:message code="userPanel.articleToCheck"/></option>
+                            <c:if test="${roles[0] == 'JOURNALIST'}">
+                                <option value="to check"><spring:message code="userPanel.articleToCheck"/></option>
+                            </c:if>
                             <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
                         </select>
                         <input type="button" class="customButton space" onclick="$(this).closest('form').submit();" value="<spring:message code="submit"/>">

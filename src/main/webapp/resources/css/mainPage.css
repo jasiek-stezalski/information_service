@@ -46,3 +46,10 @@ body{
     color: white;
     background-color: #565236;
 }
+
+.crop{
+    width:580px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

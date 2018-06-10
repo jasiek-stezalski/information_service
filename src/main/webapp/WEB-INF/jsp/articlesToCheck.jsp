@@ -10,14 +10,29 @@
 <div id="container">
     <div class="articleContainer">
         <div class="articleTitle">
-            <spring:message code="userPanel.oldArticles"/>
+            <spring:message code="userPanel.articlesToCheck"/>
         </div>
         <div class="userPanelButtons moveLeft">
             <sec:authentication property="authorities" var="roles" scope="page"/>
-            <c:forEach items="${articles.archive}" var="article">
-                <div class="userPanelArticles">
-                    <a href="/articlePage/${article.idArticle}">${article.title}</a>
+
+            <c:forEach items="${articles.toCheck}" var="article">
+                <input type="button" class="customButton" onclick="window.location.href='/articlePanel/updateArticle/${article.idArticle}'" value="<spring:message code="userPanel.updateArticle"/>">
+                <input type="button" class="customButton" onclick="window.location.href='/articlePanel/deleteArticle/${article.idArticle}'" value="<spring:message code="userPanel.deleteArticle"/>">
+
+                <div class="inline space">
+                    <form:form method="post" action="/articlePanel/changeStatus">
+                        <input type="hidden" name="idArticle" value="${article.idArticle}">
+                        <select name="status" size="1">
+                            <option value="checked"><spring:message code="userPanel.articleChecked"/></option>
+                            <option value="in progress"><spring:message code="userPanel.articleToImprove"/></option>
+                        </select>
+                        <input type="button" class="customButton space" onclick="$(this).closest('form').submit();" value="<spring:message code="submit"/>">
+                    </form:form>
                 </div>
+                <div class="userPanelArticles inline moreToLeft">
+                    <a href="/articlePage/${article.idArticle}">${article.title}</a>
+                </div><br>
+
             </c:forEach>
         </div>
     </div>
