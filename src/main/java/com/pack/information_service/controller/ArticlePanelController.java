@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -44,7 +46,7 @@ public class ArticlePanelController {
 
     @PostMapping("/addArticle")
     public String addArticle(@ModelAttribute("articleForm") @Valid Article articleFrom, BindingResult result,
-                             @RequestParam MultipartFile file, @RequestParam String description, Model model) {
+                             @RequestParam MultipartFile file, @RequestParam String description, Model model, HttpServletRequest request) {
         if (result.hasErrors()) {
             model.addAttribute("categories", articleService.getCategories());
             return "articleEdition";
@@ -56,7 +58,12 @@ public class ArticlePanelController {
         if (!file.isEmpty()) {
             pictureService.save(file, description, articleFrom);
         }
-        return "redirect:/articlePanel/yourArticles";
+
+        HttpSession session = request.getSession();
+        String previousUrl = (String) session.getAttribute("previousUrl");
+        session.removeAttribute("previousUrl");
+
+        return "redirect:" + previousUrl;
     }
 
     @GetMapping("/proposeArticle")
@@ -78,11 +85,11 @@ public class ArticlePanelController {
     @GetMapping("/takeArticle/{idArticle}")
     public String takeArticle(@PathVariable Long idArticle) {
         articleService.take(idArticle);
-        return "redirect:/articlePanel/updateArticle/" + idArticle;
+        return "redirect:/articlePanel/yourArticles";
     }
 
     @GetMapping("/updateArticle/{idArticle}")
-    public String updateArticle(@PathVariable Long idArticle, Model model) {
+    public String updateArticle(@PathVariable Long idArticle, Model model, HttpServletRequest request) {
         Article article = articleService.findById(idArticle);
         model.addAttribute("articleForm", article);
         model.addAttribute("categories", articleService.getCategories());
@@ -94,31 +101,35 @@ public class ArticlePanelController {
             model.addAttribute("description", "");
             model.addAttribute("path", "");
         }
+
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("previousUrl", referrer);
+
         return "articleEdition";
     }
 
     @PostMapping("/changeStatus")
-    public String changeStatus(@RequestParam Long idArticle, @RequestParam String status) {
+    public String changeStatus(@RequestParam Long idArticle, @RequestParam String status, HttpServletRequest request) {
         articleService.save(idArticle, status);
-        return "redirect:/articlePanel/yourArticles";
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @PostMapping("/setPriority")
-    public String setPriority(@RequestParam Long idArticle, @RequestParam Integer priority) {
+    public String setPriority(@RequestParam Long idArticle, @RequestParam Integer priority, HttpServletRequest request) {
         articleService.save(idArticle, priority);
-        return "redirect:/userPanel";
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @GetMapping("/deleteArticle/{idArticle}")
-    public String deleteArticle(@PathVariable Long idArticle) {
+    public String deleteArticle(@PathVariable Long idArticle, HttpServletRequest request) {
         articleService.delete(idArticle);
-        return "redirect:/articlePanel/yourArticles";
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @GetMapping("/errorFixed/{idError}")
-    public String errorFixed(@PathVariable Long idError) {
+    public String errorFixed(@PathVariable Long idError, HttpServletRequest request) {
         articleErrorService.save(idError);
-        return "redirect:/userPanel";
+        return "redirect:" + request.getHeader("Referer");
     }
 
     @GetMapping("/yourArchive")
