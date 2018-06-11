@@ -53,7 +53,7 @@ public class UserValidatorTest {
     @Test
     public void validate_UsernameLessThan8Characters_HasErrors(){
 
-        System.out.println("validate_UsernameLessThan8Characters_HasErrors test");
+        //System.out.println("validate_UsernameLessThan8Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getUsername()).thenReturn(USERNAME_SHORTER_THAN_8_CHARS);
@@ -69,7 +69,7 @@ public class UserValidatorTest {
     @Test
     public void validate_UsernameMoreThan32Characters_HasErrors(){
 
-        System.out.println("validate_UsernameMoreThan32Characters_HasErrors test");
+        //System.out.println("validate_UsernameMoreThan32Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getUsername()).thenReturn(USERNAME_LONGER_THAN_32_CHARS);
@@ -85,7 +85,7 @@ public class UserValidatorTest {
     @Test
     public void validate_DuplicateUsername_HasErrors(){
 
-        System.out.println("validate_DuplicateUsername_HasErrors test");
+        //System.out.println("validate_DuplicateUsername_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getUsername()).thenReturn(USERNAME_WITH_VALID_LENGTH);
@@ -103,7 +103,7 @@ public class UserValidatorTest {
     @Test
     public void validate_PasswordLessThan8Characters_HasErrors(){
 
-        System.out.println("validate_PasswordLessThan8Characters_HasErrors test");
+        //System.out.println("validate_PasswordLessThan8Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getUsername()).thenReturn(USERNAME_WITH_VALID_LENGTH);
@@ -119,7 +119,7 @@ public class UserValidatorTest {
     @Test
     public void validate_PasswordMoreThan32Characters_HasErrors(){
 
-        System.out.println("validate_PasswordMoreThan32Characters_HasErrors test");
+       // System.out.println("validate_PasswordMoreThan32Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getUsername()).thenReturn(USERNAME_WITH_VALID_LENGTH);
@@ -134,7 +134,7 @@ public class UserValidatorTest {
     @Test
     public void validate_PasswordNotEqualsConfirmPassword_HasErrors(){
 
-        System.out.println("validate_PasswordNotEqualsConfirmPassword_HasErrors test");
+        //System.out.println("validate_PasswordNotEqualsConfirmPassword_HasErrors test");
 
         when(mockUserForm.getUsername()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
@@ -151,7 +151,7 @@ public class UserValidatorTest {
     @Test
     public void usernameValidate_UsernameLessThan8Characters_HasErrors(){
 
-        System.out.println("usernameValidate_UsernameLessThan8Characters_HasErrors test");
+        //System.out.println("usernameValidate_UsernameLessThan8Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getUsername()).thenReturn(USERNAME_SHORTER_THAN_8_CHARS);
@@ -165,7 +165,7 @@ public class UserValidatorTest {
     @Test
     public void usernameValidate_UsernameMoreThan32Characters_HasErrors(){
 
-        System.out.println("usernameValidate_UsernameMoreThan32Characters_HasErrors test");
+       // System.out.println("usernameValidate_UsernameMoreThan32Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getUsername()).thenReturn(USERNAME_LONGER_THAN_32_CHARS);
@@ -179,7 +179,7 @@ public class UserValidatorTest {
     @Test
     public void usernameValidate_DuplicateUsername_HasErrors(){
 
-        System.out.println("usernameValidate_DuplicateUsername_HasErrors test");
+        //System.out.println("usernameValidate_DuplicateUsername_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
 
@@ -195,7 +195,7 @@ public class UserValidatorTest {
     @Test
     public void passwordValidate_PasswordLessThan8Characters_HasErrors(){
 
-        System.out.println("passwordValidate_PasswordLessThan8Characters_HasErrors test");
+       // System.out.println("passwordValidate_PasswordLessThan8Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getPassword()).thenReturn(PASSWORD_SHORTER_THAN_8_CHARS);
@@ -210,7 +210,7 @@ public class UserValidatorTest {
     @Test
     public void passwordValidate_PasswordMoreThan32Characters_HasErrors(){
 
-        System.out.println("passwordValidate_PasswordMoreThan32Characters_HasErrors test");
+       // System.out.println("passwordValidate_PasswordMoreThan32Characters_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getPassword()).thenReturn(PASSWORD_LONGER_THAN_32_CHARS);
@@ -225,7 +225,7 @@ public class UserValidatorTest {
     @Test
     public void passwordValidate_PasswordSameAsOldPassword_HasErrors(){
 
-        System.out.println("passwordValidate_PasswordSameAsOldPassword_HasErrors test");
+       // System.out.println("passwordValidate_PasswordSameAsOldPassword_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
@@ -241,7 +241,7 @@ public class UserValidatorTest {
     @Test
     public void passwordValidate_PasswordNotEqualsConfirmPassword_HasErrors(){
 
-        System.out.println("passwordValidate_PasswordNotEqualsConfirmPassword_HasErrors test");
+       // System.out.println("passwordValidate_PasswordNotEqualsConfirmPassword_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
@@ -257,7 +257,7 @@ public class UserValidatorTest {
     @Test
     public void passwordValidate_EncodedPasswordNotMatch_HasErrors(){
 
-        System.out.println("passwordValidate_EncodedPasswordNotMatch_HasErrors test");
+        //System.out.println("passwordValidate_EncodedPasswordNotMatch_HasErrors test");
 
         when(mockUserService.findByUsername("test")).thenReturn(mockUser);
         when(mockUserForm.getPassword()).thenReturn(PASSWORD_WITH_VALID_LENGTH);
