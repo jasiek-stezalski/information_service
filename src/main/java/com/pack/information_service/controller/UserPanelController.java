@@ -32,13 +32,6 @@ public class UserPanelController {
         this.roleService = roleService;
     }
 
-    @GetMapping("")
-    public String userPanel() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (username.equals("anonymousUser")) return "redirect:/mainPage";
-        return "userPanel";
-    }
-
     @GetMapping("/updateUser")
     public String updateUser(Model model) {
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());

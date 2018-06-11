@@ -15,7 +15,7 @@
         <div class="userPanelButtons moveLeft">
             <sec:authentication property="authorities" var="roles" scope="page"/>
 
-            <c:forEach items="${articles.toDisplay}" var="article">
+            <c:forEach items="${articles}" var="article">
                 <div class="inline space">
                     <div class="inline">
                         <form:form method="post" action="/articlePanel/setPriority">
