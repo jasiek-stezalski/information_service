@@ -27,8 +27,11 @@ public class ArticleServiceImplTest {
     private Article article;
     private User realUser;
     private User mockUser;
+    private User olduser;
+    private User checked_User;
     private ArticleRating articleRatings;
     private ArticleRepository mockArticleRepository;
+    private Article mockArticle;
     private ArticleServiceImpl usi;
     private List<Article> list_of_article_id;
     private List<Article> list_of_article_category;
@@ -38,15 +41,12 @@ public class ArticleServiceImplTest {
     private Comment coment;
 
     private static final String USERNAME_OF_EXISTING_USER = "Kasius Tosades";
-    private static final String ARTICLE_FIELD="MODERATOR";
-    private static final String USERNAME_OF_NOT_EXISTING_USER = "Maphat Antabolis";
     private static final String CATEGORY_OF_ARTICLE = "Sport";
     private static final String TITLE_OF_ARTICLE = "Incredible News";
     private static final String status="to display";
 
     private static final Long ID_OF_EXISTING_ARTICLE = 1L;
     private static final Long ID_OF_EXISTING_USER = 1L;
-    private static final Long ID_OF_NOT_EXISTING_USER = 0L;
 
 
     void add_comments(){
@@ -60,6 +60,8 @@ public class ArticleServiceImplTest {
         article=new Article();
         realUser=new User();
         mockUser=new User();
+        olduser=new User();
+        checked_User=new User();
         list_of_article_id=new ArrayList<>();
         list_of_article_category=new ArrayList<>();
         list_of_article_title=new ArrayList<>();
@@ -68,18 +70,13 @@ public class ArticleServiceImplTest {
         coment=new Comment();
 
 
-
-
-
-
         mockuserRepository= Mockito.mock(UserRepository.class);
         mockarticleRepository = Mockito.mock(ArticleRepository.class);
         mockArticleRepository=Mockito.mock(ArticleRepository.class);
+        mockArticle=Mockito.mock(Article.class);
 
         usi=new ArticleServiceImpl(mockArticleRepository,mockuserRepository);
 
-
-       // mockArticleRepository=new ArticleRepository();
 
         when(mockuserRepository.findByIdUser(ID_OF_EXISTING_USER)).thenReturn(realUser);
         when(mockArticleRepository.findByIdArticle(ID_OF_EXISTING_ARTICLE)).thenReturn(article);
@@ -89,13 +86,10 @@ public class ArticleServiceImplTest {
         coment.setUser(realUser);
         comments_in_article.add(coment);
     article.setComments(comments_in_article);
-
-
+    checked_User=realUser;
 
 
         usi=new ArticleServiceImpl(mockArticleRepository,mockuserRepository);
-
-
 
     }
 
@@ -163,12 +157,27 @@ public class ArticleServiceImplTest {
 
     @Test
     public void proposeArticleStatus(){
+        Article added_article=new Article();
+        article.setStatus("proposed");
+        when(mockuserRepository.findByUsername(USERNAME_OF_EXISTING_USER)).thenReturn(olduser);
+        article.setUser(olduser);
+
+        mockarticleRepository.save(article);
+
+        when(mockarticleRepository.findByIdArticle(ID_OF_EXISTING_ARTICLE)).thenReturn(added_article);
+
+        assertSame(checked_User,realUser);
 
     }
 
     @Test
     public void takeArticleStatus(){
-
+        User load_user_from_repository=new User();
+        when(mockuserRepository.findByUsername(USERNAME_OF_EXISTING_USER )).thenReturn(load_user_from_repository);
+        article.setUser(load_user_from_repository);
+        article.setIdArticle(3L);
+        article.setStatus("in progress");
+        mockarticleRepository.save(article);
     }
 
     @Test
