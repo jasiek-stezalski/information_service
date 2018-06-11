@@ -13,32 +13,31 @@
             <spring:message code="userPanel.articleError"/>
         </div>
         <div class="userPanelButtons moveLeft">
-            <sec:authentication property="authorities" var="roles" scope="page"/>
             <c:forEach items="${articles}" var="article">
-                <div class="userPanelArticles">
+                <div class="userPanelArticles inline crop">
                     <a href="/articlePage/${article.idArticle}">${article.title}</a>
-                </div>
-            </c:forEach>
-            <c:forEach items="${articles.withErrors}" var="article">
-                <br/><a href="/articlePage/${article.idArticle}">${article.title}</a>
+                </div><br><br>
 
                 <c:forEach items="${article.articleErrors}" var="error">
-                    <br/><spring:message code="userPanel.errorContent"/>
-                    ${error.content}
 
                     <c:if test="${error.status == 'to check'}">
-                        <br/><a href="/articlePanel/updateArticle/${article.idArticle}"><spring:message
-                            code="userPanel.updateArticle"/> </a><br/>
-
+                        <div class="inline spaceTop">
                         <form:form method="get" action="/articlePanel/errorFixed/${error.idError}">
-                            <input type="submit" value="<spring:message code="userPanel.errorConfirmed"/> ">
+                            <input type="button" class="customButton space" onclick="$(this).closest('form').submit();" value="<spring:message code="userPanel.errorConfirmed"/> ">
                         </form:form>
+                        </div>
+                        <div class="inline">
+                            <input type="button" class="customButton space" onclick="window.location.href='/articlePanel/updateArticle/${article.idArticle}'" value="<spring:message code="userPanel.updateArticle"/>">
+                        </div>
                     </c:if>
+                    <div class="space inline">
+                        <c:if test="${error.status == 'checked'}">
+                            <spring:message code="userPanel.errorFixed"/>
+                        </c:if>
+                    </div>
 
-                    <c:if test="${error.status == 'checked'}">
-                        <spring:message code="userPanel.errorFixed"/><br/>
-                    </c:if>
-
+                    <spring:message code="userPanel.errorContent"/>
+                    ${error.content}<br>
                 </c:forEach>
 
             </c:forEach>

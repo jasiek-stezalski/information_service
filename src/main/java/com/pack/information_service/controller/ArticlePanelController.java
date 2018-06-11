@@ -148,7 +148,7 @@ public class ArticlePanelController {
     @GetMapping("/proposedArticles")
     public String proposedArticles(Model model) {
         model.addAttribute("articles", articleService.findByStatus("proposed"));
-        return "proposedArticle";
+        return "proposedArticles";
     }
 
     @GetMapping("/displayedCategoryArticles")

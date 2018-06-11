@@ -6,6 +6,7 @@
 
 .dropdownContent {
     display: none;
+    margin: auto;
     position: absolute;
     margin-top:16px;
     z-index: 1;
@@ -41,4 +42,12 @@
 .bottomCurve{
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+}
+
+.userPanelDropdown{
+    margin-top:15px;
+}
+
+.userPanelDropdown a{
+    min-width:140px;
 }

@@ -56,6 +56,7 @@
                    value="<spring:message code="MainPage.register"/>">
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
+
             <sec:authentication property="authorities" var="roles" scope="page"/>
             <c:choose>
                 <c:when test="${roles[0] == 'USER'}">
@@ -63,9 +64,10 @@
                            value="<spring:message code="MainPage.userPanel"/>">
                 </c:when>
                 <c:otherwise>
+                    <div class="divider" style="float:none; display:inline">|</div>
             <div class="dropdown menuItem" style="float:none;">
                 <spring:message code="MainPage.userPanel"/>
-                <div class="dropdownContent bottomCurve noSelect">
+                <div class="dropdownContent bottomCurve noSelect userPanelDropdown">
 
                     <a href="/userPanel"><spring:message code="Account"/></a>
 
@@ -76,20 +78,18 @@
                             <a href="/articlePanel/yourArchive"><spring:message code="Archives"/></a>
                         </c:if>
                         <c:if test="${roles[0] == 'MODERATOR'}">
-                            <a href="/articlePanel/displayedCategoryArticles"><spring:message
-                                    code="DisplayedArticles"/></a>
-                            <a href="/articlePanel/articlesCategoryToDisplay"><spring:message
-                                    code="ArticlesToDisplay"/></a>
                             <a href="/articlePanel/articlesCategoryToCheck"><spring:message code="ArticlesToCheck"/></a>
+                            <a href="/articlePanel/articlesCategoryToDisplay"><spring:message code="ArticlesToDisplay"/></a>
+                            <a href="/articlePanel/displayedCategoryArticles"><spring:message code="DisplayedArticles"/></a>
                             <a href="/articlePanel/errorsInArticles"><spring:message code="ErrorsInArticles"/></a>
                             <a href="/articlePanel/moderatorArchive"><spring:message code="Archives"/></a>
                         </c:if>
                         <c:if test="${roles[0] == 'EDITOR_IN_CHIEF'}">
-                            <a href="/articlePanel/displayedAllArticles"><spring:message code="DisplayedArticles"/></a>
-                            <a href="/articlePanel/allArticlesToDisplay"><spring:message code="ArticlesToDisplay"/></a>
                             <a href="/articlePanel/allArticlesToCheck"><spring:message code="ArticlesToCheck"/></a>
-                            <a href="/userPanel/stats"><spring:message code="Stats"/></a>
+                            <a href="/articlePanel/allArticlesToDisplay"><spring:message code="ArticlesToDisplay"/></a>
+                            <a href="/articlePanel/displayedAllArticles"><spring:message code="DisplayedArticles"/></a>
                             <a href="/articlePanel/allArchive"><spring:message code="Archives"/></a>
+                            <a href="/userPanel/stats"><spring:message code="Stats"/></a>
                         </c:if>
                     </c:if>
                     <c:if test="${roles[0] == 'ADMIN'}">
@@ -98,6 +98,7 @@
 
                 </div>
             </div>
+                    <div class="divider" style="float:none; display:inline; margin-right:10px;">|</div>
                 </c:otherwise>
             </c:choose>
             <input class="registerButton customButton" type="button" onclick="document.forms['logoutForm'].submit()"

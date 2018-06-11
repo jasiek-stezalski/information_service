@@ -13,7 +13,6 @@
             <spring:message code="userPanel.oldArticles"/>
         </div>
         <div class="userPanelButtons moveLeft">
-            <sec:authentication property="authorities" var="roles" scope="page"/>
             <c:forEach items="${articles}" var="article">
                 <div class="userPanelArticles">
                     <a href="/articlePage/${article.idArticle}">${article.title}</a>

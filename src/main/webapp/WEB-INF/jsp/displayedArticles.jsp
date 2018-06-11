@@ -13,7 +13,6 @@
             <spring:message code="userPanel.articlesToDisplay"/>
         </div>
         <div class="userPanelButtons moveLeft">
-            <sec:authentication property="authorities" var="roles" scope="page"/>
 
             <c:forEach items="${articles}" var="article">
                 <div class="inline space">
