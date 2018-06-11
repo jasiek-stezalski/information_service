@@ -13,7 +13,6 @@ public class RoleServiceImplTest {
     private Map <String,String> map=null;
 
 
-
     public Map<String, String> setup(){
         return  new LinkedHashMap<String, String>() {{
             put("USER", "UserPanel.user");
