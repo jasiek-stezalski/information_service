@@ -10,10 +10,31 @@
 <div id="container">
     <div class="articleContainer">
         <div class="articleTitle">
-            <spring:message code="userPanel.oldArticles"/>
+            <spring:message code="userPanel.Statistics"/>
         </div>
         <div class="userPanelButtons moveLeft">
-            <sec:authentication property="authorities" var="roles" scope="page"/>
+            <table>
+                <thead>
+                    <tr>
+                        <th><div class="statsBottom"><spring:message code="userPanel.username"/></div></th>
+                        <th><div class="moveLeft statsWidth statsCenter statsBottom"><spring:message code="userPanel.articlesInYear"/></div></th>
+                        <th><div class="moveLeft statsWidth statsCenter statsBottom"><spring:message code="userPanel.averageMark"/></div></th>
+                        <th><div class="moveLeft statsWidth statsCenter statsBottom"><spring:message code="userPanel.articlesInMonth"/></div></th>
+                        <th><div class="moveLeft statsWidth statsCenter statsBottom"><spring:message code="userPanel.averageMark"/></div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <c:forEach items="${statistics}" var="statistic">
+                    <tr>
+                        <td><div class="space">${statistic.user.username}</div></td>
+                        <td><div class="statsCenter spaceTop">${statistic.yearCount}</div></td>
+                        <td><div class="statsCenter">${statistic.yearMark}</div></td>
+                        <td><div class="statsCenter">${statistic.monthCount}</div></td>
+                        <td><div class="statsCenter">${statistic.monthMark}</div></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

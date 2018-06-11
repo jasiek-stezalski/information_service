@@ -6,6 +6,7 @@
 
 .dropdownContent {
     display: none;
+    margin: auto;
     position: absolute;
     margin-top:16px;
     z-index: 1;
@@ -21,7 +22,7 @@
 .dropdownContent a{
     min-width:130px;
     padding:7px;
-    color:black;
+    color:#333;
     text-decoration: none;
     display:block;
     text-align:center;
@@ -30,6 +31,7 @@
 
 .dropdownContent a:hover{
     background-color: #565236;
+    color: white;
 }
 
 .dropdown a:last-child:hover{
@@ -40,4 +42,12 @@
 .bottomCurve{
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
+}
+
+.userPanelDropdown{
+    margin-top:15px;
+}
+
+.userPanelDropdown a{
+    min-width:140px;
 }

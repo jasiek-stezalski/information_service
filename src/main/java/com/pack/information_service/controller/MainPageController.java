@@ -33,4 +33,13 @@ public class MainPageController {
         return "mainPage";
     }
 
+    @GetMapping("/userPanel")
+    public String userPanel(){
+        return "userPanel";
+    }
+
+    @GetMapping("/contact")
+    public String contact(){
+        return "contact";
+    }
 }

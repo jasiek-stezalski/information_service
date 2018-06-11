@@ -25,10 +25,10 @@
         </div>
     </div>
 </div>
-
+<%--
 <sec:authentication property="authorities" var="roles" scope="page"/>
 
-<%--Journalist panel--%>
+&lt;%&ndash;Journalist panel&ndash;%&gt;
 
 <c:if test="${roles[0] == 'JOURNALIST'}">
 
@@ -75,7 +75,7 @@
 
 </c:if>
 
-<%--Moderator panel--%>
+&lt;%&ndash;Moderator panel&ndash;%&gt;
 
 <c:if test="${roles[0] == 'MODERATOR'}">
 
@@ -221,7 +221,7 @@
 
 </c:if>
 
-<%--Editor in Chief panel--%>
+&lt;%&ndash;Editor in Chief panel&ndash;%&gt;
 
 <c:if test="${roles[0] == 'EDITOR_IN_CHIEF'}">
 
@@ -368,7 +368,7 @@
 
 </c:if>
 
-<%--Admin panel--%>
+&lt;%&ndash;Admin panel&ndash;%&gt;
 
 <c:if test="${roles[0] == 'ADMIN'}">
 
@@ -446,7 +446,7 @@
         </tbody>
     </table>
 
-</c:if>
+</c:if>--%>
 
 </body>
 </html>

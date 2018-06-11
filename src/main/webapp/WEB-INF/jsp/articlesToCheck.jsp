@@ -13,7 +13,6 @@
             <spring:message code="userPanel.articlesToCheck"/>
         </div>
         <div class="userPanelButtons moveLeft">
-            <sec:authentication property="authorities" var="roles" scope="page"/>
 
             <c:forEach items="${articles}" var="article">
                 <input type="button" class="customButton" onclick="window.location.href='/articlePanel/updateArticle/${article.idArticle}'" value="<spring:message code="userPanel.updateArticle"/>">

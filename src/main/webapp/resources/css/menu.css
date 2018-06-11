@@ -36,7 +36,7 @@
 }
 
 .registerButton{
-    width: 115px;
+    min-width: 115px;
     height: 35px;
     margin-right:10px;
     text-decoration: none;
@@ -47,7 +47,6 @@
     margin-top: 9px;
     margin-right: 16px;
     padding: 6px;
-    border:none;
     color: black;
     font-size: 15px;
 }
@@ -68,9 +67,15 @@
 }
 
 .menuItem:hover{
-    text-shadow: 1px 0px 12px rgba(255, 255, 255, 1);
+
 }
 
 .menuItem a{
+    color:#333;
+    text-decoration:none;
     text-shadow: none;
+}
+
+.menuItem a:hover{
+
 }
