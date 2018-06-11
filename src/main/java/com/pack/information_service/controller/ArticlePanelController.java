@@ -193,5 +193,4 @@ public class ArticlePanelController {
         model.addAttribute("articles", articleService.findByError());
         return "errorsInArticles";
     }
-
 }

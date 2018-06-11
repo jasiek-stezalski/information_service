@@ -15,7 +15,7 @@
         <div class="userPanelButtons moveLeft">
             <sec:authentication property="authorities" var="roles" scope="page"/>
 
-            <c:forEach items="${articles.toCheck}" var="article">
+            <c:forEach items="${articles}" var="article">
                 <input type="button" class="customButton" onclick="window.location.href='/articlePanel/updateArticle/${article.idArticle}'" value="<spring:message code="userPanel.updateArticle"/>">
                 <input type="button" class="customButton" onclick="window.location.href='/articlePanel/deleteArticle/${article.idArticle}'" value="<spring:message code="userPanel.deleteArticle"/>">
 
