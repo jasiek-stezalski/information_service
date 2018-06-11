@@ -81,7 +81,7 @@ public class UserPanelController {
     @GetMapping("/blocked/{idUser}")
     public String lock(@PathVariable Long idUser) {
         userService.lock(idUser);
-        return "redirect:/userPanel";
+        return "redirect:/userPanel/stats";
     }
 
     @GetMapping("/deleteUser")
@@ -93,7 +93,7 @@ public class UserPanelController {
     @GetMapping("/deleteUser/{idUser}")
     public String deleteUserByAdmin(@PathVariable Long idUser) {
         userService.delete(idUser);
-        return "redirect:/userPanel";
+        return "redirect:/userPanel/stats";
     }
 
     @GetMapping("/stats")
