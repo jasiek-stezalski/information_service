@@ -41,7 +41,7 @@
         <div class="noDisplay">
             <form:form method="post" action="/articlePage/searchArticle">
         </div>
-        <input id="search" name="search" type="text" placeholder=<spring:message code="MainPage.search"/>>
+        <input id="search" name="search" type="search" placeholder=<spring:message code="MainPage.search"/>>
         <input class="noDisplay" type="submit" class="btn registerButton"
                value="<spring:message code="MainPage.buttonSearch"/>">
         <div class="noDisplay">
@@ -57,9 +57,16 @@
         </c:if>
         <c:if test="${pageContext.request.userPrincipal.name != null}">
             <sec:authentication property="authorities" var="roles" scope="page"/>
+            <c:choose>
+                <c:when test="${roles[0] == 'USER'}">
+                    <input class="registerButton customButton" type="button" onclick="window.location.href='/userPanel'"
+                           value="<spring:message code="MainPage.userPanel"/>">
+                </c:when>
+                <c:otherwise>
             <div class="dropdown menuItem" style="float:none;">
                 <spring:message code="MainPage.userPanel"/>
                 <div class="dropdownContent bottomCurve noSelect">
+
                     <a href="/userPanel"><spring:message code="Account"/></a>
 
                     <c:if test="${(roles[0] == 'JOURNALIST') || (roles[0] =='MODERATOR') || (roles[0] =='EDITOR_IN_CHIEF')}">
@@ -88,8 +95,11 @@
                     <c:if test="${roles[0] == 'ADMIN'}">
                         <a href="/userPanel/usersList"><spring:message code="UsersList"/></a>
                     </c:if>
+
                 </div>
             </div>
+                </c:otherwise>
+            </c:choose>
             <input class="registerButton customButton" type="button" onclick="document.forms['logoutForm'].submit()"
                    value="<spring:message code="MainPage.signOut"/>">
             <div class="noDisplay">

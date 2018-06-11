@@ -21,7 +21,7 @@
 .dropdownContent a{
     min-width:130px;
     padding:7px;
-    color:black;
+    color:#333;
     text-decoration: none;
     display:block;
     text-align:center;
@@ -30,6 +30,7 @@
 
 .dropdownContent a:hover{
     background-color: #565236;
+    color: white;
 }
 
 .dropdown a:last-child:hover{

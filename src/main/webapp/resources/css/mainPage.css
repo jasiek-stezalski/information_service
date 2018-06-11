@@ -16,7 +16,7 @@ body{
     min-height: 380px;
     margin: auto;
     background-color: #ddd9b8;
-    box-shadow: 0px 15px 30px 10px;
+    box-shadow: 0px 15px 30px 0px;
 }
 
 .noSelect{
