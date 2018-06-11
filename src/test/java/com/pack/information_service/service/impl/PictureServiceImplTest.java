@@ -7,10 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.pack.information_service.domain.Article;
-import com.pack.information_service.domain.ArticleError;
 import com.pack.information_service.domain.Picture;
 import com.pack.information_service.repository.PictureRepository;
-import com.pack.information_service.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
