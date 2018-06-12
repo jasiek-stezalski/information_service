@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
+import java.util.OptionalDouble;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
@@ -32,10 +33,10 @@ public class ArticleRatingServiceImplTest {
     private ArticleRatingServiceImpl usi;
 
     private static final String USERNAME_OF_EXISTING_USER = "Kasius Tosades";
-    private static final String USERNAME_OF_NOT_EXISTING_USER = "Maphat Antabolis";
     private static final Long ID_OF_EXISTING_ARTICLE = 1L;
     private static final Long ID_OF_EXISTING_USER = 1L;
     private static final Integer mark=5;
+    private static final double articleMark=5.d;
 
 
     @Before
@@ -48,12 +49,13 @@ public class ArticleRatingServiceImplTest {
         mockUser=Mockito.mock(User.class);
         mockArticleRatingRepository=Mockito.mock(ArticleRatingRepository.class);
         mockarticleRepository = Mockito.mock(ArticleRepository.class);
+
         usi = new ArticleRatingServiceImpl(mockArticleRatingRepository,mockuserRepository,mockarticleRepository);
+
+        usiArticleRating=new ArticleRating(mark,article,realUser);
 
         when(mockuserRepository.findByIdUser(ID_OF_EXISTING_USER)).thenReturn(realUser);
         when(mockuserRepository.findByUsername(USERNAME_OF_EXISTING_USER)).thenReturn(mockUser);
-
-       when(mockarticleRepository.findByIdArticle(ID_OF_EXISTING_ARTICLE)).thenReturn(article);
         when(mockArticleRatingRepository.findByArticleAndUser(article,realUser)).thenReturn(articleRatings);
 
 
@@ -72,13 +74,19 @@ public class ArticleRatingServiceImplTest {
 
     @Test
     public void save_Mark_of_ArticleRating(){
-        //String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        when(mockuserRepository.findByUsername(USERNAME_OF_EXISTING_USER)).thenReturn(mockUser);
+        when(mockarticleRepository.findByIdArticle(ID_OF_EXISTING_ARTICLE)).thenReturn(article);
 
-        usiArticleRating=new ArticleRating(mark,article,realUser);
+        ArticleRating articleRating = new ArticleRating(mark, article, mockUser);
 
-        mockArticleRatingRepository.save(usiArticleRating);
+        mockArticleRatingRepository.save(articleRating);
 
+
+        article.setMark(Math.round(articleMark * 100) / 100.d);
+
+        mockarticleRepository.save(article);
+
+        assertNotNull(article.getMark());
+        
     }
-
-    
 }
