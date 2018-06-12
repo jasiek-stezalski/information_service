@@ -9,12 +9,13 @@
     <%@include file="top.jsp"%>
 </header>
 <div id="container">
+    <sec:authentication property="authorities" var="roles" scope="page"/>
+    <%@include file="fastTravel.jsp"%>
     <div class="articleContainer">
         <div class="articleTitle">
             <spring:message code="userPanel.Title"/>
         </div>
         <div class="userPanelButtons">
-            <sec:authentication property="authorities" var="roles" scope="page"/>
 
             <input type="button" class="customButton" onclick="window.location.href='/userPanel/updateUser'" value="<spring:message code="userPanel.updateUser"/>">
             <input type="button" class="customButton userPanelDelete" onclick="window.location.href='/userPanel/deleteUser'" value="<spring:message code="userPanel.deleteUser"/>">

@@ -8,6 +8,7 @@
     <%@include file="top.jsp"%>
 </header>
 <div id="container">
+    <%@include file="fastTravel.jsp"%>
     <div class="articleContainer">
         <div class="articleTitle">
             <spring:message code="userPanel.users"/>
@@ -30,7 +31,7 @@
                 <tr>
                     <c:if test="${user.username != pageContext.request.userPrincipal.name}">
                         <td><div class="space">${user.username}</div></td>
-                        <td><div class="statsCenter"><spring:message code="${allRoles.get(user.role.iterator().next().name)}"/></div></td>
+                        <td><div class="space statsCenter"><spring:message code="${allRoles.get(user.role.iterator().next().name)}"/></div></td>
                         <td><div class="space">
                             <form:form method="post" action="/userPanel/changeRole">
                                 <input type="hidden" name="idUser" value="${user.idUser}">

@@ -27,14 +27,11 @@
             </c:if>
         </c:forEach>
     </div>
-    <%--<div style="padding-top:20px;">
-        <c:if test="${articles[0].priority==2}">
-            <div class="secondPriorityContainer noSelect">
-                <img  class="secondPriorityPicture noSelect" src="<c:url value="${(article.pictures[0]).path}"/>">
-                <div  class="secondPriorityTitle noSelect">${article.title}</div>
-            </div>
-        </c:if>
-    </div>--%>
+    <div style="padding-top:20px;">
+        <div class="secondPriorityContainer noSelect commercial">
+            <img src="${pageContext.request.contextPath}/resources/images/r.png"/>
+        </div>
+    </div>
     <div class="allLesserPictureContainer">
         <c:forEach items="${articles.topNews}" var="article">
             <c:if test="${article.priority==2}">

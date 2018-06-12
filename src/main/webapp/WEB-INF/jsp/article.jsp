@@ -114,6 +114,7 @@
             </c:if>
         </div>
         <p class="articleContent">${article.content}</p>
+
         <div class="commentsTitle">
             <spring:message code="Article.comments"/>
         </div>

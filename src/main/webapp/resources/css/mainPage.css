@@ -53,3 +53,9 @@ body{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.commercial{
+    height:350px;
+    width:420px;
+
+}

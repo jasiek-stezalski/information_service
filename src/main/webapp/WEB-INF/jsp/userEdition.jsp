@@ -10,6 +10,7 @@
     <%@include file="top.jsp"%>
 </header>
 <div id="container">
+    <%@include file="fastTravel.jsp"%>
     <div class="articleContainer">
         <div class="articleTitle">
             <spring:message code="userEdition.editUsername"/>
