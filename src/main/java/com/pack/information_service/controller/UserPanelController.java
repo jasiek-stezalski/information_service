@@ -32,6 +32,13 @@ public class UserPanelController {
         this.roleService = roleService;
     }
 
+    @GetMapping("")
+    public String userPanel() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if (username.equals("anonymousUser")) return "redirect:/mainPage";
+        return "userPanel";
+    }
+
     @GetMapping("/updateUser")
     public String updateUser(Model model) {
         User user = userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -42,13 +49,13 @@ public class UserPanelController {
     @PostMapping("/changeRole")
     public String changeRole(@RequestParam Long idUser, @RequestParam String role) {
         userService.changeRole(idUser, role);
-        return "redirect:/userPanel";
+        return "redirect:/userPanel/usersList";
     }
 
     @PostMapping("/changeCategory")
     public String changeCategory(@RequestParam Long idUser, @RequestParam String category) {
         userService.changeCategory(idUser, category);
-        return "redirect:/userPanel";
+        return "redirect:/userPanel/usersList";
     }
 
     @GetMapping("/updateUsername")
@@ -81,7 +88,7 @@ public class UserPanelController {
     @GetMapping("/blocked/{idUser}")
     public String lock(@PathVariable Long idUser) {
         userService.lock(idUser);
-        return "redirect:/userPanel/stats";
+        return "redirect:/userPanel/usersList";
     }
 
     @GetMapping("/deleteUser")
@@ -93,7 +100,7 @@ public class UserPanelController {
     @GetMapping("/deleteUser/{idUser}")
     public String deleteUserByAdmin(@PathVariable Long idUser) {
         userService.delete(idUser);
-        return "redirect:/userPanel/stats";
+        return "redirect:/userPanel/usersList";
     }
 
     @GetMapping("/stats")

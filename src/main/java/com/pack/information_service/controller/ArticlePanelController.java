@@ -38,9 +38,13 @@ public class ArticlePanelController {
     }
 
     @GetMapping("/addArticle")
-    public String addArticle(Model model) {
+    public String addArticle(Model model, HttpServletRequest request) {
         model.addAttribute("articleForm", new Article("in progress"));
         model.addAttribute("categories", articleService.getCategories());
+
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("previousUrl", referrer);
+
         return "articleEdition";
     }
 

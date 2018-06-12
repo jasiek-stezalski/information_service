@@ -76,6 +76,18 @@ public class UserServiceImplTest {
     }
 
     @Test
+    public void findById_UserExists_UserFound(){
+
+        assertSame(realUser, usi.findById(ID_OF_EXISTING_USER));
+    }
+
+    @Test
+    public void findById_UserNotExists_UserNotFound(){
+
+        assertNull(usi.findById(ID_OF_NOT_EXISTING_USER));
+    }
+
+    @Test
     public void findAll_ListOfUsersExists_ListFound(){
 
         when(mockUserRepository.findAll()).thenReturn(userList);
@@ -115,7 +127,6 @@ public class UserServiceImplTest {
 
         System.out.println(realUser.getRole());
     }
-
 
 
     @Test
