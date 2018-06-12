@@ -35,21 +35,4 @@
     </div>
 </div>
 </body>
-<%--
-<form:form method="post" action="/articlePanel/proposeArticle" modelAttribute="articleForm">
-    <h1><spring:message code="userPanel.proposeArticle"/></h1>
-
-    <br/><br/><spring:message code="ArticleEdition.title"/>
-    <form:input path="title" size="50"/>
-    <form:errors path="title"><spring:message code="ArticleEdition.TitleError"/> </form:errors>
-
-    <br/><br/><spring:message code="ArticleEdition.content"/>
-    <br/><br/><form:textarea class="noResize" path="content" id="text" rows="10" cols="200"/>
-    <form:errors path="content"><spring:message code="ArticleEdition.ContentError"/></form:errors>
-
-    <input type="submit" value="<spring:message code="save"/>"/>
-
-</form:form>
---%>
-
 </html>

@@ -55,7 +55,8 @@ body{
 }
 
 .commercial{
-    height:350px;
-    width:420px;
-
+    height:250px;
+    width:320px;
+    margin-left:50px;
+    margin-top:50px;
 }

@@ -28,8 +28,8 @@
         </c:forEach>
     </div>
     <div style="padding-top:20px;">
-        <div class="secondPriorityContainer noSelect commercial">
-            <img src="${pageContext.request.contextPath}/resources/images/r.png"/>
+        <div class="secondPriorityContainer noSelect">
+            <img class="commercial" src="${pageContext.request.contextPath}/resources/images/r.png"/>
         </div>
     </div>
     <div class="allLesserPictureContainer">
@@ -56,103 +56,6 @@
         </c:forEach>
     </div>
 </div>
-
-<%--<div class="container">
-    <h2><spring:message code="MainPage.article.topNews"/></h2>
-    <div class="row">
-        <c:forEach items="${articles.topNews}" var="article">
-            <div class="col-md-2">
-                <div class="thumbnail">
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">
-                        <img src="<c:url value="${(article.pictures[0]).path}"/>" style="width: 100px;height: 100px;">
-                        <div class="caption">
-                            <p>${article.title}</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </c:forEach>
-    </div>
-
-    <h3><spring:message code="MainPage.article.news"/></h3>
-    <table class="table">
-        <tbody>
-        <c:forEach items="${articles.news}" var="article">
-            <tr>
-                <td>
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-
-    <h3><spring:message code="MainPage.article.sport"/></h3>
-    <table class="table">
-        <tbody>
-        <c:forEach items="${articles.sport}" var="article">
-            <tr>
-                <td>
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-
-    <h3><spring:message code="MainPage.article.business"/></h3>
-    <table class="table">
-        <tbody>
-        <c:forEach items="${articles.business}" var="article">
-            <tr>
-                <td>
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-
-    <h3><spring:message code="MainPage.article.entertainment"/></h3>
-    <table class="table">
-        <tbody>
-        <c:forEach items="${articles.entertainment}" var="article">
-            <tr>
-                <td>
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-
-    <h3><spring:message code="MainPage.article.technologies"/></h3>
-    <table class="table">
-        <tbody>
-        <c:forEach items="${articles.technologies}" var="article">
-            <tr>
-                <td>
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-
-    <h3><spring:message code="MainPage.article.motorization"/></h3>
-    <table class="table">
-        <tbody>
-        <c:forEach items="${articles.motorization}" var="article">
-            <tr>
-                <td>
-                    <a href="<spring:url value="/articlePage/${article.idArticle}"/>">${article.title}</a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>--%>
-
 </body>
     <script src="${pageContext.request.contextPath}/resources/js/slideShow.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/lesserPicture.js"></script>
