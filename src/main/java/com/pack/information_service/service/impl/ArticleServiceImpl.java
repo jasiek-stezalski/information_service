@@ -192,9 +192,15 @@ public class ArticleServiceImpl implements ArticleService {
                     statistics.add(new Statistic(user,
                             ((BigInteger) yearStatistics.get(i)[1]).intValue(),
                             (yearStatistics.get(i)[2] != null) ? (double) yearStatistics.get(i)[2] : 0D, 0, 0D));
+                    monthStatistics.add(i, new Object[0]);
                 }
-            } else statistics.add(new Statistic(user, 0, 0D, 0, 0D));
+            } else {
+                statistics.add(new Statistic(user, 0, 0D, 0, 0D));
+                monthStatistics.add(i, new Object[0]);
+                yearStatistics.add(i, new Object[0]);
+            }
         }
+
         return statistics;
     }
 
